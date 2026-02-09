@@ -1,0 +1,5626 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "SIM TRADE AUTO SYSTEM 接口文档",
+        "version": "1.0",
+        "title": "SIM TRADE AUTO SYSTEM API",
+        "termsOfService": "http://localhost:9090",
+        "contact": {
+            "name": "Ji Fengsheng",
+            "email": "ji.fengsheng@fndsoft.com"
+        }
+    },
+    "host": "localhost:9090",
+    "basePath": "/sim-trade",
+    "tags": [
+        {
+            "name": "业务基本配置接口",
+            "description": "Business Config Controller"
+        },
+        {
+            "name": "公司信息接口",
+            "description": "Company Controller"
+        },
+        {
+            "name": "关闭接口",
+            "description": "Shutdown Controller"
+        },
+        {
+            "name": "单据信息接口",
+            "description": "Document Info Controller"
+        },
+        {
+            "name": "合同任务执行历史信息记录接口",
+            "description": "Contract Task History Controller"
+        },
+        {
+            "name": "合同基础信息接口",
+            "description": "Contract Info Controller"
+        },
+        {
+            "name": "商品基本信息接口",
+            "description": "Goods Info Controller"
+        },
+        {
+            "name": "履约流程类型接口",
+            "description": "Fulfillment Process Type Controller"
+        },
+        {
+            "name": "市场货品接口",
+            "description": "Market Goods Info Controller"
+        },
+        {
+            "name": "流程步骤详情接口",
+            "description": "Fulfillment Process Step Controller"
+        },
+        {
+            "name": "港口信息接口",
+            "description": "Harbor Info Controller"
+        },
+        {
+            "name": "状态接口",
+            "description": "Status Controller"
+        },
+        {
+            "name": "系统配置接口",
+            "description": "Sys Profile Parameter Controller"
+        }
+    ],
+    "paths": {
+        "/businessConfig": {
+            "get": {
+                "tags": [
+                    "业务基本配置接口"
+                ],
+                "summary": "获取所有业务基本配置",
+                "description": "获取所有业务基本配置信息",
+                "operationId": "getAllBusinessConfigsUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«List«BusinessConfig对象»»",
+                            "$ref": "#/definitions/通用响应结果«List«BusinessConfig对象»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "post": {
+                "tags": [
+                    "业务基本配置接口"
+                ],
+                "summary": "创建业务基本配置",
+                "description": "创建新的业务基本配置信息",
+                "operationId": "createBusinessConfigUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "reqVo",
+                        "description": "reqVo",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "BusinessConfig对象",
+                            "$ref": "#/definitions/BusinessConfig对象"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/businessConfig/getCrawlRate": {
+            "get": {
+                "tags": [
+                    "业务基本配置接口"
+                ],
+                "summary": "获取汇率",
+                "description": "获取汇率",
+                "operationId": "getCrawlRateUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "account",
+                        "in": "query",
+                        "description": "account",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "password",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«CrawlRateRespVo»",
+                            "$ref": "#/definitions/通用响应结果«CrawlRateRespVo»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/businessConfig/getCurrentConfig": {
+            "get": {
+                "tags": [
+                    "业务基本配置接口"
+                ],
+                "summary": "获取当前配置",
+                "description": "获取当前配置",
+                "operationId": "getCurrentConfigUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«BusinessConfig对象»",
+                            "$ref": "#/definitions/通用响应结果«BusinessConfig对象»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/businessConfig/{id}": {
+            "get": {
+                "tags": [
+                    "业务基本配置接口"
+                ],
+                "summary": "根据ID获取业务基本配置",
+                "description": "根据ID获取业务基本配置信息",
+                "operationId": "getBusinessConfigByIdUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«BusinessConfig对象»",
+                            "$ref": "#/definitions/通用响应结果«BusinessConfig对象»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "业务基本配置接口"
+                ],
+                "summary": "更新业务基本配置",
+                "description": "根据ID更新业务基本配置信息",
+                "operationId": "updateBusinessConfigUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "reqVo",
+                        "description": "reqVo",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "BusinessConfig对象",
+                            "$ref": "#/definitions/BusinessConfig对象"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«BusinessConfig对象»",
+                            "$ref": "#/definitions/通用响应结果«BusinessConfig对象»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "业务基本配置接口"
+                ],
+                "summary": "删除业务基本配置",
+                "description": "根据ID删除业务基本配置信息",
+                "operationId": "deleteBusinessConfigUsingDELETE",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/company/export/{companyCode}": {
+            "get": {
+                "tags": [
+                    "公司信息接口"
+                ],
+                "summary": "导出公司信息",
+                "description": "导出公司信息",
+                "operationId": "exportUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "companyCode",
+                        "in": "path",
+                        "description": "companyCode",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/company/import/{companyCode}": {
+            "post": {
+                "tags": [
+                    "公司信息接口"
+                ],
+                "summary": "导入公司信息",
+                "description": "导入公司信息",
+                "operationId": "importDataUsingPOST",
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "companyCode",
+                        "in": "path",
+                        "description": "companyCode",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "file",
+                        "in": "formData",
+                        "description": "file",
+                        "required": true,
+                        "type": "file"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/contract-info": {
+            "get": {
+                "tags": [
+                    "合同基础信息接口"
+                ],
+                "summary": "获取所有合同基础信息",
+                "description": "获取所有合同基础信息记录",
+                "operationId": "getAllContractInfosUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«List«ContractInfo对象»»",
+                            "$ref": "#/definitions/通用响应结果«List«ContractInfo对象»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "post": {
+                "tags": [
+                    "合同基础信息接口"
+                ],
+                "summary": "创建合同基础信息",
+                "description": "创建新的合同基础信息记录",
+                "operationId": "createContractInfoUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "reqVo",
+                        "description": "reqVo",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "ContractInfo对象",
+                            "$ref": "#/definitions/ContractInfo对象"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/contract-info/executeContract": {
+            "post": {
+                "tags": [
+                    "合同基础信息接口"
+                ],
+                "summary": "执行合同",
+                "description": "执行合同",
+                "operationId": "executeContractUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "reqVo",
+                        "description": "reqVo",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "ExecuteContractReqVo",
+                            "$ref": "#/definitions/ExecuteContractReqVo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/contract-info/executeStep": {
+            "post": {
+                "tags": [
+                    "合同基础信息接口"
+                ],
+                "summary": "执行步骤",
+                "description": "执行步骤",
+                "operationId": "executeStepUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "contractCode",
+                        "in": "query",
+                        "description": "contractCode",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "stepCode",
+                        "in": "query",
+                        "description": "stepCode",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/contract-info/getCurrentInfo": {
+            "get": {
+                "tags": [
+                    "合同基础信息接口"
+                ],
+                "summary": "获取当前执行中的合同信息",
+                "description": "获取当前执行中的合同信息",
+                "operationId": "getCurrentInfoUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«ContractInfo对象»",
+                            "$ref": "#/definitions/通用响应结果«ContractInfo对象»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/contract-info/list": {
+            "post": {
+                "tags": [
+                    "合同基础信息接口"
+                ],
+                "summary": "获取合同记录列表",
+                "description": "获取合同记录列表",
+                "operationId": "listUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "contractInfoListVo",
+                        "description": "contractInfoListVo",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "ContractInfoListVo",
+                            "$ref": "#/definitions/ContractInfoListVo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«IPage«ContractInfo对象»»",
+                            "$ref": "#/definitions/通用响应结果«IPage«ContractInfo对象»»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/contract-info/stopContract": {
+            "post": {
+                "tags": [
+                    "合同基础信息接口"
+                ],
+                "summary": "停止合同",
+                "description": "停止合同",
+                "operationId": "stopContractUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "contractId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "wait",
+                        "in": "query",
+                        "description": "wait",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/contract-info/{id}": {
+            "get": {
+                "tags": [
+                    "合同基础信息接口"
+                ],
+                "summary": "根据ID获取合同基础信息",
+                "description": "根据ID获取合同基础信息记录",
+                "operationId": "getContractInfoByIdUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«ContractInfo对象»",
+                            "$ref": "#/definitions/通用响应结果«ContractInfo对象»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "合同基础信息接口"
+                ],
+                "summary": "更新合同基础信息",
+                "description": "根据ID更新合同基础信息记录",
+                "operationId": "updateContractInfoUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "reqVo",
+                        "description": "reqVo",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "ContractInfo对象",
+                            "$ref": "#/definitions/ContractInfo对象"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "合同基础信息接口"
+                ],
+                "summary": "删除合同基础信息",
+                "description": "根据ID删除合同基础信息记录",
+                "operationId": "deleteContractInfoUsingDELETE",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/contract-task-history": {
+            "get": {
+                "tags": [
+                    "合同任务执行历史信息记录接口"
+                ],
+                "summary": "获取所有合同任务执行历史信息",
+                "description": "获取所有合同任务执行历史信息记录",
+                "operationId": "getAllContractTaskHistoriesUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«List«ContractTaskHistory对象»»",
+                            "$ref": "#/definitions/通用响应结果«List«ContractTaskHistory对象»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "post": {
+                "tags": [
+                    "合同任务执行历史信息记录接口"
+                ],
+                "summary": "创建合同任务执行历史信息",
+                "description": "创建新的合同任务执行历史信息记录",
+                "operationId": "createContractTaskHistoryUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "reqVo",
+                        "description": "reqVo",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "ContractTaskHistory对象",
+                            "$ref": "#/definitions/ContractTaskHistory对象"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/contract-task-history/getCurrentHistory": {
+            "get": {
+                "tags": [
+                    "合同任务执行历史信息记录接口"
+                ],
+                "summary": "获取当前最新的历史记录",
+                "description": "获取当前最新的历史记录",
+                "operationId": "getCurrentHistoryUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«List«ContractTaskHistory对象»»",
+                            "$ref": "#/definitions/通用响应结果«List«ContractTaskHistory对象»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/contract-task-history/getDoneHistory": {
+            "get": {
+                "tags": [
+                    "合同任务执行历史信息记录接口"
+                ],
+                "summary": "获取已完成的历史记录",
+                "description": "获取已完成的历史记录",
+                "operationId": "getDoneHistoryUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "contractId",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«Set«ContractTaskHistory对象»»",
+                            "$ref": "#/definitions/通用响应结果«Set«ContractTaskHistory对象»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/contract-task-history/getLatestHistory": {
+            "get": {
+                "tags": [
+                    "合同任务执行历史信息记录接口"
+                ],
+                "summary": "获取当前最新的历史记录",
+                "description": "获取当前最新的历史记录",
+                "operationId": "getLatestHistoryUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "contractId",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«List«ContractTaskHistory对象»»",
+                            "$ref": "#/definitions/通用响应结果«List«ContractTaskHistory对象»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/contract-task-history/listByBatch": {
+            "get": {
+                "tags": [
+                    "合同任务执行历史信息记录接口"
+                ],
+                "summary": "根据批次获取历史记录",
+                "description": "根据批次获取历史记录",
+                "operationId": "listByBatchUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "batch",
+                        "in": "query",
+                        "description": "batch",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "contractId",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«List«ContractTaskHistory对象»»",
+                            "$ref": "#/definitions/通用响应结果«List«ContractTaskHistory对象»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/contract-task-history/{id}": {
+            "get": {
+                "tags": [
+                    "合同任务执行历史信息记录接口"
+                ],
+                "summary": "根据ID获取合同任务执行历史信息",
+                "description": "根据ID获取合同任务执行历史信息记录",
+                "operationId": "getContractTaskHistoryByIdUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«ContractTaskHistory对象»",
+                            "$ref": "#/definitions/通用响应结果«ContractTaskHistory对象»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "合同任务执行历史信息记录接口"
+                ],
+                "summary": "更新合同任务执行历史信息",
+                "description": "根据ID更新合同任务执行历史信息记录",
+                "operationId": "updateContractTaskHistoryUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "reqVo",
+                        "description": "reqVo",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "ContractTaskHistory对象",
+                            "$ref": "#/definitions/ContractTaskHistory对象"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "合同任务执行历史信息记录接口"
+                ],
+                "summary": "删除合同任务执行历史信息",
+                "description": "根据ID删除合同任务执行历史信息记录",
+                "operationId": "deleteContractTaskHistoryUsingDELETE",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/document-info": {
+            "get": {
+                "tags": [
+                    "单据信息接口"
+                ],
+                "summary": "获取所有单据信息",
+                "description": "获取所有单据信息记录",
+                "operationId": "getAllDocumentInfosUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«List«DocumentInfo对象»»",
+                            "$ref": "#/definitions/通用响应结果«List«DocumentInfo对象»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "post": {
+                "tags": [
+                    "单据信息接口"
+                ],
+                "summary": "创建单据信息",
+                "description": "创建新的单据信息记录",
+                "operationId": "createDocumentInfoUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "reqVo",
+                        "description": "reqVo",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "DocumentInfo对象",
+                            "$ref": "#/definitions/DocumentInfo对象"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/document-info/{id}": {
+            "get": {
+                "tags": [
+                    "单据信息接口"
+                ],
+                "summary": "根据ID获取单据信息",
+                "description": "根据ID获取单据信息记录",
+                "operationId": "getDocumentInfoByIdUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«DocumentInfo对象»",
+                            "$ref": "#/definitions/通用响应结果«DocumentInfo对象»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "单据信息接口"
+                ],
+                "summary": "更新单据信息",
+                "description": "根据ID更新单据信息记录",
+                "operationId": "updateDocumentInfoUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "reqVo",
+                        "description": "reqVo",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "DocumentInfo对象",
+                            "$ref": "#/definitions/DocumentInfo对象"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "单据信息接口"
+                ],
+                "summary": "删除单据信息",
+                "description": "根据ID删除单据信息记录",
+                "operationId": "deleteDocumentInfoUsingDELETE",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/fulfillment-process-step": {
+            "get": {
+                "tags": [
+                    "流程步骤详情接口"
+                ],
+                "summary": "获取所有流程步骤详情",
+                "description": "获取所有流程步骤详情记录",
+                "operationId": "getAllFulfillmentProcessStepsUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«List«FulfillmentProcessStep对象»»",
+                            "$ref": "#/definitions/通用响应结果«List«FulfillmentProcessStep对象»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "post": {
+                "tags": [
+                    "流程步骤详情接口"
+                ],
+                "summary": "创建流程步骤详情",
+                "description": "创建新的流程步骤详情记录",
+                "operationId": "createFulfillmentProcessStepUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "reqVo",
+                        "description": "reqVo",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "FulfillmentProcessStep对象",
+                            "$ref": "#/definitions/FulfillmentProcessStep对象"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/fulfillment-process-step/getDoneProcessSteps": {
+            "get": {
+                "tags": [
+                    "流程步骤详情接口"
+                ],
+                "summary": "获取已执行的流程步骤",
+                "description": "获取已执行的流程步骤",
+                "operationId": "getDoneProcessStepsUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "contractId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "processCode",
+                        "in": "query",
+                        "description": "processCode",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«List«FulfillmentProcessStep对象»»",
+                            "$ref": "#/definitions/通用响应结果«List«FulfillmentProcessStep对象»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/fulfillment-process-step/getFirstProcessStep": {
+            "get": {
+                "tags": [
+                    "流程步骤详情接口"
+                ],
+                "summary": "获取第一个步骤",
+                "description": "获取第一个步骤",
+                "operationId": "getFirstProcessStepUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "processCode",
+                        "in": "query",
+                        "description": "processCode",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«FulfillmentProcessStep对象»",
+                            "$ref": "#/definitions/通用响应结果«FulfillmentProcessStep对象»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/fulfillment-process-step/getLastProcessStep": {
+            "get": {
+                "tags": [
+                    "流程步骤详情接口"
+                ],
+                "summary": "获取最后一个步骤",
+                "description": "获取最后一个步骤",
+                "operationId": "getLastProcessStepUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "processCode",
+                        "in": "query",
+                        "description": "processCode",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«FulfillmentProcessStep对象»",
+                            "$ref": "#/definitions/通用响应结果«FulfillmentProcessStep对象»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/fulfillment-process-step/getNextExecuteProcessStep": {
+            "get": {
+                "tags": [
+                    "流程步骤详情接口"
+                ],
+                "summary": "获取可执行的流程步骤",
+                "description": "获取可执行的流程步骤",
+                "operationId": "getNextExecuteProcessStepUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "contractId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "processCode",
+                        "in": "query",
+                        "description": "processCode",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«List«FulfillmentProcessStep对象»»",
+                            "$ref": "#/definitions/通用响应结果«List«FulfillmentProcessStep对象»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/fulfillment-process-step/getNextProcessStepMap": {
+            "get": {
+                "tags": [
+                    "流程步骤详情接口"
+                ],
+                "summary": "获取下一个流程步骤Map",
+                "description": "获取下一个流程步骤Map",
+                "operationId": "getNextProcessStepMapUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "processCode",
+                        "in": "query",
+                        "description": "processCode",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "putEmptyList",
+                        "in": "query",
+                        "description": "putEmptyList",
+                        "required": false,
+                        "type": "boolean"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«Map«string,List«FulfillmentProcessStep对象»»»",
+                            "$ref": "#/definitions/通用响应结果«Map«string,List«FulfillmentProcessStep对象»»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/fulfillment-process-step/getUndoProcessSteps": {
+            "get": {
+                "tags": [
+                    "流程步骤详情接口"
+                ],
+                "summary": "获取未执行的流程步骤",
+                "description": "获取未执行的流程步骤",
+                "operationId": "getUndoProcessStepsUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "contractId",
+                        "in": "query",
+                        "description": "contractId",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "processCode",
+                        "in": "query",
+                        "description": "processCode",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«List«FulfillmentProcessStep对象»»",
+                            "$ref": "#/definitions/通用响应结果«List«FulfillmentProcessStep对象»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/fulfillment-process-step/list": {
+            "post": {
+                "tags": [
+                    "流程步骤详情接口"
+                ],
+                "summary": "获取流程步骤列表",
+                "description": "获取流程步骤列表",
+                "operationId": "listUsingPOST_1",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "listReqVo",
+                        "description": "listReqVo",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "FulfillmentProcessStepListReqVo列表对象",
+                            "$ref": "#/definitions/FulfillmentProcessStepListReqVo列表对象"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«IPage«FulfillmentProcessStep对象»»",
+                            "$ref": "#/definitions/通用响应结果«IPage«FulfillmentProcessStep对象»»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/fulfillment-process-step/listByProcessCode": {
+            "get": {
+                "tags": [
+                    "流程步骤详情接口"
+                ],
+                "summary": "根据流程编码获取流程步骤列表",
+                "description": "根据流程编码获取流程步骤列表",
+                "operationId": "listByProcessCodeUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "processCode",
+                        "in": "query",
+                        "description": "processCode",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«List«FulfillmentProcessStep对象»»",
+                            "$ref": "#/definitions/通用响应结果«List«FulfillmentProcessStep对象»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/fulfillment-process-step/{id}": {
+            "get": {
+                "tags": [
+                    "流程步骤详情接口"
+                ],
+                "summary": "根据ID获取流程步骤详情",
+                "description": "根据ID获取流程步骤详情记录",
+                "operationId": "getFulfillmentProcessStepByIdUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«FulfillmentProcessStep对象»",
+                            "$ref": "#/definitions/通用响应结果«FulfillmentProcessStep对象»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "流程步骤详情接口"
+                ],
+                "summary": "更新流程步骤详情",
+                "description": "根据ID更新流程步骤详情记录",
+                "operationId": "updateFulfillmentProcessStepUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "reqVo",
+                        "description": "reqVo",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "FulfillmentProcessStep对象",
+                            "$ref": "#/definitions/FulfillmentProcessStep对象"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "流程步骤详情接口"
+                ],
+                "summary": "删除流程步骤详情",
+                "description": "根据ID删除流程步骤详情记录",
+                "operationId": "deleteFulfillmentProcessStepUsingDELETE",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/fulfillment-process-type": {
+            "get": {
+                "tags": [
+                    "履约流程类型接口"
+                ],
+                "summary": "获取所有履约流程类型",
+                "description": "获取所有履约流程类型记录",
+                "operationId": "getAllFulfillmentProcessTypesUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«List«FulfillmentProcessType对象»»",
+                            "$ref": "#/definitions/通用响应结果«List«FulfillmentProcessType对象»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "post": {
+                "tags": [
+                    "履约流程类型接口"
+                ],
+                "summary": "创建履约流程类型",
+                "description": "创建新的履约流程类型记录",
+                "operationId": "createFulfillmentProcessTypeUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "reqVo",
+                        "description": "reqVo",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "FulfillmentProcessType对象",
+                            "$ref": "#/definitions/FulfillmentProcessType对象"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/fulfillment-process-type/{id}": {
+            "get": {
+                "tags": [
+                    "履约流程类型接口"
+                ],
+                "summary": "根据ID获取履约流程类型",
+                "description": "根据ID获取履约流程类型记录",
+                "operationId": "getFulfillmentProcessTypeByIdUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«FulfillmentProcessType对象»",
+                            "$ref": "#/definitions/通用响应结果«FulfillmentProcessType对象»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "履约流程类型接口"
+                ],
+                "summary": "更新履约流程类型",
+                "description": "根据ID更新履约流程类型记录",
+                "operationId": "updateFulfillmentProcessTypeUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "reqVo",
+                        "description": "reqVo",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "FulfillmentProcessType对象",
+                            "$ref": "#/definitions/FulfillmentProcessType对象"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "履约流程类型接口"
+                ],
+                "summary": "删除履约流程类型",
+                "description": "根据ID删除履约流程类型记录",
+                "operationId": "deleteFulfillmentProcessTypeUsingDELETE",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/goods-info": {
+            "get": {
+                "tags": [
+                    "商品基本信息接口"
+                ],
+                "summary": "获取所有商品基本信息",
+                "description": "获取所有商品基本信息记录",
+                "operationId": "getAllGoodsInfosUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«List«GoodsInfo对象»»",
+                            "$ref": "#/definitions/通用响应结果«List«GoodsInfo对象»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "post": {
+                "tags": [
+                    "商品基本信息接口"
+                ],
+                "summary": "创建商品基本信息",
+                "description": "创建新的商品基本信息记录",
+                "operationId": "createGoodsInfoUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "reqVo",
+                        "description": "reqVo",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "GoodsInfo对象",
+                            "$ref": "#/definitions/GoodsInfo对象"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/goods-info/{id}": {
+            "get": {
+                "tags": [
+                    "商品基本信息接口"
+                ],
+                "summary": "根据ID获取商品基本信息",
+                "description": "根据ID获取商品基本信息记录",
+                "operationId": "getGoodsInfoByIdUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«GoodsInfo对象»",
+                            "$ref": "#/definitions/通用响应结果«GoodsInfo对象»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "商品基本信息接口"
+                ],
+                "summary": "更新商品基本信息",
+                "description": "根据ID更新商品基本信息记录",
+                "operationId": "updateGoodsInfoUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "reqVo",
+                        "description": "reqVo",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "GoodsInfo对象",
+                            "$ref": "#/definitions/GoodsInfo对象"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "商品基本信息接口"
+                ],
+                "summary": "删除商品基本信息",
+                "description": "根据ID删除商品基本信息记录",
+                "operationId": "deleteGoodsInfoUsingDELETE",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/harbor-info": {
+            "get": {
+                "tags": [
+                    "港口信息接口"
+                ],
+                "summary": "获取所有港口信息",
+                "description": "获取所有港口信息记录",
+                "operationId": "getAllHarborInfosUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«List«HarborInfo对象»»",
+                            "$ref": "#/definitions/通用响应结果«List«HarborInfo对象»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "post": {
+                "tags": [
+                    "港口信息接口"
+                ],
+                "summary": "创建港口信息",
+                "description": "创建新的港口信息记录",
+                "operationId": "createHarborInfoUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "reqVo",
+                        "description": "reqVo",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "HarborInfo对象",
+                            "$ref": "#/definitions/HarborInfo对象"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/harbor-info/listByCountry": {
+            "get": {
+                "tags": [
+                    "港口信息接口"
+                ],
+                "summary": "根据国家查询港口信息",
+                "description": "根据国家查询港口信息记录",
+                "operationId": "listByCountryUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "country",
+                        "in": "query",
+                        "description": "country",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«List«HarborInfo对象»»",
+                            "$ref": "#/definitions/通用响应结果«List«HarborInfo对象»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/harbor-info/listInPort": {
+            "get": {
+                "tags": [
+                    "港口信息接口"
+                ],
+                "summary": "获取国内港口信息",
+                "description": "获取国内港口信息记录",
+                "operationId": "listInPortUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«List«HarborInfo对象»»",
+                            "$ref": "#/definitions/通用响应结果«List«HarborInfo对象»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/harbor-info/{id}": {
+            "get": {
+                "tags": [
+                    "港口信息接口"
+                ],
+                "summary": "根据ID获取港口信息",
+                "description": "根据ID获取港口信息记录",
+                "operationId": "getHarborInfoByIdUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«HarborInfo对象»",
+                            "$ref": "#/definitions/通用响应结果«HarborInfo对象»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "港口信息接口"
+                ],
+                "summary": "更新港口信息",
+                "description": "根据ID更新港口信息记录",
+                "operationId": "updateHarborInfoUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "reqVo",
+                        "description": "reqVo",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "HarborInfo对象",
+                            "$ref": "#/definitions/HarborInfo对象"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "港口信息接口"
+                ],
+                "summary": "删除港口信息",
+                "description": "根据ID删除港口信息记录",
+                "operationId": "deleteHarborInfoUsingDELETE",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/market-goods-info": {
+            "get": {
+                "tags": [
+                    "市场货品接口"
+                ],
+                "summary": "获取所有市场货品",
+                "description": "获取所有市场货品记录",
+                "operationId": "getAllMarketGoodsInfosUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«List«MarketGoodsInfo对象»»",
+                            "$ref": "#/definitions/通用响应结果«List«MarketGoodsInfo对象»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "post": {
+                "tags": [
+                    "市场货品接口"
+                ],
+                "summary": "创建市场货品",
+                "description": "创建新的市场货品记录",
+                "operationId": "createMarketGoodsInfoUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "reqVo",
+                        "description": "reqVo",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "MarketGoodsInfo对象",
+                            "$ref": "#/definitions/MarketGoodsInfo对象"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/market-goods-info/{code}": {
+            "get": {
+                "tags": [
+                    "市场货品接口"
+                ],
+                "summary": "根据code获取市场货品",
+                "description": "根据code获取市场货品记录",
+                "operationId": "getMarketGoodsInfoByIdUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "code",
+                        "in": "path",
+                        "description": "code",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«MarketGoodsInfo对象»",
+                            "$ref": "#/definitions/通用响应结果«MarketGoodsInfo对象»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/market-goods-info/{id}": {
+            "put": {
+                "tags": [
+                    "市场货品接口"
+                ],
+                "summary": "更新市场货品",
+                "description": "根据ID更新市场货品记录",
+                "operationId": "updateMarketGoodsInfoUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "reqVo",
+                        "description": "reqVo",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "MarketGoodsInfo对象",
+                            "$ref": "#/definitions/MarketGoodsInfo对象"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "市场货品接口"
+                ],
+                "summary": "删除市场货品",
+                "description": "根据ID删除市场货品记录",
+                "operationId": "deleteMarketGoodsInfoUsingDELETE",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/shutdown": {
+            "get": {
+                "tags": [
+                    "关闭接口"
+                ],
+                "summary": "shutdown",
+                "operationId": "shutdownUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/status/healthy": {
+            "get": {
+                "tags": [
+                    "状态接口"
+                ],
+                "summary": "status",
+                "operationId": "statusUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/sys-profile-parameter": {
+            "get": {
+                "tags": [
+                    "系统配置接口"
+                ],
+                "summary": "获取所有系统配置",
+                "description": "获取所有系统配置记录",
+                "operationId": "getAllSysProfileParametersUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«List«SysProfileParameter对象»»",
+                            "$ref": "#/definitions/通用响应结果«List«SysProfileParameter对象»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "post": {
+                "tags": [
+                    "系统配置接口"
+                ],
+                "summary": "创建系统配置",
+                "description": "创建新的系统配置记录",
+                "operationId": "createSysProfileParameterUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "reqVo",
+                        "description": "reqVo",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "SysProfileParameter对象",
+                            "$ref": "#/definitions/SysProfileParameter对象"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/sys-profile-parameter/getCompany/{companyCode}": {
+            "post": {
+                "tags": [
+                    "系统配置接口"
+                ],
+                "summary": "获取公司信息",
+                "description": "获取公司信息",
+                "operationId": "getCompanyUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "companyCode",
+                        "in": "path",
+                        "description": "companyCode",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«AccountInfoDto»",
+                            "$ref": "#/definitions/通用响应结果«AccountInfoDto»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/sys-profile-parameter/list": {
+            "get": {
+                "tags": [
+                    "系统配置接口"
+                ],
+                "summary": "分页查询系统配置",
+                "description": "分页查询系统配置记录",
+                "operationId": "listUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "current",
+                        "in": "query",
+                        "description": "页码",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "page.current",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "page.hitCount",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "page.pages",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "page.records[0].description",
+                        "in": "query",
+                        "description": "描述",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "page.records[0].id",
+                        "in": "query",
+                        "description": "ID",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "page.records[0].lastUpdateTime",
+                        "in": "query",
+                        "description": "最后更新时间",
+                        "required": false,
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    {
+                        "name": "page.records[0].name",
+                        "in": "query",
+                        "description": "名称",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "page.records[0].sort",
+                        "in": "query",
+                        "description": "排序",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int32"
+                    },
+                    {
+                        "name": "page.records[0].value",
+                        "in": "query",
+                        "description": "值",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "page.searchCount",
+                        "in": "query",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "page.size",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "page.total",
+                        "in": "query",
+                        "required": false,
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "搜索条件",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "每页显示多少条",
+                        "required": true,
+                        "type": "integer",
+                        "format": "int64"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«IPage«SysProfileParameter对象»»",
+                            "$ref": "#/definitions/通用响应结果«IPage«SysProfileParameter对象»»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/sys-profile-parameter/updateCompany/{companyCode}": {
+            "post": {
+                "tags": [
+                    "系统配置接口"
+                ],
+                "summary": "更新公司信息",
+                "description": "更新公司信息",
+                "operationId": "updateCompanyUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "companyCode",
+                        "in": "path",
+                        "description": "companyCode",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "companyInfoDto",
+                        "description": "companyInfoDto",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "CompanyInfoDto",
+                            "$ref": "#/definitions/CompanyInfoDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/sys-profile-parameter/{id}": {
+            "get": {
+                "tags": [
+                    "系统配置接口"
+                ],
+                "summary": "根据ID获取系统配置",
+                "description": "根据ID获取系统配置记录",
+                "operationId": "getSysProfileParameterByIdUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«SysProfileParameter对象»",
+                            "$ref": "#/definitions/通用响应结果«SysProfileParameter对象»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "put": {
+                "tags": [
+                    "系统配置接口"
+                ],
+                "summary": "更新系统配置",
+                "description": "根据ID更新系统配置记录",
+                "operationId": "updateSysProfileParameterUsingPUT",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "in": "body",
+                        "name": "reqVo",
+                        "description": "reqVo",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "SysProfileParameter对象",
+                            "$ref": "#/definitions/SysProfileParameter对象"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            },
+            "delete": {
+                "tags": [
+                    "系统配置接口"
+                ],
+                "summary": "删除系统配置",
+                "description": "根据ID删除系统配置记录",
+                "operationId": "deleteSysProfileParameterUsingDELETE",
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "204": {
+                        "description": "No Content"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            }
+        }
+    },
+    "definitions": {
+        "AccountInfoDto": {
+            "type": "object",
+            "properties": {
+                "abbreviationChinese": {
+                    "type": "string",
+                    "description": "简称（中文）"
+                },
+                "abbreviationEnglish": {
+                    "type": "string",
+                    "description": "简称（英文）"
+                },
+                "accountCode": {
+                    "type": "string",
+                    "description": "账户编号"
+                },
+                "accountNo": {
+                    "type": "string"
+                },
+                "addressChinese": {
+                    "type": "string",
+                    "description": "地址（中文）"
+                },
+                "addressEnglish": {
+                    "type": "string",
+                    "description": "地址（英文）"
+                },
+                "country": {
+                    "type": "string",
+                    "description": "所属国家"
+                },
+                "creditCode": {
+                    "type": "string",
+                    "description": "统一社会信用代码"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "邮箱"
+                },
+                "fax": {
+                    "type": "string",
+                    "description": "传真"
+                },
+                "fullNameChinese": {
+                    "type": "string",
+                    "description": "全称（中文）"
+                },
+                "fullNameEnglish": {
+                    "type": "string",
+                    "description": "全称（英文）"
+                },
+                "introduction": {
+                    "type": "string",
+                    "description": "介绍"
+                },
+                "legalPersonChinese": {
+                    "type": "string",
+                    "description": "企业法人（中文）"
+                },
+                "legalPersonEnglish": {
+                    "type": "string",
+                    "description": "企业法人（英文）"
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "电话"
+                },
+                "postalCode": {
+                    "type": "string",
+                    "description": "邮政编码"
+                },
+                "registeredCapital": {
+                    "type": "string",
+                    "description": "注册资金"
+                },
+                "userCode": {
+                    "type": "string",
+                    "description": "用户编号"
+                },
+                "website": {
+                    "type": "string",
+                    "description": "网址"
+                }
+            },
+            "title": "AccountInfoDto"
+        },
+        "BusinessConfig对象": {
+            "type": "object",
+            "properties": {
+                "baseUrl": {
+                    "type": "string",
+                    "description": "接口地址"
+                },
+                "configId": {
+                    "type": "string",
+                    "description": "主键ID"
+                },
+                "consumptionTaxRate": {
+                    "type": "number",
+                    "description": "从价消费税率（默认0%）"
+                },
+                "createTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "创建时间"
+                },
+                "createUser": {
+                    "type": "string",
+                    "description": "创建人"
+                },
+                "exchangeRate": {
+                    "type": "number",
+                    "description": "进口方货币汇率"
+                },
+                "exportAccount": {
+                    "type": "string",
+                    "description": "出口商账号"
+                },
+                "exportCity": {
+                    "type": "string",
+                    "description": "出口城市"
+                },
+                "exportCityEng": {
+                    "type": "string",
+                    "description": "出口城市（英文）"
+                },
+                "exportContractCode": {
+                    "type": "string",
+                    "description": "外销合同编号"
+                },
+                "exportEmail": {
+                    "type": "string",
+                    "description": "出口商邮箱（非必填）"
+                },
+                "exportPassword": {
+                    "type": "string",
+                    "description": "出口商密码"
+                },
+                "exportPort": {
+                    "type": "string",
+                    "description": "出口港"
+                },
+                "exportPortEng": {
+                    "type": "string",
+                    "description": "出口港（英文）"
+                },
+                "exportPrice": {
+                    "type": "number",
+                    "description": "出口报价"
+                },
+                "exportPriceUnit": {
+                    "type": "string",
+                    "description": "出口报价单位"
+                },
+                "goodsChineseName": {
+                    "type": "string",
+                    "description": "商品中文名称"
+                },
+                "goodsEnglishName": {
+                    "type": "string",
+                    "description": "商品英文名称"
+                },
+                "goodsNo": {
+                    "type": "string",
+                    "description": "商品编号"
+                },
+                "importAccount": {
+                    "type": "string",
+                    "description": "进口商账号"
+                },
+                "importCity": {
+                    "type": "string",
+                    "description": "进口城市"
+                },
+                "importCityEng": {
+                    "type": "string",
+                    "description": "进口城市（英文）"
+                },
+                "importEmail": {
+                    "type": "string",
+                    "description": "进口商邮箱（非必填）"
+                },
+                "importPassword": {
+                    "type": "string",
+                    "description": "进口商密码"
+                },
+                "importPort": {
+                    "type": "string",
+                    "description": "进口港"
+                },
+                "importPortEng": {
+                    "type": "string",
+                    "description": "进口港（英文）"
+                },
+                "importTaxRate": {
+                    "type": "number",
+                    "description": "进口优惠税率（默认0%）"
+                },
+                "innerContractCode": {
+                    "type": "string",
+                    "description": "内销合同编号"
+                },
+                "insuranceMarkupRate": {
+                    "type": "number",
+                    "description": "保险加成率（默认0%）"
+                },
+                "issuingBankAccount": {
+                    "type": "string",
+                    "description": "进口地银行账号"
+                },
+                "issuingBankEmail": {
+                    "type": "string",
+                    "description": "进口地银行邮箱（非必填）"
+                },
+                "issuingBankPassword": {
+                    "type": "string",
+                    "description": "进口地银行密码"
+                },
+                "lastUpdateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "最新更新时间"
+                },
+                "lastUpdateUser": {
+                    "type": "string",
+                    "description": "最新更新人"
+                },
+                "marketPrice": {
+                    "type": "number",
+                    "description": "进口商市场报价"
+                },
+                "negotiatingBankAccount": {
+                    "type": "string",
+                    "description": "出口地银行账号"
+                },
+                "negotiatingBankEmail": {
+                    "type": "string",
+                    "description": "出口地银行邮箱（非必填）"
+                },
+                "negotiatingBankPassword": {
+                    "type": "string",
+                    "description": "出口地银行密码"
+                },
+                "originType": {
+                    "type": "string",
+                    "description": "产地证明书类型：ORIGIN 原产地证明书, GSP 普惠制产地证明书"
+                },
+                "payment": {
+                    "type": "string",
+                    "description": "结算方式（L/C/T/T/D/P/D/A）"
+                },
+                "premiumRate": {
+                    "type": "number",
+                    "description": "保险费率（默认0.88%）"
+                },
+                "supplierAccount": {
+                    "type": "string",
+                    "description": "供应商账号"
+                },
+                "supplierEmail": {
+                    "type": "string",
+                    "description": "供应商邮箱（非必填）"
+                },
+                "supplierPassword": {
+                    "type": "string",
+                    "description": "供应商密码"
+                },
+                "supplierPrice": {
+                    "type": "number",
+                    "description": "供应商报价（默认RMB）"
+                },
+                "taxRebateRate": {
+                    "type": "number",
+                    "description": "退税率（默认13%）"
+                },
+                "trade": {
+                    "type": "string",
+                    "description": "贸易术语（CIF/CFR/FOB）"
+                },
+                "transactionVolume": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "交易数量"
+                },
+                "usdRate": {
+                    "type": "number",
+                    "description": "USD汇率"
+                },
+                "vatRate": {
+                    "type": "number",
+                    "description": "增值税税率（默认13%）"
+                }
+            },
+            "title": "BusinessConfig对象",
+            "description": "BusinessConfig对象"
+        },
+        "CompanyInfoDto": {
+            "type": "object",
+            "properties": {
+                "abbreviationChinese": {
+                    "type": "string",
+                    "description": "简称（中文）"
+                },
+                "abbreviationEnglish": {
+                    "type": "string",
+                    "description": "简称（英文）"
+                },
+                "accountCode": {
+                    "type": "string",
+                    "description": "账户编号"
+                },
+                "addressChinese": {
+                    "type": "string",
+                    "description": "地址（中文）"
+                },
+                "addressEnglish": {
+                    "type": "string",
+                    "description": "地址（英文）"
+                },
+                "country": {
+                    "type": "string",
+                    "description": "所属国家"
+                },
+                "creditCode": {
+                    "type": "string",
+                    "description": "统一社会信用代码"
+                },
+                "email": {
+                    "type": "string",
+                    "description": "邮箱"
+                },
+                "fax": {
+                    "type": "string",
+                    "description": "传真"
+                },
+                "fullNameChinese": {
+                    "type": "string",
+                    "description": "全称（中文）"
+                },
+                "fullNameEnglish": {
+                    "type": "string",
+                    "description": "全称（英文）"
+                },
+                "introduction": {
+                    "type": "string",
+                    "description": "介绍"
+                },
+                "legalPersonChinese": {
+                    "type": "string",
+                    "description": "企业法人（中文）"
+                },
+                "legalPersonEnglish": {
+                    "type": "string",
+                    "description": "企业法人（英文）"
+                },
+                "phone": {
+                    "type": "string",
+                    "description": "电话"
+                },
+                "postalCode": {
+                    "type": "string",
+                    "description": "邮政编码"
+                },
+                "registeredCapital": {
+                    "type": "string",
+                    "description": "注册资金"
+                },
+                "userCode": {
+                    "type": "string",
+                    "description": "用户编号"
+                },
+                "website": {
+                    "type": "string",
+                    "description": "网址"
+                }
+            },
+            "title": "CompanyInfoDto"
+        },
+        "ContractInfoListVo": {
+            "type": "object",
+            "required": [
+                "current",
+                "size"
+            ],
+            "properties": {
+                "current": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "页码"
+                },
+                "search": {
+                    "type": "string",
+                    "description": "搜索条件"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "每页显示多少条"
+                }
+            },
+            "title": "ContractInfoListVo"
+        },
+        "ContractInfo对象": {
+            "type": "object",
+            "properties": {
+                "baseUrl": {
+                    "type": "string",
+                    "description": "基础地址"
+                },
+                "consumptionTaxRate": {
+                    "type": "number",
+                    "description": "从价消费税率（默认0%）"
+                },
+                "contractCode": {
+                    "type": "string",
+                    "description": "合同编号"
+                },
+                "contractId": {
+                    "type": "string",
+                    "description": "合同主键ID"
+                },
+                "createTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "创建时间"
+                },
+                "createUser": {
+                    "type": "string",
+                    "description": "创建人"
+                },
+                "endTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "结束时间"
+                },
+                "exchangeRate": {
+                    "type": "number",
+                    "description": "进口方货币汇率"
+                },
+                "executeLastBatch": {
+                    "type": "string",
+                    "description": "最新执行批次"
+                },
+                "executeLastStep": {
+                    "type": "string",
+                    "description": "最新执行步骤"
+                },
+                "executeMessage": {
+                    "type": "string",
+                    "description": "执行信息"
+                },
+                "executeStatus": {
+                    "type": "string",
+                    "description": "执行状态（初始化/执行中/失败/成功结束）"
+                },
+                "exportAccount": {
+                    "type": "string",
+                    "description": "出口商账号"
+                },
+                "exportCity": {
+                    "type": "string",
+                    "description": "出口城市"
+                },
+                "exportCityEng": {
+                    "type": "string",
+                    "description": "出口城市（英文）"
+                },
+                "exportContractCode": {
+                    "type": "string",
+                    "description": "外销合同编号"
+                },
+                "exportEmail": {
+                    "type": "string",
+                    "description": "出口商邮箱（非必填）"
+                },
+                "exportPassword": {
+                    "type": "string",
+                    "description": "出口商密码"
+                },
+                "exportPort": {
+                    "type": "string",
+                    "description": "出口港"
+                },
+                "exportPortEng": {
+                    "type": "string",
+                    "description": "出口港（英文）"
+                },
+                "exportPrice": {
+                    "type": "number",
+                    "description": "出口报价"
+                },
+                "exportPriceUnit": {
+                    "type": "string",
+                    "description": "出口报价单位"
+                },
+                "goodsChineseName": {
+                    "type": "string",
+                    "description": "商品中文名称"
+                },
+                "goodsEnglishName": {
+                    "type": "string",
+                    "description": "商品英文名称"
+                },
+                "goodsNo": {
+                    "type": "string",
+                    "description": "商品编号"
+                },
+                "importAccount": {
+                    "type": "string",
+                    "description": "进口商账号"
+                },
+                "importCity": {
+                    "type": "string",
+                    "description": "进口城市"
+                },
+                "importCityEng": {
+                    "type": "string",
+                    "description": "进口城市（英文）"
+                },
+                "importEmail": {
+                    "type": "string",
+                    "description": "进口商邮箱（非必填）"
+                },
+                "importPassword": {
+                    "type": "string",
+                    "description": "进口商密码"
+                },
+                "importPort": {
+                    "type": "string",
+                    "description": "进口港"
+                },
+                "importPortEng": {
+                    "type": "string",
+                    "description": "进口港（英文）"
+                },
+                "innerContractCode": {
+                    "type": "string",
+                    "description": "内销合同编号"
+                },
+                "insuranceMarkupRate": {
+                    "type": "number",
+                    "description": "保险加成率（默认0%）"
+                },
+                "issuingBankAccount": {
+                    "type": "string",
+                    "description": "进口地银行账号"
+                },
+                "issuingBankEmail": {
+                    "type": "string",
+                    "description": "进口地银行邮箱（非必填）"
+                },
+                "issuingBankPassword": {
+                    "type": "string",
+                    "description": "进口地银行密码"
+                },
+                "lastUpdateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "最新更新时间"
+                },
+                "lastUpdateUser": {
+                    "type": "string",
+                    "description": "最新更新人"
+                },
+                "marketPrice": {
+                    "type": "number",
+                    "description": "进口商市场报价"
+                },
+                "negotiatingBankAccount": {
+                    "type": "string",
+                    "description": "出口地银行账号"
+                },
+                "negotiatingBankEmail": {
+                    "type": "string",
+                    "description": "出口地银行邮箱（非必填）"
+                },
+                "negotiatingBankPassword": {
+                    "type": "string",
+                    "description": "出口地银行密码"
+                },
+                "originType": {
+                    "type": "string",
+                    "description": "产地证明书类型：ORIGIN 原产地证明书, GSP 普惠制产地证明书"
+                },
+                "payment": {
+                    "type": "string",
+                    "description": "结算方式（L/C/T/T/D/P/D/A）"
+                },
+                "premiumRate": {
+                    "type": "number",
+                    "description": "保险费率（默认0.88%）"
+                },
+                "processCode": {
+                    "type": "string",
+                    "description": "流程类型"
+                },
+                "supplierAccount": {
+                    "type": "string",
+                    "description": "供应商账号"
+                },
+                "supplierEmail": {
+                    "type": "string",
+                    "description": "供应商邮箱（非必填）"
+                },
+                "supplierPassword": {
+                    "type": "string",
+                    "description": "供应商密码"
+                },
+                "supplierPrice": {
+                    "type": "number",
+                    "description": "供应商报价（默认RMB）"
+                },
+                "taxRebateRate": {
+                    "type": "number",
+                    "description": "退税率（默认13%）"
+                },
+                "trade": {
+                    "type": "string",
+                    "description": "贸易术语（CIF/CFR/FOB）"
+                },
+                "transactionVolume": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "交易数量"
+                },
+                "usdRate": {
+                    "type": "number",
+                    "description": "USD汇率"
+                },
+                "vatRate": {
+                    "type": "number",
+                    "description": "增值税税率（默认13%）"
+                }
+            },
+            "title": "ContractInfo对象",
+            "description": "ContractInfo对象"
+        },
+        "ContractTaskHistory对象": {
+            "type": "object",
+            "properties": {
+                "batch": {
+                    "type": "string",
+                    "description": "批次"
+                },
+                "contractId": {
+                    "type": "string",
+                    "description": "关联合同ID"
+                },
+                "createTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "记录创建时间"
+                },
+                "createUser": {
+                    "type": "string",
+                    "description": "创建人"
+                },
+                "historyId": {
+                    "type": "string",
+                    "description": "主键ID"
+                },
+                "lastUpdateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "最后更新时间"
+                },
+                "lastUpdateUser": {
+                    "type": "string",
+                    "description": "最后更新人"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "执行日志信息"
+                },
+                "processStepId": {
+                    "type": "string",
+                    "description": "关联的流程步骤ID"
+                },
+                "show": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "是否显示"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "状态"
+                }
+            },
+            "title": "ContractTaskHistory对象",
+            "description": "ContractTaskHistory对象"
+        },
+        "CrawlRateRespVo": {
+            "type": "object",
+            "properties": {
+                "countryChinese": {
+                    "type": "string",
+                    "description": "国家"
+                },
+                "countryEnglish": {
+                    "type": "string",
+                    "description": "国家英文"
+                },
+                "exchangeRate": {
+                    "type": "number",
+                    "description": "进口方货币汇率"
+                },
+                "exportPriceUnit": {
+                    "type": "string",
+                    "description": "货币单位"
+                },
+                "usdRate": {
+                    "type": "number",
+                    "description": "USD汇率"
+                }
+            },
+            "title": "CrawlRateRespVo"
+        },
+        "DocumentInfo对象": {
+            "type": "object",
+            "properties": {
+                "contractCode": {
+                    "type": "string",
+                    "description": "关联合同编号"
+                },
+                "contractId": {
+                    "type": "string",
+                    "description": "关联合同id"
+                },
+                "createTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "创建时间"
+                },
+                "createUser": {
+                    "type": "string",
+                    "description": "创建人"
+                },
+                "documentCode": {
+                    "type": "string",
+                    "description": "单据编号"
+                },
+                "documentContentHtml": {
+                    "type": "string",
+                    "description": "HTML格式的单据内容"
+                },
+                "documentContentJson": {
+                    "type": "string",
+                    "description": "JSON格式的单据内容"
+                },
+                "documentContentOrigin": {
+                    "type": "string",
+                    "description": "原始单据内容"
+                },
+                "documentId": {
+                    "type": "string",
+                    "description": "单据主键ID"
+                },
+                "documentName": {
+                    "type": "string",
+                    "description": "单据名称"
+                },
+                "documentType": {
+                    "type": "string",
+                    "description": "单据类型"
+                },
+                "lastUpdateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "最新更新时间"
+                },
+                "lastUpdateUser": {
+                    "type": "string",
+                    "description": "最新更新人"
+                }
+            },
+            "title": "DocumentInfo对象",
+            "description": "DocumentInfo对象"
+        },
+        "ExecuteContractReqVo": {
+            "type": "object",
+            "properties": {
+                "processCode": {
+                    "type": "string"
+                },
+                "stopStepCode": {
+                    "type": "string"
+                }
+            },
+            "title": "ExecuteContractReqVo"
+        },
+        "FulfillmentProcessStepListReqVo列表对象": {
+            "type": "object",
+            "required": [
+                "current",
+                "size"
+            ],
+            "properties": {
+                "current": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "页码"
+                },
+                "payment": {
+                    "type": "string",
+                    "description": "结算方式（L/C/T/T/D/P/D/A）"
+                },
+                "search": {
+                    "type": "string",
+                    "description": "搜索条件"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "每页显示多少条"
+                },
+                "trade": {
+                    "type": "string",
+                    "description": "贸易术语（CIF/CFR/FOB）"
+                }
+            },
+            "title": "FulfillmentProcessStepListReqVo列表对象",
+            "description": "FulfillmentProcessStepListReqVo列表对象"
+        },
+        "FulfillmentProcessStep对象": {
+            "type": "object",
+            "properties": {
+                "createTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "创建时间"
+                },
+                "createUser": {
+                    "type": "string",
+                    "description": "创建人"
+                },
+                "endTime": {
+                    "type": "string",
+                    "description": "结束时间"
+                },
+                "errorHandler": {
+                    "type": "string",
+                    "description": "执行错误处理"
+                },
+                "lastUpdateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "最新更新时间"
+                },
+                "lastUpdateUser": {
+                    "type": "string",
+                    "description": "最新更新人"
+                },
+                "parentStepId": {
+                    "type": "string",
+                    "description": "父步骤ID（上一个步骤）"
+                },
+                "processCode": {
+                    "type": "string",
+                    "description": "关联的履约流程编码"
+                },
+                "roleCode": {
+                    "type": "string",
+                    "description": "流程归属角色（进口商/出口商/供应商/银行）"
+                },
+                "skip": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "步骤是否跳过"
+                },
+                "sleepSeconds": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "步骤执行后停顿时间（秒）"
+                },
+                "sort": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "步骤排序序号"
+                },
+                "stepCode": {
+                    "type": "string",
+                    "description": "步骤编码"
+                },
+                "stepDesc": {
+                    "type": "string",
+                    "description": "步骤描述"
+                },
+                "stepId": {
+                    "type": "string",
+                    "description": "主键ID"
+                },
+                "stepName": {
+                    "type": "string",
+                    "description": "步骤名称"
+                }
+            },
+            "title": "FulfillmentProcessStep对象",
+            "description": "FulfillmentProcessStep对象"
+        },
+        "FulfillmentProcessType对象": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "履约流程编码"
+                },
+                "createTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "创建时间"
+                },
+                "createUser": {
+                    "type": "string",
+                    "description": "创建人"
+                },
+                "desc": {
+                    "type": "string",
+                    "description": "描述"
+                },
+                "lastUpdateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "最新更新时间"
+                },
+                "lastUpdateUser": {
+                    "type": "string",
+                    "description": "最新更新人"
+                },
+                "payment": {
+                    "type": "string",
+                    "description": "结算方式"
+                },
+                "processId": {
+                    "type": "string",
+                    "description": "ID"
+                },
+                "trade": {
+                    "type": "string",
+                    "description": "贸易术语"
+                }
+            },
+            "title": "FulfillmentProcessType对象",
+            "description": "FulfillmentProcessType对象"
+        },
+        "GoodsInfo对象": {
+            "type": "object",
+            "properties": {
+                "baseUrl": {
+                    "type": "string",
+                    "description": "基础地址"
+                },
+                "chineseDesc": {
+                    "type": "string",
+                    "description": "中文描述（如每箱24罐，每罐425克）"
+                },
+                "chineseName": {
+                    "type": "string",
+                    "description": "中文名称（如洋菇罐头(整粒)）"
+                },
+                "createTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "创建时间"
+                },
+                "createUser": {
+                    "type": "string",
+                    "description": "创建人"
+                },
+                "englishDesc": {
+                    "type": "string",
+                    "description": "英文描述（如425Gx24TINS/CTN）"
+                },
+                "englishName": {
+                    "type": "string",
+                    "description": "英文名称（如CANNED WHOLE MUSHROOMS）"
+                },
+                "goodsCode": {
+                    "type": "string",
+                    "description": "商品编号"
+                },
+                "goodsId": {
+                    "type": "string",
+                    "description": "主键ID"
+                },
+                "goodsType": {
+                    "type": "string",
+                    "description": "商品类别（如食品）"
+                },
+                "grossWeight": {
+                    "type": "number",
+                    "description": "毛重（如11.2 KGS/包装）"
+                },
+                "hsCode": {
+                    "type": "string",
+                    "description": "海关代码（如2003101100）"
+                },
+                "lastUpdateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "最新更新时间"
+                },
+                "lastUpdateUser": {
+                    "type": "string",
+                    "description": "最新更新人"
+                },
+                "netWeight": {
+                    "type": "number",
+                    "description": "净重（如10.2 KGS/包装）"
+                },
+                "originPlace": {
+                    "type": "string",
+                    "description": "产地（如CHINA）"
+                },
+                "salesUnit": {
+                    "type": "string",
+                    "description": "销售单位（如CARTON）"
+                },
+                "unitConv": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "单位换算（每包装单位=销售单位数量）"
+                },
+                "volume": {
+                    "type": "number",
+                    "description": "体积（如0.014739 CBM/包装）"
+                },
+                "volumeUnit": {
+                    "type": "string",
+                    "description": "体积单位（如CBM）"
+                }
+            },
+            "title": "GoodsInfo对象",
+            "description": "GoodsInfo对象"
+        },
+        "HarborInfo对象": {
+            "type": "object",
+            "properties": {
+                "baseUrl": {
+                    "type": "string",
+                    "description": "基础地址"
+                },
+                "countryChinese": {
+                    "type": "string",
+                    "description": "国家中文名称"
+                },
+                "countryEnglish": {
+                    "type": "string",
+                    "description": "国家英文名称"
+                },
+                "createTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "创建时间"
+                },
+                "createUser": {
+                    "type": "string",
+                    "description": "创建人"
+                },
+                "freightForty": {
+                    "type": "number",
+                    "description": "40尺集装箱基本运费"
+                },
+                "freightTwenty": {
+                    "type": "number",
+                    "description": "20尺集装箱基本运费"
+                },
+                "fuelForty": {
+                    "type": "number",
+                    "description": "40尺集装箱燃油附加费"
+                },
+                "fuelTwenty": {
+                    "type": "number",
+                    "description": "20尺集装箱燃油附加费"
+                },
+                "harborCode": {
+                    "type": "string",
+                    "description": "港埠代码"
+                },
+                "harborId": {
+                    "type": "string",
+                    "description": "主键ID"
+                },
+                "harborPortChinese": {
+                    "type": "string",
+                    "description": "港口中文名称"
+                },
+                "harborPortEnglish": {
+                    "type": "string",
+                    "description": "港口英文名称"
+                },
+                "harborRoute": {
+                    "type": "string",
+                    "description": "所属航线"
+                },
+                "lastUpdateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "最新更新时间"
+                },
+                "lastUpdateUser": {
+                    "type": "string",
+                    "description": "最新更新人"
+                },
+                "mtq": {
+                    "type": "number",
+                    "description": "MTQ代码"
+                },
+                "portSurchargeForty": {
+                    "type": "number",
+                    "description": "40尺集装箱港口附加费"
+                },
+                "portSurchargeTwenty": {
+                    "type": "number",
+                    "description": "20尺集装箱港口附加费"
+                },
+                "tne": {
+                    "type": "number",
+                    "description": "TNE代码"
+                }
+            },
+            "title": "HarborInfo对象",
+            "description": "HarborInfo对象"
+        },
+        "IPage«ContractInfo对象»": {
+            "type": "object",
+            "properties": {
+                "current": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "hitCount": {
+                    "type": "boolean"
+                },
+                "pages": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "records": {
+                    "type": "array",
+                    "items": {
+                        "originalRef": "ContractInfo对象",
+                        "$ref": "#/definitions/ContractInfo对象"
+                    }
+                },
+                "searchCount": {
+                    "type": "boolean"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            },
+            "title": "IPage«ContractInfo对象»"
+        },
+        "IPage«FulfillmentProcessStep对象»": {
+            "type": "object",
+            "properties": {
+                "current": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "hitCount": {
+                    "type": "boolean"
+                },
+                "pages": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "records": {
+                    "type": "array",
+                    "items": {
+                        "originalRef": "FulfillmentProcessStep对象",
+                        "$ref": "#/definitions/FulfillmentProcessStep对象"
+                    }
+                },
+                "searchCount": {
+                    "type": "boolean"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            },
+            "title": "IPage«FulfillmentProcessStep对象»"
+        },
+        "IPage«SysProfileParameter对象»": {
+            "type": "object",
+            "properties": {
+                "current": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "hitCount": {
+                    "type": "boolean"
+                },
+                "pages": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "records": {
+                    "type": "array",
+                    "items": {
+                        "originalRef": "SysProfileParameter对象",
+                        "$ref": "#/definitions/SysProfileParameter对象"
+                    }
+                },
+                "searchCount": {
+                    "type": "boolean"
+                },
+                "size": {
+                    "type": "integer",
+                    "format": "int64"
+                },
+                "total": {
+                    "type": "integer",
+                    "format": "int64"
+                }
+            },
+            "title": "IPage«SysProfileParameter对象»"
+        },
+        "Map«string,List«FulfillmentProcessStep对象»»": {
+            "type": "object",
+            "title": "Map«string,List«FulfillmentProcessStep对象»»",
+            "additionalProperties": {
+                "originalRef": "List",
+                "$ref": "#/definitions/List"
+            }
+        },
+        "MarketGoodsInfo对象": {
+            "type": "object",
+            "properties": {
+                "baseUrl": {
+                    "type": "string",
+                    "description": "基础地址"
+                },
+                "cost": {
+                    "type": "number",
+                    "description": "成本金额（如38.62）"
+                },
+                "costUnit": {
+                    "type": "string",
+                    "description": "成本单位（如RMB）"
+                },
+                "createTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "创建时间"
+                },
+                "createUser": {
+                    "type": "string",
+                    "description": "创建人"
+                },
+                "goodsCode": {
+                    "type": "string",
+                    "description": "货号（如01001）"
+                },
+                "goodsDesc": {
+                    "type": "string",
+                    "description": "商品描述（如每箱24罐，每罐425克）"
+                },
+                "goodsDescEng": {
+                    "type": "string",
+                    "description": "商品英文描述"
+                },
+                "goodsId": {
+                    "type": "string",
+                    "description": "主键ID"
+                },
+                "goodsName": {
+                    "type": "string",
+                    "description": "商品名称（如洋菇罐头(整粒)）"
+                },
+                "goodsNameEng": {
+                    "type": "string",
+                    "description": "商品英文名称"
+                },
+                "goodsUnit": {
+                    "type": "string",
+                    "description": "计量单位（如CARTON）"
+                },
+                "importCountry": {
+                    "type": "string",
+                    "description": "进口商国家"
+                },
+                "importPrice": {
+                    "type": "number",
+                    "description": "进口商市场价格"
+                },
+                "importPriceUnit": {
+                    "type": "string",
+                    "description": "进口商价格单位"
+                },
+                "lastUpdateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "最新更新时间"
+                },
+                "lastUpdateUser": {
+                    "type": "string",
+                    "description": "最新更新人"
+                }
+            },
+            "title": "MarketGoodsInfo对象",
+            "description": "MarketGoodsInfo对象"
+        },
+        "SysProfileParameter对象": {
+            "type": "object",
+            "properties": {
+                "description": {
+                    "type": "string",
+                    "description": "描述"
+                },
+                "id": {
+                    "type": "string",
+                    "description": "ID"
+                },
+                "lastUpdateTime": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "最后更新时间"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "名称"
+                },
+                "sort": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "排序"
+                },
+                "value": {
+                    "type": "string",
+                    "description": "值"
+                }
+            },
+            "title": "SysProfileParameter对象",
+            "description": "SysProfileParameter对象"
+        },
+        "通用响应结果«AccountInfoDto»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "originalRef": "AccountInfoDto",
+                    "$ref": "#/definitions/AccountInfoDto"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«AccountInfoDto»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«BusinessConfig对象»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "originalRef": "BusinessConfig对象",
+                    "$ref": "#/definitions/BusinessConfig对象"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«BusinessConfig对象»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«ContractInfo对象»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "originalRef": "ContractInfo对象",
+                    "$ref": "#/definitions/ContractInfo对象"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«ContractInfo对象»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«ContractTaskHistory对象»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "originalRef": "ContractTaskHistory对象",
+                    "$ref": "#/definitions/ContractTaskHistory对象"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«ContractTaskHistory对象»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«CrawlRateRespVo»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "originalRef": "CrawlRateRespVo",
+                    "$ref": "#/definitions/CrawlRateRespVo"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«CrawlRateRespVo»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«DocumentInfo对象»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "originalRef": "DocumentInfo对象",
+                    "$ref": "#/definitions/DocumentInfo对象"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«DocumentInfo对象»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«FulfillmentProcessStep对象»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "originalRef": "FulfillmentProcessStep对象",
+                    "$ref": "#/definitions/FulfillmentProcessStep对象"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«FulfillmentProcessStep对象»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«FulfillmentProcessType对象»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "originalRef": "FulfillmentProcessType对象",
+                    "$ref": "#/definitions/FulfillmentProcessType对象"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«FulfillmentProcessType对象»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«GoodsInfo对象»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "originalRef": "GoodsInfo对象",
+                    "$ref": "#/definitions/GoodsInfo对象"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«GoodsInfo对象»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«HarborInfo对象»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "originalRef": "HarborInfo对象",
+                    "$ref": "#/definitions/HarborInfo对象"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«HarborInfo对象»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«IPage«ContractInfo对象»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "originalRef": "IPage«ContractInfo对象»",
+                    "$ref": "#/definitions/IPage«ContractInfo对象»"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«IPage«ContractInfo对象»»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«IPage«FulfillmentProcessStep对象»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "originalRef": "IPage«FulfillmentProcessStep对象»",
+                    "$ref": "#/definitions/IPage«FulfillmentProcessStep对象»"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«IPage«FulfillmentProcessStep对象»»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«IPage«SysProfileParameter对象»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "originalRef": "IPage«SysProfileParameter对象»",
+                    "$ref": "#/definitions/IPage«SysProfileParameter对象»"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«IPage«SysProfileParameter对象»»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«List«BusinessConfig对象»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "type": "array",
+                    "description": "响应数据",
+                    "items": {
+                        "originalRef": "BusinessConfig对象",
+                        "$ref": "#/definitions/BusinessConfig对象"
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«List«BusinessConfig对象»»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«List«ContractInfo对象»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "type": "array",
+                    "description": "响应数据",
+                    "items": {
+                        "originalRef": "ContractInfo对象",
+                        "$ref": "#/definitions/ContractInfo对象"
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«List«ContractInfo对象»»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«List«ContractTaskHistory对象»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "type": "array",
+                    "description": "响应数据",
+                    "items": {
+                        "originalRef": "ContractTaskHistory对象",
+                        "$ref": "#/definitions/ContractTaskHistory对象"
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«List«ContractTaskHistory对象»»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«List«DocumentInfo对象»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "type": "array",
+                    "description": "响应数据",
+                    "items": {
+                        "originalRef": "DocumentInfo对象",
+                        "$ref": "#/definitions/DocumentInfo对象"
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«List«DocumentInfo对象»»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«List«FulfillmentProcessStep对象»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "type": "array",
+                    "description": "响应数据",
+                    "items": {
+                        "originalRef": "FulfillmentProcessStep对象",
+                        "$ref": "#/definitions/FulfillmentProcessStep对象"
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«List«FulfillmentProcessStep对象»»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«List«FulfillmentProcessType对象»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "type": "array",
+                    "description": "响应数据",
+                    "items": {
+                        "originalRef": "FulfillmentProcessType对象",
+                        "$ref": "#/definitions/FulfillmentProcessType对象"
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«List«FulfillmentProcessType对象»»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«List«GoodsInfo对象»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "type": "array",
+                    "description": "响应数据",
+                    "items": {
+                        "originalRef": "GoodsInfo对象",
+                        "$ref": "#/definitions/GoodsInfo对象"
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«List«GoodsInfo对象»»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«List«HarborInfo对象»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "type": "array",
+                    "description": "响应数据",
+                    "items": {
+                        "originalRef": "HarborInfo对象",
+                        "$ref": "#/definitions/HarborInfo对象"
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«List«HarborInfo对象»»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«List«MarketGoodsInfo对象»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "type": "array",
+                    "description": "响应数据",
+                    "items": {
+                        "originalRef": "MarketGoodsInfo对象",
+                        "$ref": "#/definitions/MarketGoodsInfo对象"
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«List«MarketGoodsInfo对象»»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«List«SysProfileParameter对象»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "type": "array",
+                    "description": "响应数据",
+                    "items": {
+                        "originalRef": "SysProfileParameter对象",
+                        "$ref": "#/definitions/SysProfileParameter对象"
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«List«SysProfileParameter对象»»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«Map«string,List«FulfillmentProcessStep对象»»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "type": "object",
+                    "description": "响应数据",
+                    "additionalProperties": {
+                        "type": "array",
+                        "items": {
+                            "originalRef": "FulfillmentProcessStep对象",
+                            "$ref": "#/definitions/FulfillmentProcessStep对象"
+                        }
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«Map«string,List«FulfillmentProcessStep对象»»»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«MarketGoodsInfo对象»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "originalRef": "MarketGoodsInfo对象",
+                    "$ref": "#/definitions/MarketGoodsInfo对象"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«MarketGoodsInfo对象»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«Set«ContractTaskHistory对象»»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "type": "array",
+                    "description": "响应数据",
+                    "items": {
+                        "originalRef": "ContractTaskHistory对象",
+                        "$ref": "#/definitions/ContractTaskHistory对象"
+                    }
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«Set«ContractTaskHistory对象»»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«SysProfileParameter对象»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "originalRef": "SysProfileParameter对象",
+                    "$ref": "#/definitions/SysProfileParameter对象"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«SysProfileParameter对象»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«boolean»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "type": "boolean",
+                    "description": "响应数据"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«boolean»",
+            "description": "通用响应结果封装类"
+        }
+    }
+}

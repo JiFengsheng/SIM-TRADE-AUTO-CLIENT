@@ -1,0 +1,17 @@
+流程管理页面内容
+
+流程管理是用来管理不同流程的步骤数据，页面展示的是不同的流程查询到的步骤列表数据，可以使用ant-design-vue
+的表格组件进行展示步骤列表，调用的接口请使用 processStepApi.list 这个接口，该接口可传 trade(贸易术语),
+payment(结算方式) 两个参数进行数据查询，列表左上角显示 trade、和payment两种下拉选择的过滤组件，列表有上角显示的是
+搜索框组件，可以调用接口传search参数进行模糊搜索，列表展示 步骤名称(字段：step_desc)、步骤编码(字段: step_code)、
+归属角色(字段：role_code)、延迟时间(字段: sleep_seconds)、重新执行是否跳过(字段: skip)、控制列显示一个修改按钮
+补充：
+role_code有5种值，EXPORTER(出口商)、IMPORTER(进口商)、SUPPLIER(供应商)、ISSUING_BANK(进口地银行)、NEGOTIATING_BANK(出口地银行)，
+请根据code显示对应的名称
+trade有3种取值分别是：CIF、CFR、FOB
+payment有四种取值分别是：L/C、D/P、D/A、T/T
+
+
+注意：
+1、要求界面简洁美观，你可以使用ant-design-vue以及tailwind css进行开发
+2、接口都要写在hook.ts这个文件里面方便复用

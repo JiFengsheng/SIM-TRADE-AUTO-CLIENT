@@ -1,0 +1,6 @@
+server:
+  port: 9090
+
+spring:
+  pid:
+    file: ./sim-trade.pid

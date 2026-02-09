@@ -1,0 +1,77 @@
+公司管理设计内容
+
+这个页面是负责更新出口商、进口商、供应商、出口地银行、进口地银行的信息，现在想设计成5个tab页面，
+你可以使用ant-design里面的Tabs 标签页组件来实现，每个tab显示对应的公司信息，每个tab切换获取公司
+信息的接口 参考sysProfileParameterApi.getCompany 这个接口来获取，然后每个tab展示的是修改每个
+公司信息的表单页面,有一个保存按钮可以点击进行修改公司信息，接口参考 sysProfileParameterApi.updateCompany ，
+注意不同公司的表单页面会有区别，以下是每个公司的表单具体内容：
+
+===============================================================================
+出口商信息：
+公司全称(中文)：字段（fullNameChinese）
+公司全称(英文)：字段（fullNameEnglish）
+公司简称(中文)：字段（abbreviationChinese）
+公司简称(英文)：字段（abbreviationEnglish）
+企业法人(中文)：字段（legalPersonChinese）
+企业法人(英文)：字段（legalPersonEnglish）
+电话：字段（phone）
+传真：字段（fax）
+邮政编码：字段（postalCode）
+网址：字段（website）
+公司地址(中文)：字段（addressChinese）
+公司地址(英文)：字段（addressEnglish）
+公司介绍：字段（introduction）
+===============================================================================
+进口商信息：
+公司全称：字段（fullNameEnglish）
+公司简称：字段（abbreviationEnglish）
+企业法人：字段（legalPersonEnglish）
+电话：字段（phone）
+传真：字段（fax）
+网址：字段（website）
+公司地址(注意应根据所属国家来填写)：字段（addressEnglish）
+公司介绍：字段（introduction）
+===============================================================================
+工厂信息：
+公司全称：字段（fullNameChinese）
+公司简称：字段（abbreviationChinese）
+企业法人：字段（legalPersonChinese）
+电话：字段（phone）
+传真：字段（fax）
+邮政编码：字段（postalCode）
+网址：字段（website）
+公司地址：字段（addressChinese）
+公司介绍：字段（introduction）
+===============================================================================
+出口地银行信息：
+银行全称(中文)：字段（fullNameChinese）
+银行全称(英文)：字段（fullNameEnglish）
+银行简称(中文)：字段（abbreviationChinese）
+银行简称(英文)：字段（abbreviationEnglish）
+电话：字段（phone）
+传真：字段（fax）
+邮政编码：字段（postalCode）
+网址：字段（website）
+银行地址(中文)：字段（addressChinese）
+银行地址(英文)：字段（addressEnglish）
+银行介绍：字段（introduction）
+===============================================================================
+进口地银行信息：
+银行全称：字段（fullNameEnglish）
+银行简称：字段（abbreviationEnglish）
+电话：字段（phone）
+传真：字段（fax）
+网址：字段（website）
+银行地址：字段（addressEnglish）
+银行介绍：字段（introduction）
+===============================================================================
+
+
+注意：
+1、要求页面简洁美观好看，你可以使用ant-design以及tailwind css来实现界面和样式
+2、接口里面的 companyCode 有5个取值，分别如下：
+EXPORTER_COMPANY 对应 出口商信息
+IMPORTER_COMPANY 对应 进口商信息
+SUPPLIER_COMPANY 对应 供应商信息
+ISSUING_BANK_COMPANY 对应 进口地银行信息
+NEGOTIATING_BANK_COMPANY 对应 出口地银行信息
