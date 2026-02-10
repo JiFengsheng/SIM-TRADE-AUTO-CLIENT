@@ -1,13 +1,13 @@
 <template>
-  <div class="p-4 lg:p-6 xl:p-8 space-y-4 bg-slate-50 min-h-full">
-    <a-card class="shadow-sm rounded-xl border-0 !bg-white/80 backdrop-blur-sm" :loading="loading"
+  <div class="process-page p-4 lg:p-6 xl:p-8 space-y-4 min-h-full">
+    <a-card hoverable class="process-card shadow-sm rounded-xl border-0 backdrop-blur-sm" :loading="loading"
       :body-style="{ padding: '20px' }">
       <!-- 标题和过滤区域 -->
       <div class="flex items-center justify-between mb-6">
         <!-- 左上角：trade 和 payment 过滤组件 -->
         <div class="flex items-center gap-4">
           <div class="flex items-center gap-2">
-            <span class="text-sm text-slate-600 font-medium">贸易术语：</span>
+            <span class="process-label text-sm font-medium">贸易术语：</span>
             <a-select v-model:value="tradeFilter" placeholder="请选择贸易术语" style="width: 150px" allow-clear
               @change="handleTradeChange">
               <a-select-option value="CIF">CIF</a-select-option>
@@ -16,7 +16,7 @@
             </a-select>
           </div>
           <div class="flex items-center gap-2">
-            <span class="text-sm text-slate-600 font-medium">结算方式：</span>
+            <span class="process-label text-sm font-medium">结算方式：</span>
             <a-select v-model:value="paymentFilter" placeholder="请选择结算方式" style="width: 150px" allow-clear
               @change="handlePaymentChange">
               <a-select-option value="L/C">L/C</a-select-option>
@@ -48,22 +48,22 @@
       }" row-key="stepId" class="custom-compact-table" size="middle">
         <a-table-column key="stepDesc" title="步骤名称" data-index="stepDesc" width="200">
           <template #default="{ text }">
-            <span class="text-slate-900 font-medium">{{ text || '-' }}</span>
+            <span class="process-cell-primary">{{ text || '-' }}</span>
           </template>
         </a-table-column>
         <a-table-column key="stepCode" title="步骤编码" data-index="stepCode" width="150">
           <template #default="{ text }">
-            <span class="text-slate-700">{{ text || '-' }}</span>
+            <span class="process-cell-secondary">{{ text || '-' }}</span>
           </template>
         </a-table-column>
         <a-table-column key="roleCode" title="归属角色" data-index="roleCode" width="120">
           <template #default="{ text }">
-            <span class="text-slate-700">{{ getRoleName(text) }}</span>
+            <span class="process-cell-secondary">{{ getRoleName(text) }}</span>
           </template>
         </a-table-column>
         <a-table-column key="sleepSeconds" title="延迟时间" data-index="sleepSeconds" width="120" align="right">
           <template #default="{ text }">
-            <span class="text-slate-700">{{ formatSecondsToTime(text) }}</span>
+            <span class="process-cell-secondary">{{ formatSecondsToTime(text) }}</span>
           </template>
         </a-table-column>
         <a-table-column key="skip" title="重新执行是否跳过" width="160" align="center">
@@ -153,12 +153,30 @@ onMounted(() => {
 </script>
 
 <style scoped>
+/* 使用 App 根节点注入的 --app-* 变量，兼容 light/dark（ant-design-vue 4.x 不暴露 --ant-*） */
+.process-page {
+  background-color: var(--app-bg-color);
+}
+.process-card {
+  background-color: var(--app-bg-container);
+}
+.process-label {
+  color: var(--app-color-text-secondary);
+}
+.process-cell-primary {
+  color: var(--app-color-text);
+  font-weight: 600;
+}
+.process-cell-secondary {
+  color: var(--app-color-text-secondary);
+}
+
 .custom-compact-table :deep(.ant-table-thead > tr > th) {
   padding-top: 12px;
   padding-bottom: 12px;
-  background-color: rgba(248, 250, 252, 0.9);
+  background-color: var(--app-bg-container);
   font-weight: 600;
-  color: #475569;
+  color: var(--app-color-text-secondary);
 }
 
 .custom-compact-table :deep(.ant-table-tbody > tr > td) {
@@ -167,6 +185,6 @@ onMounted(() => {
 }
 
 .custom-compact-table :deep(.ant-table-tbody > tr:hover > td) {
-  background-color: rgba(241, 245, 249, 0.5);
+  background-color: var(--app-bg-container-hover);
 }
 </style>

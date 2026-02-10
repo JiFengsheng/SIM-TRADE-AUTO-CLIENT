@@ -1,6 +1,6 @@
 <template>
   <div class="company-page w-full h-full overflow-y-auto scrollbar-w-none">
-    <div class="w-full max-w-5xl mx-auto py-8 px-8">
+    <div class="w-full max-w-6xl mx-auto py-8 px-4 lg:px-6">
       <h1 class="text-2xl font-bold mb-6 text-center">公司管理</h1>
 
       <a-card class="desk-card" :bordered="false">
@@ -73,7 +73,7 @@
         <a-button>选择文件</a-button>
       </a-upload>
 
-      <div class="text-xs text-gray-500 mt-2">
+      <div class="text-xs company-text-secondary mt-2">
         请选择要导入的文件（建议使用导出模板）。
       </div>
     </a-modal>
@@ -302,18 +302,19 @@ const handleSave = async () => {
 
 <style scoped>
 .company-page {
-  background-color: var(--ant-bg-color);
+  background-color: var(--app-bg-color);
+  color: var(--app-color-text);
 }
 
 .desk-card {
-  background-color: var(--ant-bg-color);
+  background-color: var(--app-bg-container);
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
   transition: all 0.3s ease;
 }
 
 .desk-card:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.26);
   transform: translateY(-1px);
 }
 
@@ -327,12 +328,17 @@ const handleSave = async () => {
 .section-title {
   font-weight: 600;
   font-size: 16px;
+  color: var(--app-color-text);
 }
 
 .section-subtitle {
   font-size: 12px;
-  color: #8c8c8c;
+  color: var(--app-color-text-secondary);
   margin-top: 4px;
+}
+
+.company-text-secondary {
+  color: var(--app-color-text-secondary);
 }
 
 .company-tabs :deep(.ant-tabs-content-holder) {
@@ -341,6 +347,6 @@ const handleSave = async () => {
 
 ::deep(.ant-form-item-label > label) {
   font-weight: 500;
-  color: var(--ant-text-color);
+  color: var(--app-color-text);
 }
 </style>

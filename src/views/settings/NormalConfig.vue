@@ -8,11 +8,26 @@
         <a-tab-pane key="app" :tab="$t('settings.general')">
           <a-form :model="config" layout="vertical" class="space-y-6 mt-4">
             <a-form-item :label="$t('settings.language')" name="language">
-              <a-select v-model:value="config.language" :placeholder="$t('settings.selectLanguage')" class="w-full"
-                @change="handleLanguageChange">
+              <a-select
+                v-model:value="config.language"
+                :placeholder="$t('settings.selectLanguage')"
+                class="w-full"
+                @change="handleLanguageChange"
+              >
                 <a-select-option value="zh">{{ $t('settings.chinese') }}</a-select-option>
                 <a-select-option value="en">{{ $t('settings.english') }}</a-select-option>
               </a-select>
+            </a-form-item>
+
+            <a-form-item :label="$t('settings.themeMode')" name="themeMode">
+              <a-radio-group v-model:value="config.themeMode" @change="handleThemeModeChange">
+                <a-radio-button value="light">
+                  {{ $t('settings.lightMode') }}
+                </a-radio-button>
+                <a-radio-button value="dark">
+                  {{ $t('settings.darkMode') }}
+                </a-radio-button>
+              </a-radio-group>
             </a-form-item>
 
             <!-- <a-form-item :label="$t('settings.fontSize')" name="fontSize">
@@ -82,6 +97,7 @@ const config = ref<AppConfig>({
   language: 'zh',
   fontSize: 14,
   themeColor: '#ff17a9',
+  themeMode: 'light'
 });
 
 
@@ -97,11 +113,14 @@ const loadConfig = async () => {
       language: savedConfig.language || 'zh',
       fontSize: savedConfig.fontSize || 14,
       themeColor: savedConfig.themeColor || '#ff17a9',
+      themeMode: savedConfig.themeMode || 'light',
     };
     // 加载配置后立即设置语言
     setLocale(config.value.language as 'zh' | 'en');
     // 立即更新主题色
     window.dispatchEvent(new CustomEvent('theme-color-change', { detail: { color: config.value.themeColor } }));
+    // 立即更新主题模式
+    window.dispatchEvent(new CustomEvent('theme-mode-change', { detail: { mode: config.value.themeMode } }));
   } catch (error) {
     console.error('加载配置失败:', error);
     message.error(t('common.loadFailed'));
@@ -122,6 +141,12 @@ const handleLanguageChange = async (value: string) => {
   // }
 };
 
+// 处理主题模式变化（实时更新）
+const handleThemeModeChange = (value: Event) => {
+  console.log('handleThemeModeChange', (value.target as HTMLInputElement).value);
+  config.value.themeMode = (value.target as HTMLInputElement).value as 'light' | 'dark';
+  window.dispatchEvent(new CustomEvent('theme-mode-change', { detail: { mode: config.value.themeMode } }));
+};
 // 处理主题颜色变化（实时更新）
 const handleThemeColorChange = (color: string) => {
   config.value.themeColor = color;
@@ -138,6 +163,7 @@ const handleSave = async () => {
       language: config.value.language,
       fontSize: config.value.fontSize,
       themeColor: config.value.themeColor,
+      themeMode: config.value.themeMode
 
     };
     const result = await window.electronAPI.saveAppConfig(configToSave);
@@ -167,7 +193,8 @@ onMounted(() => {
 
 <style scoped>
 .setting-page {
-  background-color: var(--ant-bg-color);
+  background-color: var(--app-bg-color);
+  color: var(--app-color-text);
   padding: 0;
   margin: 0;
 }
@@ -185,12 +212,12 @@ onMounted(() => {
 }
 
 .model-config-card {
-  background-color: #fafafa;
+  background-color: var(--app-bg-container);
   transition: all 0.3s ease;
 }
 
 .model-config-card:hover {
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.26);
   border-color: var(--theme-primary-color, #ff17a9);
 }
 
@@ -207,7 +234,7 @@ onMounted(() => {
 }
 
 .color-block.selected {
-  border-color: #000;
+  border-color: var(--app-color-text);
   box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.2);
   transform: scale(1.05);
 }

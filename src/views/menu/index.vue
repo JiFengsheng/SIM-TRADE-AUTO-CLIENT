@@ -1,7 +1,7 @@
 <template>
   <div id="sim-menu" class="h-full">
 
-    <a-menu v-model:openKeys="state.openKeys" v-model:selectedKeys="state.selectedKeys" mode="inline" theme="light"
+    <a-menu class="h-full" v-model:openKeys="state.openKeys" v-model:selectedKeys="state.selectedKeys" mode="inline" theme="light"
       @select="handleSelect" :inline-collapsed="isCollapsed" :items="items"></a-menu>
 
   </div>
@@ -122,4 +122,8 @@ const handleSelect = (e: any) => {
 
 </script>
 
-<style scoped></style>
+<style scoped>
+#sim-menu {
+  background-color: var(--app-bg-color);
+}
+</style>

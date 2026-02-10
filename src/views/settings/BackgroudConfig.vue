@@ -11,10 +11,10 @@
             ]">
             <a-input v-model:value="config.baseUrl" placeholder="http://localhost:9090" class="w-full" size="large">
               <template #prefix>
-                <Icon icon="radix-icons:link-2" class="text-gray-400" />
+                <Icon icon="radix-icons:link-2" class="setting-text-tertiary" />
               </template>
             </a-input>
-            <div class="text-sm text-gray-500 mt-2">
+            <div class="text-sm setting-text-secondary mt-2">
               应用请求后端 API 的基础地址，用于所有接口请求
             </div>
           </a-form-item>
@@ -25,14 +25,14 @@
             ]">
             <a-input-number v-model:value="config.port" :min="1" :max="65535" :step="1" class="w-full" size="large"
               placeholder="9090" />
-            <div class="text-sm text-gray-500 mt-2">
+            <div class="text-sm setting-text-secondary mt-2">
               用于指定启动本地后端服务运行的端口号
             </div>
           </a-form-item>
 
           <a-form-item label="是否自动启动后台" name="autoStart">
             <a-switch v-model:checked="config.autoStart" checked-children="是" un-checked-children="否" />
-            <div class="text-sm text-gray-500 mt-2">
+            <div class="text-sm setting-text-secondary mt-2">
               开启后，下次应用启动时将自动启动后台服务（仅在本地服务时生效）
             </div>
           </a-form-item>
@@ -40,7 +40,7 @@
           <a-divider />
 
           <div class="flex items-center justify-between">
-            <div class="text-sm text-gray-500">
+            <div class="text-sm setting-text-secondary">
               <Icon icon="radix-icons:info-circled" class="inline mr-1" />
               配置保存后将立即生效，影响所有 API 请求
             </div>
@@ -54,11 +54,11 @@
       <!-- 配置预览 -->
       <a-card class="config-preview-card mt-6" title="配置预览">
         <div class="space-y-2">
-          <div class="flex items-center justify-between py-2 border-b border-gray-100">
-            <span class="text-gray-600">完整 API 地址：</span>
-            <code class="text-sm bg-gray-50 px-3 py-1 rounded">{{ fullApiUrl }}</code>
+          <div class="flex items-center justify-between py-2 border-b setting-border">
+            <span class="setting-text-secondary">完整 API 地址：</span>
+            <code class="text-sm setting-code-bg px-3 py-1 rounded">{{ fullApiUrl }}</code>
           </div>
-          <div class="text-xs text-gray-400 mt-2">
+          <div class="text-xs setting-text-tertiary mt-2">
             <Icon icon="radix-icons:lightbulb" class="inline mr-1" />
             示例接口：{{ fullApiUrl }}/api/example
           </div>
@@ -75,10 +75,10 @@
                 :class="serviceStatus === 'running' ? 'text-green-500' : 'text-red-500'" class="text-xl" />
             </div>
             <div>
-              <div class="font-medium text-gray-800">
+              <div class="font-medium setting-text">
                 {{ serviceStatus === 'running' ? '服务运行中' : serviceStatus === 'stopped' ? '服务已停止' : '检查中...' }}
               </div>
-              <div class="text-sm text-gray-500 mt-1">
+              <div class="text-sm setting-text-secondary mt-1">
                 {{ serviceStatus === 'running' ? '后端服务正常运行' : serviceStatus === 'stopped' ? '后端服务未运行或无法连接' : '正在检查服务状态'
                 }}
               </div>
@@ -296,41 +296,42 @@ onMounted(async () => {
 
 <style scoped>
 .setting-page {
-  background-color: var(--ant-bg-color);
+  background-color: var(--app-bg-color);
+  color: var(--app-color-text);
   padding: 0;
   margin: 0;
 }
 
 .config-card {
-  background-color: var(--ant-bg-color);
+  background-color: var(--app-bg-container);
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
   transition: all 0.3s ease;
 }
 
 .config-card:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.26);
 }
 
 .config-preview-card {
-  background-color: var(--ant-bg-color);
+  background-color: var(--app-bg-container);
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
 }
 
 .config-preview-card :deep(.ant-card-head) {
-  border-bottom: 1px solid var(--ant-border-color-split);
+  border-bottom: 1px solid var(--app-border-color);
 }
 
 .config-preview-card code {
   font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-  color: var(--ant-primary-color);
+  color: var(--theme-primary-color, #1677ff);
   font-weight: 500;
 }
 
 :deep(.ant-form-item-label > label) {
   font-weight: 500;
-  color: var(--ant-text-color);
+  color: var(--app-color-text);
 }
 
 :deep(.ant-input),
@@ -359,13 +360,13 @@ onMounted(async () => {
 }
 
 .service-status-card {
-  background-color: var(--ant-bg-color);
+  background-color: var(--app-bg-container);
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
 }
 
 .service-status-card :deep(.ant-card-head) {
-  border-bottom: 1px solid var(--ant-border-color-split);
+  border-bottom: 1px solid var(--app-border-color);
 }
 
 .status-indicator {
@@ -375,18 +376,18 @@ onMounted(async () => {
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background-color: #f5f5f5;
+  background-color: var(--app-bg-container-hover);
   transition: all 0.3s ease;
 }
 
 .status-indicator.status-online {
-  background-color: #f6ffed;
-  border: 2px solid #b7eb8f;
+  background-color: rgba(82, 196, 26, 0.14);
+  border: 2px solid rgba(82, 196, 26, 0.35);
 }
 
 .status-indicator.status-offline {
-  background-color: #fff2f0;
-  border: 2px solid #ffccc7;
+  background-color: rgba(255, 77, 79, 0.14);
+  border: 2px solid rgba(255, 77, 79, 0.35);
 }
 
 :deep(.ant-btn-dangerous) {
@@ -447,5 +448,26 @@ onMounted(async () => {
   display: inline-flex;
   align-items: center;
   line-height: 1;
+}
+
+.setting-text {
+  color: var(--app-color-text);
+}
+
+.setting-text-secondary {
+  color: var(--app-color-text-secondary);
+}
+
+.setting-text-tertiary {
+  color: var(--app-color-text-secondary);
+  opacity: 0.75;
+}
+
+.setting-border {
+  border-color: var(--app-border-color);
+}
+
+.setting-code-bg {
+  background-color: var(--app-bg-container-hover);
 }
 </style>

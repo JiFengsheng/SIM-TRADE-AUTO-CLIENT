@@ -1,6 +1,7 @@
 <template>
   <div class="auth-page">
     <div class="auth-page__bg" />
+    <div class="auth-page__overlay" />
     <div class="auth-page__content">
       <div class="auth-card">
         <h1 class="auth-card__title">身份认证</h1>
@@ -50,6 +51,8 @@ async function onSubmit() {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  background-color: var(--app-bg-color);
+  color: var(--app-color-text);
 }
 
 .auth-page__bg {
@@ -57,6 +60,18 @@ async function onSubmit() {
   inset: 0;
   background: url("../../assets/images/auth.png") center center / cover no-repeat;
   z-index: 0;
+}
+
+.auth-page__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  /* 暗色遮罩，提升文字与卡片层次 */
+  /* background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.35) 0%,
+    rgba(0, 0, 0, 0.55) 100%
+  ); */
 }
 
 .auth-page__content {
@@ -68,21 +83,21 @@ async function onSubmit() {
 }
 
 .auth-card {
-  background: rgba(255, 255, 255, 0.92);
+  background: color-mix(in srgb, var(--app-bg-container) 92%, transparent);
   backdrop-filter: blur(12px);
   border-radius: 16px;
   box-shadow:
-    0 4px 24px rgba(0, 0, 0, 0.06),
-    0 1px 2px rgba(0, 0, 0, 0.04);
+    0 10px 28px rgba(0, 0, 0, 0.35),
+    0 2px 6px rgba(0, 0, 0, 0.22);
   padding: 40px 36px;
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: 1px solid color-mix(in srgb, var(--app-border-color) 70%, transparent);
 }
 
 .auth-card__title {
   margin: 0 0 8px;
   font-size: 22px;
   font-weight: 600;
-  color: #1e293b;
+  color: var(--app-color-text);
   text-align: center;
   letter-spacing: 0.02em;
 }
@@ -90,7 +105,7 @@ async function onSubmit() {
 .auth-card__desc {
   margin: 0 0 28px;
   font-size: 14px;
-  color: #64748b;
+  color: var(--app-color-text-secondary);
   text-align: center;
   line-height: 1.5;
 }

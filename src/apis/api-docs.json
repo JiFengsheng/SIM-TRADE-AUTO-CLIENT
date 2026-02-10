@@ -50,6 +50,10 @@
             "description": "Market Goods Info Controller"
         },
         {
+            "name": "广告接口",
+            "description": "Advertisement Controller"
+        },
+        {
             "name": "流程步骤详情接口",
             "description": "Fulfillment Process Step Controller"
         },
@@ -64,9 +68,113 @@
         {
             "name": "系统配置接口",
             "description": "Sys Profile Parameter Controller"
+        },
+        {
+            "name": "邮件接口",
+            "description": "Email Controller"
         }
     ],
     "paths": {
+        "/advertisement/publishAds": {
+            "post": {
+                "tags": [
+                    "广告接口"
+                ],
+                "summary": "发布广告",
+                "description": "发布广告",
+                "operationId": "publishAdsUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "advertisementDto",
+                        "description": "advertisementDto",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "AdvertisementDto",
+                            "$ref": "#/definitions/AdvertisementDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/advertisement/publishInfo": {
+            "post": {
+                "tags": [
+                    "广告接口"
+                ],
+                "summary": "发布信息",
+                "description": "发布信息",
+                "operationId": "publishInfoUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "publishInfoDto",
+                        "description": "publishInfoDto",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "PublishInfoDto",
+                            "$ref": "#/definitions/PublishInfoDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
         "/businessConfig": {
             "get": {
                 "tags": [
@@ -1495,6 +1603,195 @@
                     },
                     "403": {
                         "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/email/getEmailContent": {
+            "get": {
+                "tags": [
+                    "邮件接口"
+                ],
+                "summary": "获取邮件内容",
+                "description": "获取邮件内容",
+                "operationId": "getEmailContentUsingGET",
+                "produces": [
+                    "*/*"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«EmailTemplateDto»",
+                            "$ref": "#/definitions/通用响应结果«EmailTemplateDto»"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/email/saveEmailContent": {
+            "post": {
+                "tags": [
+                    "邮件接口"
+                ],
+                "summary": "保存邮件内容",
+                "description": "保存邮件内容",
+                "operationId": "saveEmailContentUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "emailTemplateDto",
+                        "description": "emailTemplateDto",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "EmailTemplateDto",
+                            "$ref": "#/definitions/EmailTemplateDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/email/sendEmail/{sendType}": {
+            "post": {
+                "tags": [
+                    "邮件接口"
+                ],
+                "summary": "发送邮件(业务)",
+                "description": "发送邮件(业务)",
+                "operationId": "sendEmailUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "emailDto",
+                        "description": "emailDto",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "EmailDto",
+                            "$ref": "#/definitions/EmailDto"
+                        }
+                    },
+                    {
+                        "name": "sendType",
+                        "in": "path",
+                        "description": "sendType",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/email/sendNormalEmail": {
+            "post": {
+                "tags": [
+                    "邮件接口"
+                ],
+                "summary": "发送邮件(通用)",
+                "description": "发送邮件(通用)",
+                "operationId": "sendNormalEmailUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "emailDto",
+                        "description": "emailDto",
+                        "required": true,
+                        "schema": {
+                            "originalRef": "EmailDto",
+                            "$ref": "#/definitions/EmailDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "originalRef": "通用响应结果«boolean»",
+                            "$ref": "#/definitions/通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
                     }
                 },
                 "deprecated": false
@@ -3624,6 +3921,44 @@
             },
             "title": "AccountInfoDto"
         },
+        "AdvertisementDto": {
+            "type": "object",
+            "properties": {
+                "account": {
+                    "type": "string",
+                    "description": "账号"
+                },
+                "advertisementType": {
+                    "type": "string",
+                    "description": "发布类型"
+                },
+                "content": {
+                    "type": "string",
+                    "description": "内容"
+                },
+                "goodsNo": {
+                    "type": "string",
+                    "description": "产品编号"
+                },
+                "keywords": {
+                    "type": "string",
+                    "description": "关键字"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "密码"
+                },
+                "roleCode": {
+                    "type": "string",
+                    "description": "角色"
+                },
+                "title": {
+                    "type": "string",
+                    "description": "标题"
+                }
+            },
+            "title": "AdvertisementDto"
+        },
         "BusinessConfig对象": {
             "type": "object",
             "properties": {
@@ -3647,6 +3982,10 @@
                 "createUser": {
                     "type": "string",
                     "description": "创建人"
+                },
+                "emailSetting": {
+                    "type": "string",
+                    "description": "邮件设置"
                 },
                 "exchangeRate": {
                     "type": "number",
@@ -3967,6 +4306,10 @@
                 "createUser": {
                     "type": "string",
                     "description": "创建人"
+                },
+                "emailSetting": {
+                    "type": "string",
+                    "description": "邮件设置"
                 },
                 "endTime": {
                     "type": "string",
@@ -4315,6 +4658,71 @@
             },
             "title": "DocumentInfo对象",
             "description": "DocumentInfo对象"
+        },
+        "EmailDto": {
+            "type": "object",
+            "properties": {
+                "content": {
+                    "type": "string"
+                },
+                "contractNo": {
+                    "type": "string"
+                },
+                "receiver": {
+                    "type": "string"
+                },
+                "senderAccount": {
+                    "type": "string"
+                },
+                "senderPassword": {
+                    "type": "string"
+                },
+                "senderRole": {
+                    "type": "string"
+                },
+                "title": {
+                    "type": "string"
+                }
+            },
+            "title": "EmailDto"
+        },
+        "EmailTemplateDto": {
+            "type": "object",
+            "properties": {
+                "exporterToImporterFirst": {
+                    "originalRef": "EmailDto",
+                    "$ref": "#/definitions/EmailDto"
+                },
+                "exporterToImporterSecond": {
+                    "originalRef": "EmailDto",
+                    "$ref": "#/definitions/EmailDto"
+                },
+                "exporterToSupplierFirst": {
+                    "originalRef": "EmailDto",
+                    "$ref": "#/definitions/EmailDto"
+                },
+                "exporterToSupplierSecond": {
+                    "originalRef": "EmailDto",
+                    "$ref": "#/definitions/EmailDto"
+                },
+                "importerToExporterFirst": {
+                    "originalRef": "EmailDto",
+                    "$ref": "#/definitions/EmailDto"
+                },
+                "importerToExporterSecond": {
+                    "originalRef": "EmailDto",
+                    "$ref": "#/definitions/EmailDto"
+                },
+                "supplierToExporterFirst": {
+                    "originalRef": "EmailDto",
+                    "$ref": "#/definitions/EmailDto"
+                },
+                "supplierToExporterSecond": {
+                    "originalRef": "EmailDto",
+                    "$ref": "#/definitions/EmailDto"
+                }
+            },
+            "title": "EmailTemplateDto"
         },
         "ExecuteContractReqVo": {
             "type": "object",
@@ -4851,6 +5259,40 @@
             "title": "MarketGoodsInfo对象",
             "description": "MarketGoodsInfo对象"
         },
+        "PublishInfoDto": {
+            "type": "object",
+            "properties": {
+                "account": {
+                    "type": "string",
+                    "description": "账号"
+                },
+                "content": {
+                    "type": "string",
+                    "description": "内容"
+                },
+                "keywords": {
+                    "type": "string",
+                    "description": "关键字"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "密码"
+                },
+                "publishInfoType": {
+                    "type": "string",
+                    "description": "发布信息类型"
+                },
+                "roleCode": {
+                    "type": "string",
+                    "description": "角色"
+                },
+                "title": {
+                    "type": "string",
+                    "description": "标题"
+                }
+            },
+            "title": "PublishInfoDto"
+        },
         "SysProfileParameter对象": {
             "type": "object",
             "properties": {
@@ -5032,6 +5474,31 @@
                 }
             },
             "title": "通用响应结果«DocumentInfo对象»",
+            "description": "通用响应结果封装类"
+        },
+        "通用响应结果«EmailTemplateDto»": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "响应码"
+                },
+                "data": {
+                    "description": "响应数据",
+                    "originalRef": "EmailTemplateDto",
+                    "$ref": "#/definitions/EmailTemplateDto"
+                },
+                "message": {
+                    "type": "string",
+                    "description": "响应消息"
+                },
+                "success": {
+                    "type": "boolean",
+                    "description": "响应成功"
+                }
+            },
+            "title": "通用响应结果«EmailTemplateDto»",
             "description": "通用响应结果封装类"
         },
         "通用响应结果«FulfillmentProcessStep对象»": {

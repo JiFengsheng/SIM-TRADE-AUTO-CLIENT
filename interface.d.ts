@@ -2,6 +2,7 @@ export interface AppConfig {
   language: string;
   fontSize: number;
   themeColor: string;
+  themeMode: 'light' | 'dark';
 }
 
 export interface BackgroundConfig {

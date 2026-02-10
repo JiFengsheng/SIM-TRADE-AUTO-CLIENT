@@ -504,7 +504,8 @@ const _ConfigManager = class _ConfigManager {
     __publicField(this, "defaultConfig", {
       language: "zh",
       fontSize: 14,
-      themeColor: "#1677ff"
+      themeColor: "#1677ff",
+      themeMode: "light"
     });
     require$$3.app.getPath("userData");
     console.log("EXTRA_HOME", EXTRA_HOME$4);
@@ -557,7 +558,8 @@ const _ConfigManager = class _ConfigManager {
       return {
         language: config.language || this.defaultConfig.language,
         fontSize: config.fontSize || this.defaultConfig.fontSize,
-        themeColor: config.themeColor || this.defaultConfig.themeColor
+        themeColor: config.themeColor || this.defaultConfig.themeColor,
+        themeMode: config.themeMode || this.defaultConfig.themeMode
       };
     } catch (error) {
       console.error("加载配置文件失败:", error);
@@ -721,7 +723,9 @@ const en = {
     systemConfig: "System Settings",
     normalConfig: "Application Settings",
     backgroundConfig: "Backend Settings",
-    auth: "Authentication"
+    auth: "Authentication",
+    email: "Email",
+    advertisement: "Advertisement"
   },
   common: {
     settings: "Settings",
@@ -749,7 +753,11 @@ const en = {
     chinese: "中文",
     english: "English",
     themeColor: "Theme Color",
-    selectThemeColor: "Please select theme color"
+    selectThemeColor: "Please select theme color",
+    themeMode: "Theme Mode",
+    selectThemeMode: "Please select theme mode",
+    lightMode: "Light",
+    darkMode: "Dark"
   },
   model: {
     qianfan: "Baidu Qianfan",
@@ -811,7 +819,9 @@ const zh = {
     systemConfig: "系统配置",
     normalConfig: "应用设置",
     backgroundConfig: "后台配置",
-    auth: "身份认证"
+    auth: "身份认证",
+    email: "邮箱管理",
+    advertisement: "广告管理"
   },
   common: {
     settings: "应用设置",
@@ -839,7 +849,11 @@ const zh = {
     chinese: "中文",
     english: "English",
     themeColor: "主题颜色",
-    selectThemeColor: "请选择主题颜色"
+    selectThemeColor: "请选择主题颜色",
+    themeMode: "主题模式",
+    selectThemeMode: "请选择主题模式",
+    lightMode: "亮色",
+    darkMode: "暗色"
   },
   model: {
     qianfan: "百度千帆",
@@ -3808,7 +3822,8 @@ function registerIpcHandlers(mainWindow, currentLanguage2) {
     const cleanConfig = {
       language: String((config == null ? void 0 : config.language) || "zh"),
       fontSize: Number((config == null ? void 0 : config.fontSize) || 14),
-      themeColor: String((config == null ? void 0 : config.themeColor) || "#ff17a9")
+      themeColor: String((config == null ? void 0 : config.themeColor) || "#ff17a9"),
+      themeMode: String((config == null ? void 0 : config.themeMode) || "light")
     };
     const currentConfig = await configManager.load();
     const languageChanged = currentConfig.language !== cleanConfig.language;
@@ -15526,14 +15541,7 @@ var _eval = EvalError;
 var range = RangeError;
 var ref = ReferenceError;
 var syntax = SyntaxError;
-var type;
-var hasRequiredType;
-function requireType() {
-  if (hasRequiredType) return type;
-  hasRequiredType = 1;
-  type = TypeError;
-  return type;
-}
+var type = TypeError;
 var uri = URIError;
 var abs$1 = Math.abs;
 var floor$1 = Math.floor;
@@ -15779,7 +15787,7 @@ function requireCallBindApplyHelpers() {
   if (hasRequiredCallBindApplyHelpers) return callBindApplyHelpers;
   hasRequiredCallBindApplyHelpers = 1;
   var bind3 = functionBind;
-  var $TypeError2 = requireType();
+  var $TypeError2 = type;
   var $call2 = requireFunctionCall();
   var $actualApply = requireActualApply();
   callBindApplyHelpers = function callBindBasic(args) {
@@ -15852,7 +15860,7 @@ var $EvalError = _eval;
 var $RangeError = range;
 var $ReferenceError = ref;
 var $SyntaxError = syntax;
-var $TypeError$1 = requireType();
+var $TypeError$1 = type;
 var $URIError = uri;
 var abs = abs$1;
 var floor = floor$1;
@@ -16183,7 +16191,7 @@ var GetIntrinsic2 = getIntrinsic;
 var $defineProperty = GetIntrinsic2("%Object.defineProperty%", true);
 var hasToStringTag = requireShams()();
 var hasOwn$1 = hasown;
-var $TypeError = requireType();
+var $TypeError = type;
 var toStringTag = hasToStringTag ? Symbol.toStringTag : null;
 var esSetTostringtag = function setToStringTag(object2, value) {
   var overrideIfSet = arguments.length > 2 && !!arguments[2] && arguments[2].force;

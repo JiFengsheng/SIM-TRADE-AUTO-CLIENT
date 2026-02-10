@@ -439,18 +439,19 @@ onMounted(async () => {
 
 <style scoped>
 .desk-page {
-  background-color: var(--ant-bg-color);
+  background-color: var(--app-bg-color);
+  color: var(--app-color-text);
 }
 
 .desk-card {
-  background-color: var(--ant-bg-color);
+  background-color: var(--app-bg-container);
   border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
   transition: all 0.3s ease;
 }
 
 .desk-card:hover {
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.26);
   transform: translateY(-1px);
 }
 
@@ -462,16 +463,17 @@ onMounted(async () => {
 .section-title {
   font-weight: 600;
   font-size: 16px;
+  color: var(--app-color-text);
 }
 
 .section-subtitle {
   font-size: 12px;
-  color: #8c8c8c;
+  color: var(--app-color-text-secondary);
   margin-top: 4px;
 }
 
 ::deep(.ant-form-item-label > label) {
   font-weight: 500;
-  color: var(--ant-text-color);
+  color: var(--app-color-text);
 }
 </style>

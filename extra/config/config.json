@@ -1,5 +1,6 @@
 {
-  "language": "zh",
+  "language": "en",
   "fontSize": 14,
-  "themeColor": "#1677ff"
+  "themeColor": "#1677ff",
+  "themeMode": "dark"
 }

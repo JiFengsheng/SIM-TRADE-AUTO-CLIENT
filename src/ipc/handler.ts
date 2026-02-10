@@ -64,7 +64,8 @@ export function registerIpcHandlers(
       language: String(config?.language || "zh"),
       fontSize: Number(config?.fontSize || 14),
       themeColor: String(config?.themeColor || "#ff17a9"),
-    };
+      themeMode: String(config?.themeMode || "light"),
+    } as AppConfig;
     // 检查语言是否改变
     const currentConfig = await configManager.load();
     const languageChanged = currentConfig.language !== cleanConfig.language;

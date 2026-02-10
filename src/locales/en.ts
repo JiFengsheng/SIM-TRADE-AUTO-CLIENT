@@ -10,6 +10,8 @@ export default {
     normalConfig: 'Application Settings',
     backgroundConfig: 'Backend Settings',
     auth: 'Authentication',
+    email: 'Email',
+    advertisement: 'Advertisement',
   },
   common: {
     settings: 'Settings',
@@ -38,6 +40,10 @@ export default {
     english: 'English',
     themeColor: 'Theme Color',
     selectThemeColor: 'Please select theme color',
+    themeMode: 'Theme Mode',
+    selectThemeMode: 'Please select theme mode',
+    lightMode: 'Light',
+    darkMode: 'Dark',
   },
   model: {
     qianfan: 'Baidu Qianfan',

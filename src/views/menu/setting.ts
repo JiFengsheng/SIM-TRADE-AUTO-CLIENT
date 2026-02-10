@@ -6,7 +6,9 @@ import {
   FileSearchOutlined,
   FileTextOutlined,
   ProfileOutlined,
-  BranchesOutlined
+  BranchesOutlined,
+  MailOutlined,
+  SendOutlined
 } from '@ant-design/icons-vue';
 
 /**
@@ -51,6 +53,20 @@ export function getMenuItems(t: MenuT) {
       label: t('sidebar.process'),
       title: t('sidebar.process'),
       route: '/process',
+    },
+    {
+      key: '/email',
+      icon: () => h(MailOutlined),
+      label: t('sidebar.email'),
+      title: t('sidebar.email'),
+      route: '/email',
+    },
+    {
+      key: '/advertisement',
+      icon: () => h(SendOutlined),
+      label: t('sidebar.advertisement'),
+      title: t('sidebar.advertisement'),
+      route: '/advertisement',
     },
     {
       key: '/history',

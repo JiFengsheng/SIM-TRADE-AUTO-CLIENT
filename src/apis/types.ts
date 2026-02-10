@@ -252,6 +252,54 @@ export interface CompanyInfoDto {
 }
 
 /**
+ * 广告接口相关类型定义
+ */
+
+/**
+ * 发布广告请求参数
+ * 对应文档定义：AdvertisementDto
+ */
+export interface AdvertisementDto {
+  /** 账号 */
+  account?: string;
+  /** 发布类型 */
+  advertisementType?: string;
+  /** 内容 */
+  content?: string;
+  /** 产品编号 */
+  goodsNo?: string;
+  /** 关键字 */
+  keywords?: string;
+  /** 密码 */
+  password?: string;
+  /** 角色 */
+  roleCode?: string;
+  /** 标题 */
+  title?: string;
+}
+
+/**
+ * 发布信息请求参数
+ * 对应文档定义：PublishInfoDto
+ */
+export interface PublishInfoDto {
+  /** 账号 */
+  account?: string;
+  /** 内容 */
+  content?: string;
+  /** 关键字 */
+  keywords?: string;
+  /** 密码 */
+  password?: string;
+  /** 发布信息类型 */
+  publishInfoType?: string;
+  /** 角色 */
+  roleCode?: string;
+  /** 标题 */
+  title?: string;
+}
+
+/**
  * 合同基础信息相关类型定义
  */
 
@@ -671,3 +719,61 @@ export interface CrawlRateRespVo{
   /** 进口国家（中文） */
   countryChinese?: string;
 }
+
+/**
+ * 邮件内容对象
+ * 对应文档定义：EmailDto
+ */
+export interface EmailDto {
+  /** 邮件正文内容 */
+  content?: string;
+  /** 合同编号 */
+  contractNo?: string;
+  /** 收件人邮箱 */
+  receiver?: string;
+  /** 发件人账号 */
+  senderAccount?: string;
+  /** 发件人密码 */
+  senderPassword?: string;
+  /** 发件人角色 */
+  senderRole?: string;
+  /** 邮件标题 */
+  title?: string;
+}
+
+/**
+ * 邮件模板对象
+ * 对应文档定义：EmailTemplateDto
+ */
+export interface EmailTemplateDto {
+  /** 出口商 -> 进口商 第一封邮件 */
+  exporterToImporterFirst?: EmailDto;
+  /** 出口商 -> 进口商 第二封邮件 */
+  exporterToImporterSecond?: EmailDto;
+  /** 出口商 -> 供应商 第一封邮件 */
+  exporterToSupplierFirst?: EmailDto;
+  /** 出口商 -> 供应商 第二封邮件 */
+  exporterToSupplierSecond?: EmailDto;
+  /** 进口商 -> 出口商 第一封邮件 */
+  importerToExporterFirst?: EmailDto;
+  /** 进口商 -> 出口商 第二封邮件 */
+  importerToExporterSecond?: EmailDto;
+  /** 供应商 -> 出口商 第一封邮件 */
+  supplierToExporterFirst?: EmailDto;
+  /** 供应商 -> 出口商 第二封邮件 */
+  supplierToExporterSecond?: EmailDto;
+}
+
+/**
+ * 邮件发送类型（业务枚举）
+ * 后端枚举 code 集合，用于 sendEmail 的 sendType
+ */
+export type EmailSendType =
+  | "EXPORTER_TO_IMPORTER_FIRST"
+  | "IMPORTER_TO_EXPORTER_FIRST"
+  | "EXPORTER_TO_IMPORTER_SECOND"
+  | "IMPORTER_TO_EXPORTER_SECOND"
+  | "EXPORTER_TO_SUPPLIER_FIRST"
+  | "SUPPLIER_TO_EXPORTER_FIRST"
+  | "EXPORTER_TO_SUPPLIER_SECOND"
+  | "SUPPLIER_TO_EXPORTER_SECOND";

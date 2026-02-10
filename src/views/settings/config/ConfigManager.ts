@@ -31,6 +31,7 @@ export class ConfigManager {
     language: "zh",
     fontSize: 14,
     themeColor: "#1677ff",
+    themeMode: 'light'
   };
 
   private constructor() {
@@ -97,6 +98,7 @@ export class ConfigManager {
         language: config.language || this.defaultConfig.language,
         fontSize: config.fontSize || this.defaultConfig.fontSize,
         themeColor: config.themeColor || this.defaultConfig.themeColor,
+        themeMode: config.themeMode || this.defaultConfig.themeMode,
       };
     } catch (error) {
       console.error("加载配置文件失败:", error);

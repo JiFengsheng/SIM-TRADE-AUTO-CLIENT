@@ -62,6 +62,18 @@ export const routes = [
     name: 'Auth',
     component: () => import('../views/auth/index.vue'),
     meta: { keepAlive: false },
+  },
+  {
+    path: '/email',
+    name: 'Email',
+    component: () => import('../views/email/index.vue'),
+    meta: { keepAlive: false },
+  },
+  {
+    path: '/advertisement',
+    name: 'Advertisement',
+    component: () => import('../views/advertisement/index.vue'),
+    meta: { keepAlive: true },
   }
 ]
 

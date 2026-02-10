@@ -1,10 +1,10 @@
 <template>
-  <div class="p-4 lg:p-6 xl:p-8 space-y-4 bg-slate-50 min-h-full">
-    <a-card class="shadow-sm rounded-xl border-0 !bg-white/80 backdrop-blur-sm" :loading="loading"
+  <div class="history-root p-4 lg:p-6 xl:p-8 space-y-4 min-h-full">
+    <a-card hoverable class="history-card shadow-sm rounded-xl border-0 backdrop-blur-sm" :loading="loading"
       :body-style="{ padding: '20px' }">
       <!-- 标题和搜索框 -->
       <div class="flex items-center justify-between mb-6">
-        <h2 class="text-lg font-semibold text-slate-900 m-0">历史合同</h2>
+        <h2 class="text-lg font-semibold history-text m-0">历史合同</h2>
         <div class="w-80">
           <a-input-search v-model:value="searchKeyword" placeholder="请输入搜索关键词" size="large"
             @search="handleSearch" @clear="handleSearch" allow-clear>
@@ -22,29 +22,29 @@
         total: total,
         showSizeChanger: true,
         showQuickJumper: true,
-        showTotal: (total) => `共 ${total} 条记录`,
+        showTotal: (total: number) => `共 ${total} 条记录`,
         pageSizeOptions: ['10', '20', '50', '100'],
         onChange: handlePageChange,
         onShowSizeChange: handlePageChange,
       }" row-key="contractId" class="custom-compact-table" size="middle">
         <a-table-column key="exportContractCode" title="外销合同编号" data-index="exportContractCode" width="150">
           <template #default="{ text }">
-            <span class="text-slate-900 font-medium">{{ text || '-' }}</span>
+            <span class="history-text font-medium">{{ text || '-' }}</span>
           </template>
         </a-table-column>
         <a-table-column key="innerContractCode" title="工厂合同编号" data-index="innerContractCode" width="150">
           <template #default="{ text }">
-            <span class="text-slate-900 font-medium">{{ text || '-' }}</span>
+            <span class="history-text font-medium">{{ text || '-' }}</span>
           </template>
         </a-table-column>
         <a-table-column key="goodsNo" title="商品编号" data-index="goodsNo" width="120">
           <template #default="{ text }">
-            <span class="text-slate-700">{{ text || '-' }}</span>
+            <span class="history-text-secondary">{{ text || '-' }}</span>
           </template>
         </a-table-column>
         <a-table-column key="transactionVolume" title="交易数量" data-index="transactionVolume" width="120" align="right">
           <template #default="{ text }">
-            <span class="text-slate-700">{{ text != null ? text : '-' }}</span>
+            <span class="history-text-secondary">{{ text != null ? text : '-' }}</span>
           </template>
         </a-table-column>
         <a-table-column key="exportPrice" title="出口商报价" width="140" align="right">
@@ -52,7 +52,7 @@
             <span v-if="record.exportPrice != null" class="text-emerald-600 font-medium">
               {{ record.exportPrice }} {{ record.exportPriceUnit || 'USD' }}
             </span>
-            <span v-else class="text-slate-400">-</span>
+            <span v-else class="history-text-tertiary">-</span>
           </template>
         </a-table-column>
         <a-table-column key="supplierPrice" title="供应商报价" width="140" align="right">
@@ -60,27 +60,27 @@
             <span v-if="record.supplierPrice != null" class="text-amber-600 font-medium">
               {{ record.supplierPrice }} RMB
             </span>
-            <span v-else class="text-slate-400">-</span>
+            <span v-else class="history-text-tertiary">-</span>
           </template>
         </a-table-column>
         <a-table-column key="exportCity" title="出口城市" data-index="exportCity" width="120">
           <template #default="{ text }">
-            <span class="text-slate-700">{{ text || '-' }}</span>
+            <span class="history-text-secondary">{{ text || '-' }}</span>
           </template>
         </a-table-column>
         <a-table-column key="importCity" title="进口城市" data-index="importCity" width="120">
           <template #default="{ text }">
-            <span class="text-slate-700">{{ text || '-' }}</span>
+            <span class="history-text-secondary">{{ text || '-' }}</span>
           </template>
         </a-table-column>
         <a-table-column key="exportPort" title="出口港口" data-index="exportPort" width="120">
           <template #default="{ text }">
-            <span class="text-slate-700">{{ text || '-' }}</span>
+            <span class="history-text-secondary">{{ text || '-' }}</span>
           </template>
         </a-table-column>
         <a-table-column key="importPort" title="进口港口" data-index="importPort" width="120">
           <template #default="{ text }">
-            <span class="text-slate-700">{{ text || '-' }}</span>
+            <span class="history-text-secondary">{{ text || '-' }}</span>
           </template>
         </a-table-column>
         <a-table-column key="status" title="状态" data-index="status" width="120">
@@ -94,7 +94,7 @@
         </a-table-column>
         <a-table-column key="createTime" title="创建时间" data-index="createTime" width="120">
           <template #default="{ text }">
-            <span class="text-slate-700">{{ text || '-' }}</span>
+            <span class="history-text-secondary">{{ text || '-' }}</span>
           </template>
         </a-table-column>
       </a-table>
@@ -124,12 +124,34 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.history-root {
+  background-color: var(--app-bg-color);
+  color: var(--app-color-text);
+}
+
+.history-card {
+  background-color: var(--app-bg-container) !important;
+}
+
+.history-text {
+  color: var(--app-color-text);
+}
+
+.history-text-secondary {
+  color: var(--app-color-text-secondary);
+}
+
+.history-text-tertiary {
+  color: var(--app-color-text-secondary);
+  opacity: 0.72;
+}
+
 .custom-compact-table :deep(.ant-table-thead > tr > th) {
   padding-top: 12px;
   padding-bottom: 12px;
-  background-color: rgba(248, 250, 252, 0.9);
+  background-color: var(--app-bg-container-hover);
   font-weight: 600;
-  color: #475569;
+  color: var(--app-color-text);
 }
 
 .custom-compact-table :deep(.ant-table-tbody > tr > td) {
@@ -138,6 +160,6 @@ onMounted(() => {
 }
 
 .custom-compact-table :deep(.ant-table-tbody > tr:hover > td) {
-  background-color: rgba(241, 245, 249, 0.5);
+  background-color: rgba(255, 255, 255, 0.04);
 }
 </style>

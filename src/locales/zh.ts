@@ -10,6 +10,8 @@ export default {
     normalConfig: '应用设置',
     backgroundConfig: '后台配置',
     auth: '身份认证',
+    email: '邮箱管理',
+    advertisement: '广告管理',
   },
   common: {
     settings: '应用设置',
@@ -38,6 +40,10 @@ export default {
     english: 'English',
     themeColor: '主题颜色',
     selectThemeColor: '请选择主题颜色',
+    themeMode: '主题模式',
+    selectThemeMode: '请选择主题模式',
+    lightMode: '亮色',
+    darkMode: '暗色',
   },
   model: {
     qianfan: '百度千帆',

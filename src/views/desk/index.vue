@@ -1,16 +1,16 @@
 <template>
-  <div class="p-4 lg:p-6 xl:p-8 space-y-4 bg-slate-50 min-h-full scrollbar-w-none">
+  <div class="desk-root p-4 lg:p-6 xl:p-8 space-y-4 min-h-full scrollbar-w-none">
     <!-- 合同基础信息 -->
-    <a-card class="shadow-sm rounded-xl border-0 !bg-white/80 backdrop-blur-sm" :loading="contractLoading"
+    <a-card class="desk-card shadow-sm rounded-xl border-0 backdrop-blur-sm" :loading="contractLoading"
       :body-style="{ padding: '16px 20px 8px' }">
       <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-3">
         <div>
-          <div class="text-base font-medium text-slate-900 flex flex-wrap items-center gap-3">
+          <div class="text-base font-medium desk-text flex flex-wrap items-center gap-3">
             <span>当前合同：</span>
-            <span class="text-slate-700">
+            <span class="desk-text-secondary">
               {{ currentInfo?.contractCode || '暂无正在执行的合同' }}
             </span>
-            <span class="text-slate-400">|</span>
+            <span class="desk-text-secondary opacity-70">|</span>
             <span>状态：</span>
             <a-tag :color="statusInfo.color" class="border-0 flex items-center gap-1">
               <!-- <span class="inline-block w-2 h-2 rounded-full" :style="{ backgroundColor: statusInfo.color }" /> -->
@@ -35,29 +35,29 @@
 
       <a-divider class="!my-3" />
 
-      <div class="grid md:grid-cols-3 gap-4 text-xs text-slate-600">
+      <div class="grid md:grid-cols-3 gap-4 text-xs desk-text-secondary">
         <div class="space-y-1.5">
           <div class="flex justify-between">
-            <span class="text-slate-500">外销合同编号</span>
-            <span class="font-medium text-slate-900">{{ currentInfo?.exportContractCode || '-' }}</span>
+            <span class="desk-text-secondary opacity-80">外销合同编号</span>
+            <span class="font-medium desk-text">{{ currentInfo?.exportContractCode || '-' }}</span>
           </div>
           <div class="flex justify-between">
-            <span class="text-slate-500">工厂合同编号</span>
-            <span class="font-medium text-slate-900">{{ currentInfo?.innerContractCode || '-' }}</span>
+            <span class="desk-text-secondary opacity-80">工厂合同编号</span>
+            <span class="font-medium desk-text">{{ currentInfo?.innerContractCode || '-' }}</span>
           </div>
           <div class="flex justify-between">
-            <span class="text-slate-500">交易数量</span>
-            <span class="font-medium text-slate-900">{{ currentInfo?.transactionVolume ?? '-' }}</span>
+            <span class="desk-text-secondary opacity-80">交易数量</span>
+            <span class="font-medium desk-text">{{ currentInfo?.transactionVolume ?? '-' }}</span>
           </div>
           <div class="flex justify-between">
-            <span class="text-slate-500">商品编号</span>
-            <span class="font-medium text-slate-900">{{ currentInfo?.goodsNo || '-' }}</span>
+            <span class="desk-text-secondary opacity-80">商品编号</span>
+            <span class="font-medium desk-text">{{ currentInfo?.goodsNo || '-' }}</span>
           </div>
         </div>
 
         <div class="space-y-1.5">
           <div class="flex justify-between">
-            <span class="text-slate-500">出口商报价</span>
+            <span class="desk-text-secondary opacity-80">出口商报价</span>
             <span class="font-medium text-emerald-600">
               <template v-if="currentInfo?.exportPrice != null">
                 {{ currentInfo.exportPrice }} {{ currentInfo.exportPriceUnit || 'USD' }}
@@ -68,7 +68,7 @@
             </span>
           </div>
           <div class="flex justify-between">
-            <span class="text-slate-500">供应商报价</span>
+            <span class="desk-text-secondary opacity-80">供应商报价</span>
             <span class="font-medium text-amber-600">
               <template v-if="currentInfo?.supplierPrice != null">
                 {{ currentInfo.supplierPrice }} RMB
@@ -79,31 +79,31 @@
             </span>
           </div>
           <div class="flex justify-between">
-            <span class="text-slate-500">出口城市</span>
-            <span class="font-medium text-slate-900">{{ currentInfo?.exportCity || '-' }}</span>
+            <span class="desk-text-secondary opacity-80">出口城市</span>
+            <span class="font-medium desk-text">{{ currentInfo?.exportCity || '-' }}</span>
           </div>
           <div class="flex justify-between">
-            <span class="text-slate-500">进口城市</span>
-            <span class="font-medium text-slate-900">{{ currentInfo?.importCity || '-' }}</span>
+            <span class="desk-text-secondary opacity-80">进口城市</span>
+            <span class="font-medium desk-text">{{ currentInfo?.importCity || '-' }}</span>
           </div>
         </div>
 
         <div class="space-y-1.5">
           <div class="flex justify-between">
-            <span class="text-slate-500">出口港口</span>
-            <span class="font-medium text-slate-900">{{ currentInfo?.exportPort || '-' }}</span>
+            <span class="desk-text-secondary opacity-80">出口港口</span>
+            <span class="font-medium desk-text">{{ currentInfo?.exportPort || '-' }}</span>
           </div>
           <div class="flex justify-between">
-            <span class="text-slate-500">进口港口</span>
-            <span class="font-medium text-slate-900">{{ currentInfo?.importPort || '-' }}</span>
+            <span class="desk-text-secondary opacity-80">进口港口</span>
+            <span class="font-medium desk-text">{{ currentInfo?.importPort || '-' }}</span>
           </div>
           <div class="flex justify-between">
-            <span class="text-slate-500">贸易术语</span>
-            <span class="font-medium text-slate-900">{{ currentInfo?.trade || '-' }}</span>
+            <span class="desk-text-secondary opacity-80">贸易术语</span>
+            <span class="font-medium desk-text">{{ currentInfo?.trade || '-' }}</span>
           </div>
           <div class="flex justify-between">
-            <span class="text-slate-500">结算方式</span>
-            <span class="font-medium text-slate-900">{{ currentInfo?.payment || '-' }}</span>
+            <span class="desk-text-secondary opacity-80">结算方式</span>
+            <span class="font-medium desk-text">{{ currentInfo?.payment || '-' }}</span>
           </div>
         </div>
       </div>
@@ -111,17 +111,17 @@
 
     <!-- 执行进度 & 日志 -->
     <div class="grid lg:grid-cols-3 gap-4">
-      <a-card class="shadow-sm rounded-xl border-0 !bg-white/80 backdrop-blur-sm lg:col-span-1" :loading="stepLoading"
+      <a-card class="desk-card shadow-sm rounded-xl border-0 backdrop-blur-sm lg:col-span-1" :loading="stepLoading"
         :body-style="{ padding: '16px 16px 12px 12px' }">
         <div class="flex items-center justify-between mb-3">
-          <div class="text-sm font-medium text-slate-900">合同执行进度</div>
-          <div class="text-xs text-slate-400">流程步骤</div>
+          <div class="text-sm font-medium desk-text">合同执行进度</div>
+          <div class="text-xs desk-text-secondary opacity-70">流程步骤</div>
         </div>
         <div ref="timelineContainerRef" class="max-h-[360px] overflow-y-auto pr-1 custom-scrollbar pt-3">
           <a-timeline mode="left">
             <a-timeline-item v-for="step in allSteps" :key="step.stepId || step.stepCode"
               :color="doneStepCodes.has(step.stepCode || '') ? 'green' : 'gray'">
-              <div class="text-xs font-medium text-slate-900 flex items-center gap-2">
+              <div class="text-xs font-medium desk-text flex items-center gap-2">
                 <span>{{ step.stepDesc || '-' }}</span>
                 <a-tag v-if="doneStepCodes.has(step.stepCode || '')" size="small" color="success"
                   class="border-0 text-[10px]">
@@ -136,22 +136,22 @@
         </div>
       </a-card>
 
-      <a-card class="shadow-sm rounded-xl border-0 !bg-slate-800/90 text-slate-50 lg:col-span-2" :loading="logLoading"
+      <a-card class="desk-card desk-card--log shadow-sm rounded-xl border-0 lg:col-span-2" :loading="logLoading"
         :body-style="{ padding: '12px 16px 10px' }">
         <div class="flex items-center justify-between mb-2">
-          <div class="text-sm font-medium text-slate-100">合同执行日志</div>
+          <div class="text-sm font-medium desk-text">合同执行日志</div>
           <a-button type="primary" size="small" @click="handleRefreshLogs">刷新日志</a-button>
         </div>
         <div ref="logContainerRef"
-          class="rounded-lg bg-slate-900/40 px-3 py-2 max-h-[360px] overflow-y-auto font-mono text-[11px] leading-relaxed custom-scrollbar">
+          class="desk-log-container rounded-lg px-3 py-2 max-h-[360px] overflow-y-auto font-mono text-[11px] leading-relaxed custom-scrollbar">
           <template v-if="logs && logs.length">
             <div v-for="item in logs" :key="item.historyId"
               class="text-emerald-400/90 mb-1.5 whitespace-pre-wrap break-words">
-              <span class="text-slate-500 mr-2">[{{ item.createTime }}]</span>
+              <span class="desk-log-time mr-2">[{{ item.createTime }}]</span>
               <span>{{ item.message }}</span>
             </div>
           </template>
-          <div v-else class="text-slate-500 text-[11px]">
+          <div v-else class="desk-text-secondary text-[11px]">
             暂无执行日志。
           </div>
         </div>
@@ -159,10 +159,10 @@
     </div>
 
     <!-- 未执行步骤列表 -->
-    <a-card style="display: none;" class="shadow-sm rounded-xl border-0 !bg-white/80 backdrop-blur-sm"
+    <a-card style="display: none;" class="desk-card shadow-sm rounded-xl border-0 backdrop-blur-sm"
       :loading="stepLoading" :body-style="{ padding: '16px 16px 8px' }">
       <div class="flex items-center justify-between mb-3">
-        <div class="text-sm font-medium text-slate-900">待执行流程</div>
+        <div class="text-sm font-medium desk-text">待执行流程</div>
       </div>
       <a-table :data-source="pagedUndoSteps" :pagination="{
           current: undoStepCurrent,
@@ -185,10 +185,10 @@
     </a-card>
 
     <!-- 所有步骤列表 -->
-    <a-card class="shadow-sm rounded-xl border-0 !bg-white/80 backdrop-blur-sm" :loading="allStepLoading"
+    <a-card class="desk-card shadow-sm rounded-xl border-0 backdrop-blur-sm" :loading="allStepLoading"
       :body-style="{ padding: '16px 16px 8px' }">
       <div class="flex items-center justify-between mb-3">
-        <div class="text-sm font-medium text-slate-900">流程所有步骤</div>
+        <div class="text-sm font-medium desk-text">流程所有步骤</div>
       </div>
       <a-table :data-source="pagedAllSteps" :pagination="{
           current: allStepCurrent,
@@ -722,6 +722,57 @@ onMounted(() => {
 </script>
 
 <style scoped>
+.desk-root {
+  background-color: var(--app-bg-color);
+  color: var(--app-color-text);
+}
+
+.desk-text {
+  color: var(--app-color-text);
+}
+
+.desk-text-secondary {
+  color: var(--app-color-text-secondary);
+}
+
+/* 卡片：避免写死白底，跟随 AntD 暗色 token */
+.desk-card {
+  background-color: var(--app-bg-container) !important;
+  border: 1px solid color-mix(in srgb, var(--app-border-color) 80%, transparent);
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.05),
+    0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.desk-card:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 16px 32px rgba(0, 0, 0, 0.14),
+    0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.desk-card--log {
+  background-color: var(--desk-log-card-bg) !important;
+  color: var(--desk-log-text);
+}
+
+.desk-card--log .desk-text {
+  color: var(--desk-log-text);
+}
+
+.desk-card--log .desk-text-secondary {
+  color: var(--desk-log-text-secondary);
+}
+
+.desk-log-container {
+  background-color: var(--desk-log-inner-bg);
+}
+
+.desk-log-time {
+  color: var(--desk-log-text-secondary);
+}
+
 /* 隐藏页面滚动条 */
 .scrollbar-w-none {
   scrollbar-width: none;
@@ -744,14 +795,15 @@ onMounted(() => {
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-  background-color: rgba(148, 163, 184, 0.6);
+  background-color: rgba(255, 255, 255, 0.18);
   border-radius: 999px;
 }
 
 .custom-compact-table :deep(.ant-table-thead > tr > th) {
   padding-top: 8px;
   padding-bottom: 8px;
-  background-color: rgba(248, 250, 252, 0.9);
+  background-color: var(--app-bg-container-hover);
+  color: var(--app-color-text);
 }
 
 .custom-compact-table :deep(.ant-table-tbody > tr > td) {
