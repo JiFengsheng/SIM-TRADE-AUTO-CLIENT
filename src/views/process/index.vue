@@ -4,11 +4,10 @@
       :body-style="{ padding: '20px' }">
       <!-- 标题和过滤区域 -->
       <div class="flex items-center justify-between mb-6">
-        <!-- 左上角：trade 和 payment 过滤组件 -->
         <div class="flex items-center gap-4">
           <div class="flex items-center gap-2">
-            <span class="process-label text-sm font-medium">贸易术语：</span>
-            <a-select v-model:value="tradeFilter" placeholder="请选择贸易术语" style="width: 150px" allow-clear
+            <span class="process-label text-sm font-medium">{{ $t('process.labelTrade') }}</span>
+            <a-select v-model:value="tradeFilter" :placeholder="$t('process.placeholderTrade')" style="width: 150px" allow-clear
               @change="handleTradeChange">
               <a-select-option value="CIF">CIF</a-select-option>
               <a-select-option value="CFR">CFR</a-select-option>
@@ -16,8 +15,8 @@
             </a-select>
           </div>
           <div class="flex items-center gap-2">
-            <span class="process-label text-sm font-medium">结算方式：</span>
-            <a-select v-model:value="paymentFilter" placeholder="请选择结算方式" style="width: 150px" allow-clear
+            <span class="process-label text-sm font-medium">{{ $t('process.labelPayment') }}</span>
+            <a-select v-model:value="paymentFilter" :placeholder="$t('process.placeholderPayment')" style="width: 150px" allow-clear
               @change="handlePaymentChange">
               <a-select-option value="L/C">L/C</a-select-option>
               <a-select-option value="D/P">D/P</a-select-option>
@@ -26,12 +25,11 @@
             </a-select>
           </div>
         </div>
-        <!-- 右上角：搜索框 -->
         <div class="w-80">
-          <a-input-search v-model:value="searchKeyword" placeholder="请输入搜索关键词" size="large"
+          <a-input-search v-model:value="searchKeyword" :placeholder="$t('process.placeholderSearch')" size="large"
             @search="handleSearch" @clear="handleSearch" allow-clear>
             <template #enterButton>
-              <span>搜索</span>
+              <span>{{ $t('process.btnSearch') }}</span>
             </template>
           </a-input-search>
         </div>
@@ -43,40 +41,40 @@
         pageSize: pageSize,
         total: total,
         showSizeChanger: false,
-        showTotal: (total: number) => `共 ${total} 条记录`,
+        showTotal: (totalNum: number) => t('process.showTotal', { total: totalNum }),
         onChange: handlePageChange,
       }" row-key="stepId" class="custom-compact-table" size="middle">
-        <a-table-column key="stepDesc" title="步骤名称" data-index="stepDesc" width="200">
+        <a-table-column key="stepDesc" :title="$t('process.columnStepDesc')" data-index="stepDesc" width="200">
           <template #default="{ text }">
             <span class="process-cell-primary">{{ text || '-' }}</span>
           </template>
         </a-table-column>
-        <a-table-column key="stepCode" title="步骤编码" data-index="stepCode" width="150">
+        <a-table-column key="stepCode" :title="$t('process.columnStepCode')" data-index="stepCode" width="150">
           <template #default="{ text }">
             <span class="process-cell-secondary">{{ text || '-' }}</span>
           </template>
         </a-table-column>
-        <a-table-column key="roleCode" title="归属角色" data-index="roleCode" width="120">
+        <a-table-column key="roleCode" :title="$t('process.columnRoleCode')" data-index="roleCode" width="120">
           <template #default="{ text }">
             <span class="process-cell-secondary">{{ getRoleName(text) }}</span>
           </template>
         </a-table-column>
-        <a-table-column key="sleepSeconds" title="延迟时间" data-index="sleepSeconds" width="120" align="right">
+        <a-table-column key="sleepSeconds" :title="$t('process.columnSleepSeconds')" data-index="sleepSeconds" width="120" align="right">
           <template #default="{ text }">
             <span class="process-cell-secondary">{{ formatSecondsToTime(text) }}</span>
           </template>
         </a-table-column>
-        <a-table-column key="skip" title="重新执行是否跳过" width="160" align="center">
+        <a-table-column key="skip" :title="$t('process.columnSkip')" width="160" align="center">
           <template #default="{ record }">
             <a-tag :color="record.skip ? '#f5222d' : '#52c41a'">
-              {{ record.skip ? '跳过' : '不跳过' }}
+              {{ record.skip ? $t('process.skipYes') : $t('process.skipNo') }}
             </a-tag>
           </template>
         </a-table-column>
-        <a-table-column key="action" title="操作" width="100" fixed="right">
+        <a-table-column key="action" :title="$t('process.columnAction')" width="100" fixed="right">
           <template #default="{ record }">
             <a-button type="link" size="small" @click="handleEdit(record)">
-              修改
+              {{ $t('process.btnEdit') }}
             </a-button>
           </template>
         </a-table-column>
@@ -95,10 +93,13 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
+import { useI18n } from "vue-i18n";
 import { useProcessStepList } from "./hook";
 import type { FulfillmentProcessStep } from "../../apis/types";
 import { formatSecondsToTime } from "../../utils/time";
 import UpdateModal from "./UpdateModal.vue";
+
+const { t } = useI18n();
 
 const {
   loading,
@@ -116,15 +117,14 @@ const {
   handlePageChange,
 } = useProcessStepList();
 
-// 角色编码转换为中文名称
 const getRoleName = (roleCode?: string): string => {
   if (!roleCode) return '-';
   const roleMap: Record<string, string> = {
-    EXPORTER: '出口商',
-    IMPORTER: '进口商',
-    SUPPLIER: '供应商',
-    ISSUING_BANK: '进口地银行',
-    NEGOTIATING_BANK: '出口地银行',
+    EXPORTER: t('process.roleExporter'),
+    IMPORTER: t('process.roleImporter'),
+    SUPPLIER: t('process.roleSupplier'),
+    ISSUING_BANK: t('process.roleIssuingBank'),
+    NEGOTIATING_BANK: t('process.roleNegotiatingBank'),
   };
   return roleMap[roleCode] || roleCode;
 };

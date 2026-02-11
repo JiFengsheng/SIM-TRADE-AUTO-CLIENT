@@ -1,7 +1,7 @@
 <template>
   <a-modal
     v-model:open="visible"
-    title="修改流程步骤"
+    :title="$t('process.modalUpdateTitle')"
     :confirm-loading="updateLoading"
     @ok="handleSubmit"
     @cancel="handleCancel"
@@ -14,52 +14,55 @@
       layout="vertical"
       class="mt-4"
     >
-      <a-form-item label="步骤名称" name="stepDesc">
+      <a-form-item :label="$t('process.labelStepDesc')" name="stepDesc">
         <a-input
           v-model:value="formData.stepDesc"
-          placeholder="请输入步骤名称"
+          :placeholder="$t('process.placeholderStepDesc')"
           :maxlength="200"
           allow-clear
         />
       </a-form-item>
 
-      <a-form-item label="延迟时间（秒）" name="sleepSeconds">
+      <a-form-item :label="$t('process.labelSleepSeconds')" name="sleepSeconds">
         <a-input-number
           v-model:value="formData.sleepSeconds"
-          placeholder="请输入延迟时间"
+          :placeholder="$t('process.placeholderSleepSeconds')"
           :min="0"
           :precision="0"
           class="w-full"
           allow-clear
         />
         <div class="text-xs text-gray-500 mt-1">
-          提示：{{ formData.sleepSeconds != null ? formatSecondsToTime(formData.sleepSeconds) : '请输入秒数' }}
+          {{ $t('process.hintSleepSeconds', { time: formData.sleepSeconds != null ? formatSecondsToTime(formData.sleepSeconds) : t('process.placeholderSeconds') }) }}
         </div>
       </a-form-item>
 
-      <a-form-item label="重新执行是否跳过" name="skip">
+      <a-form-item :label="$t('process.labelSkip')" name="skip">
         <a-radio-group v-model:value="formData.skip">
-          <a-radio :value="0">不跳过</a-radio>
-          <a-radio :value="1">跳过</a-radio>
+          <a-radio :value="0">{{ $t('process.skipNo') }}</a-radio>
+          <a-radio :value="1">{{ $t('process.skipYes') }}</a-radio>
         </a-radio-group>
       </a-form-item>
     </a-form>
 
     <template #footer>
-        <a-button key="back" @click="handleCancel">取消</a-button>
-        <a-button key="submit" type="primary" :loading="updateLoading" @click="handleSubmit">确定</a-button>
+        <a-button key="back" @click="handleCancel">{{ $t('process.btnCancel') }}</a-button>
+        <a-button key="submit" type="primary" :loading="updateLoading" @click="handleSubmit">{{ $t('process.btnConfirm') }}</a-button>
       </template>
 
   </a-modal>
 </template>
 
 <script setup lang="ts">
-import { ref, watch, reactive } from "vue";
+import { ref, watch, reactive, computed } from "vue";
+import { useI18n } from "vue-i18n";
 import { message } from "ant-design-vue";
 import type { FormInstance } from "ant-design-vue";
 import type { FulfillmentProcessStep } from "../../apis/types";
 import { useGetProcessStep, useUpdateProcessStep } from "./hook";
 import { formatSecondsToTime } from "../../utils/time";
+
+const { t } = useI18n();
 
 interface Props {
   open: boolean;
@@ -92,19 +95,19 @@ const formData = reactive<{
   skip: undefined,
 });
 
-const rules = {
-  stepDesc: [{ required: true, message: "请输入步骤名称", trigger: "blur" }],
+const rules = computed(() => ({
+  stepDesc: [{ required: true, message: t("process.ruleStepDesc"), trigger: "blur" }],
   sleepSeconds: [
-    { required: true, message: "请输入延迟时间", trigger: "blur" },
-    { type: "number", min: 0, message: "延迟时间不能小于0", trigger: "blur" },
+    { required: true, message: t("process.ruleSleepSeconds"), trigger: "blur" },
+    { type: "number", min: 0, message: t("process.ruleSleepSecondsMin"), trigger: "blur" },
   ],
-  skip: [{ required: true, message: "请选择是否跳过", trigger: "change" }],
-};
+  skip: [{ required: true, message: t("process.ruleSkip"), trigger: "change" }],
+}));
 
 const { loading: getLoading, getStepById } = useGetProcessStep();
 const { loading: updateLoading, updateStep } = useUpdateProcessStep({
   onSuccess: () => {
-    message.success("保存成功");
+    message.success(t("process.msgSaveSuccess"));
     emit("update:open", false);
     emit("success");
   },
@@ -135,7 +138,7 @@ watch(
             formData.sleepSeconds = props.initialData.sleepSeconds;
             formData.skip = props.initialData.skip ?? 0;
           } else {
-            message.error("获取步骤详情失败");
+            message.error(t("process.msgGetStepFail"));
           }
         }
       } else if (props.initialData) {
@@ -158,7 +161,7 @@ const handleSubmit = async () => {
   try {
     await formRef.value?.validate();
     if (!props.stepId) {
-      message.error("步骤ID不存在");
+      message.error(t("process.msgStepIdMissing"));
       return;
     }
 
@@ -169,8 +172,7 @@ const handleSubmit = async () => {
     });
   } catch (error) {
     if (error !== false) {
-      // 表单验证失败时不显示错误提示
-      message.error("保存失败，请稍后重试");
+      message.error(t("process.msgSaveFail"));
     }
   }
 };

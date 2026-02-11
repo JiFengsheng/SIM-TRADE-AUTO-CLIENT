@@ -6,12 +6,12 @@
       <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-3">
         <div>
           <div class="text-base font-medium desk-text flex flex-wrap items-center gap-3">
-            <span>当前合同：</span>
+            <span>{{ $t('desk.currentContract') }}</span>
             <span class="desk-text-secondary">
-              {{ currentInfo?.contractCode || '暂无正在执行的合同' }}
+              {{ currentInfo?.contractCode || $t('desk.noContract') }}
             </span>
             <span class="desk-text-secondary opacity-70">|</span>
-            <span>状态：</span>
+            <span>{{ $t('desk.status') }}</span>
             <a-tag :color="statusInfo.color" class="border-0 flex items-center gap-1">
               <!-- <span class="inline-block w-2 h-2 rounded-full" :style="{ backgroundColor: statusInfo.color }" /> -->
               <span>{{ statusInfo.text }}</span>
@@ -20,9 +20,9 @@
         </div>
         <div class="flex items-center gap-3">
           <a-space>
-            <a-button class="px-5" @click="handleRefresh">刷新</a-button>
+            <a-button class="px-5" @click="handleRefresh">{{ $t('desk.refresh') }}</a-button>
             <a-button class="px-5" @click="goToContract">
-              合同管理
+              {{ $t('sidebar.contract') }}
             </a-button>
             <a-button :type="actionButtonProps.type" :danger="actionButtonProps.danger"
               :disabled="actionButtonProps.disabled || !currentInfo?.processCode || !currentInfo?.contractCode || !currentInfo?.exportContractCode"
@@ -38,26 +38,26 @@
       <div class="grid md:grid-cols-3 gap-4 text-xs desk-text-secondary">
         <div class="space-y-1.5">
           <div class="flex justify-between">
-            <span class="desk-text-secondary opacity-80">外销合同编号</span>
+            <span class="desk-text-secondary opacity-80">{{ $t('desk.exportContractCode') }}</span>
             <span class="font-medium desk-text">{{ currentInfo?.exportContractCode || '-' }}</span>
           </div>
           <div class="flex justify-between">
-            <span class="desk-text-secondary opacity-80">工厂合同编号</span>
+            <span class="desk-text-secondary opacity-80">{{ $t('desk.innerContractCode') }}</span>
             <span class="font-medium desk-text">{{ currentInfo?.innerContractCode || '-' }}</span>
           </div>
           <div class="flex justify-between">
-            <span class="desk-text-secondary opacity-80">交易数量</span>
+            <span class="desk-text-secondary opacity-80">{{ $t('desk.transactionVolume') }}</span>
             <span class="font-medium desk-text">{{ currentInfo?.transactionVolume ?? '-' }}</span>
           </div>
           <div class="flex justify-between">
-            <span class="desk-text-secondary opacity-80">商品编号</span>
+            <span class="desk-text-secondary opacity-80">{{ $t('desk.goodsNo') }}</span>
             <span class="font-medium desk-text">{{ currentInfo?.goodsNo || '-' }}</span>
           </div>
         </div>
 
         <div class="space-y-1.5">
           <div class="flex justify-between">
-            <span class="desk-text-secondary opacity-80">出口商报价</span>
+            <span class="desk-text-secondary opacity-80">{{ $t('desk.exportPrice') }}</span>
             <span class="font-medium text-emerald-600">
               <template v-if="currentInfo?.exportPrice != null">
                 {{ currentInfo.exportPrice }} {{ currentInfo.exportPriceUnit || 'USD' }}
@@ -68,7 +68,7 @@
             </span>
           </div>
           <div class="flex justify-between">
-            <span class="desk-text-secondary opacity-80">供应商报价</span>
+            <span class="desk-text-secondary opacity-80">{{ $t('desk.supplierPrice') }}</span>
             <span class="font-medium text-amber-600">
               <template v-if="currentInfo?.supplierPrice != null">
                 {{ currentInfo.supplierPrice }} RMB
@@ -79,30 +79,30 @@
             </span>
           </div>
           <div class="flex justify-between">
-            <span class="desk-text-secondary opacity-80">出口城市</span>
+            <span class="desk-text-secondary opacity-80">{{ $t('desk.exportCity') }}</span>
             <span class="font-medium desk-text">{{ currentInfo?.exportCity || '-' }}</span>
           </div>
           <div class="flex justify-between">
-            <span class="desk-text-secondary opacity-80">进口城市</span>
+            <span class="desk-text-secondary opacity-80">{{ $t('desk.importCity') }}</span>
             <span class="font-medium desk-text">{{ currentInfo?.importCity || '-' }}</span>
           </div>
         </div>
 
         <div class="space-y-1.5">
           <div class="flex justify-between">
-            <span class="desk-text-secondary opacity-80">出口港口</span>
+            <span class="desk-text-secondary opacity-80">{{ $t('desk.exportPort') }}</span>
             <span class="font-medium desk-text">{{ currentInfo?.exportPort || '-' }}</span>
           </div>
           <div class="flex justify-between">
-            <span class="desk-text-secondary opacity-80">进口港口</span>
+            <span class="desk-text-secondary opacity-80">{{ $t('desk.importPort') }}</span>
             <span class="font-medium desk-text">{{ currentInfo?.importPort || '-' }}</span>
           </div>
           <div class="flex justify-between">
-            <span class="desk-text-secondary opacity-80">贸易术语</span>
+            <span class="desk-text-secondary opacity-80">{{ $t('desk.tradeTerm') }}</span>
             <span class="font-medium desk-text">{{ currentInfo?.trade || '-' }}</span>
           </div>
           <div class="flex justify-between">
-            <span class="desk-text-secondary opacity-80">结算方式</span>
+            <span class="desk-text-secondary opacity-80">{{ $t('desk.payment') }}</span>
             <span class="font-medium desk-text">{{ currentInfo?.payment || '-' }}</span>
           </div>
         </div>
@@ -114,8 +114,8 @@
       <a-card class="desk-card shadow-sm rounded-xl border-0 backdrop-blur-sm lg:col-span-1" :loading="stepLoading"
         :body-style="{ padding: '16px 16px 12px 12px' }">
         <div class="flex items-center justify-between mb-3">
-          <div class="text-sm font-medium desk-text">合同执行进度</div>
-          <div class="text-xs desk-text-secondary opacity-70">流程步骤</div>
+          <div class="text-sm font-medium desk-text">{{ $t('desk.progressTitle') }}</div>
+          <div class="text-xs desk-text-secondary opacity-70">{{ $t('desk.flowSteps') }}</div>
         </div>
         <div ref="timelineContainerRef" class="max-h-[360px] overflow-y-auto pr-1 custom-scrollbar pt-3">
           <a-timeline mode="left">
@@ -125,10 +125,10 @@
                 <span>{{ step.stepDesc || '-' }}</span>
                 <a-tag v-if="doneStepCodes.has(step.stepCode || '')" size="small" color="success"
                   class="border-0 text-[10px]">
-                  已完成
+                  {{ $t('desk.stepDone') }}
                 </a-tag>
                 <a-tag v-else size="small" color="default" class="border-0 text-[10px]">
-                  待执行
+                  {{ $t('desk.stepPending') }}
                 </a-tag>
               </div>
             </a-timeline-item>
@@ -139,8 +139,8 @@
       <a-card class="desk-card desk-card--log shadow-sm rounded-xl border-0 lg:col-span-2" :loading="logLoading"
         :body-style="{ padding: '12px 16px 10px' }">
         <div class="flex items-center justify-between mb-2">
-          <div class="text-sm font-medium desk-text">合同执行日志</div>
-          <a-button type="primary" size="small" @click="handleRefreshLogs">刷新日志</a-button>
+          <div class="text-sm font-medium desk-text">{{ $t('desk.logTitle') }}</div>
+          <a-button type="primary" size="small" @click="handleRefreshLogs">{{ $t('desk.refreshLog') }}</a-button>
         </div>
         <div ref="logContainerRef"
           class="desk-log-container rounded-lg px-3 py-2 max-h-[360px] overflow-y-auto font-mono text-[11px] leading-relaxed custom-scrollbar">
@@ -152,7 +152,7 @@
             </div>
           </template>
           <div v-else class="desk-text-secondary text-[11px]">
-            暂无执行日志。
+            {{ $t('desk.noLogs') }}
           </div>
         </div>
       </a-card>
@@ -162,7 +162,7 @@
     <a-card style="display: none;" class="desk-card shadow-sm rounded-xl border-0 backdrop-blur-sm"
       :loading="stepLoading" :body-style="{ padding: '16px 16px 8px' }">
       <div class="flex items-center justify-between mb-3">
-        <div class="text-sm font-medium desk-text">待执行流程</div>
+        <div class="text-sm font-medium desk-text">{{ $t('desk.undoFlow') }}</div>
       </div>
       <a-table :data-source="pagedUndoSteps" :pagination="{
           current: undoStepCurrent,
@@ -172,15 +172,14 @@
           pageSizeOptions: ['10', '20', '50', '100'],
           onChange: handleUndoStepPageChange,
         }" size="small" row-key="stepId" class="custom-compact-table">
-        <a-table-column key="stepDesc" title="步骤名称" data-index="stepDesc" />
-        <a-table-column key="stepCode" title="步骤编码" data-index="stepCode" />
-        <a-table-column key="roleCode" title="归属角色" data-index="roleCode">
+        <a-table-column key="stepDesc" :title="$t('desk.stepName')" data-index="stepDesc" />
+        <a-table-column key="stepCode" :title="$t('desk.stepCode')" data-index="stepCode" />
+        <a-table-column key="roleCode" :title="$t('desk.roleName')" data-index="roleCode">
           <template #default="{ text }">
             {{ getRoleName(text) }}
           </template>
         </a-table-column>
-        <a-table-column key="sort" title="排序" data-index="sort" />
-        <!-- <a-table-column key="stepDesc" title="步骤描述" data-index="stepDesc" /> -->
+        <a-table-column key="sort" :title="$t('desk.sort')" data-index="sort" />
       </a-table>
     </a-card>
 
@@ -188,7 +187,7 @@
     <a-card class="desk-card shadow-sm rounded-xl border-0 backdrop-blur-sm" :loading="allStepLoading"
       :body-style="{ padding: '16px 16px 8px' }">
       <div class="flex items-center justify-between mb-3">
-        <div class="text-sm font-medium desk-text">流程所有步骤</div>
+        <div class="text-sm font-medium desk-text">{{ $t('desk.allStepsTitle') }}</div>
       </div>
       <a-table :data-source="pagedAllSteps" :pagination="{
           current: allStepCurrent,
@@ -198,21 +197,21 @@
           pageSizeOptions: ['10', '20', '50', '100'],
           onChange: handleAllStepPageChange,
         }" size="small" row-key="stepId" class="custom-compact-table">
-        <a-table-column key="stepDesc" title="步骤名称" data-index="stepDesc"
+        <a-table-column key="stepDesc" :title="$t('desk.stepName')" data-index="stepDesc"
           :filtered-value="stepDescFilteredValue ? [stepDescFilteredValue] : null">
           <template #filterDropdown="{ setSelectedKeys, selectedKeys, confirm, clearFilters }">
             <div style="padding: 8px">
-              <a-input ref="searchInputRef" :value="selectedKeys[0]" placeholder="搜索步骤名称"
+              <a-input ref="searchInputRef" :value="selectedKeys[0]" :placeholder="$t('desk.searchStepPlaceholder')"
                 style="width: 188px; margin-bottom: 8px; display: block"
                 @change="(e: Event) => { const target = e.target as HTMLInputElement; setSelectedKeys(target.value ? [target.value] : []); }"
                 @pressEnter="handleStepDescSearch(selectedKeys, confirm)" />
               <a-space>
                 <a-button type="primary" size="small" style="width: 90px"
                   @click="handleStepDescSearch(selectedKeys, confirm)">
-                  搜索
+                  {{ $t('desk.search') }}
                 </a-button>
                 <a-button size="small" style="width: 90px" @click="handleStepDescReset(clearFilters)">
-                  重置
+                  {{ $t('desk.reset') }}
                 </a-button>
               </a-space>
             </div>
@@ -232,21 +231,21 @@
             <span v-else>{{ text || '-' }}</span>
           </template>
         </a-table-column>
-        <a-table-column key="stepCode" title="步骤编码" data-index="stepCode" />
-        <a-table-column key="roleCode" title="归属角色" data-index="roleCode"
+        <a-table-column key="stepCode" :title="$t('desk.stepCode')" data-index="stepCode" />
+        <a-table-column key="roleCode" :title="$t('desk.roleName')" data-index="roleCode"
           :filtered-value="roleFilteredValue ? [roleFilteredValue] : null">
           <template #filterDropdown="{ setSelectedKeys, selectedKeys, confirm, clearFilters }">
             <div style="padding: 8px">
-              <a-select style="width: 188px; margin-bottom: 8px; display: block" placeholder="选择角色" allow-clear
+              <a-select style="width: 188px; margin-bottom: 8px; display: block" :placeholder="$t('desk.selectRole')" allow-clear
                 :value="selectedKeys[0]" :options="roleOptions"
                 @change="(val: string | undefined) => setSelectedKeys(val ? [String(val)] : [])" />
               <a-space>
                 <a-button type="primary" size="small" style="width: 90px"
                   @click="handleRoleSearch(selectedKeys, confirm)">
-                  确定
+                  {{ $t('desk.confirm') }}
                 </a-button>
                 <a-button size="small" style="width: 90px" @click="handleRoleReset(clearFilters)">
-                  重置
+                  {{ $t('desk.reset') }}
                 </a-button>
               </a-space>
             </div>
@@ -258,12 +257,12 @@
             {{ getRoleName(text) }}
           </template>
         </a-table-column>
-        <a-table-column key="sort" title="排序" data-index="sort" />
-        <a-table-column key="action" title="控制" width="100">
+        <a-table-column key="sort" :title="$t('desk.sort')" data-index="sort" />
+        <a-table-column key="action" :title="$t('desk.control')" width="100">
           <template #default="{ record }">
             <a-button type="primary" size="small" :loading="executingStep && currentExecuteStepCode === record.stepCode"
               :disabled="!currentInfo?.contractCode || !record.stepCode" @click="handleExecuteStep(record.stepCode)">
-              执行
+              {{ $t('desk.execute') }}
             </a-button>
           </template>
         </a-table-column>
@@ -275,6 +274,7 @@
 <script setup lang="ts">
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 import { FilterFilled, SearchOutlined } from "@ant-design/icons-vue";
 import type { FulfillmentProcessStepResponse } from "../../apis/types";
 import {
@@ -289,6 +289,7 @@ import {
 } from "./hook";
 import { message } from 'ant-design-vue';
 
+const { t } = useI18n();
 const router = useRouter();
 
 const goToContract = () => {
@@ -311,16 +312,16 @@ const statusInfo = computed(() => {
   const status = (executeStatus.value || "TODO").toUpperCase();
   switch (status) {
     case "DOING":
-      return { text: "执行中", status, color: "#1677ff", type: "processing" };
+      return { text: t("desk.statusDoing"), status, color: "#1677ff", type: "processing" };
     case "DONE":
-      return { text: "已完成", status, color: "#52c41a", type: "success" };
+      return { text: t("desk.statusDone"), status, color: "#52c41a", type: "success" };
     case "STOPPED":
-      return { text: "已停止", status, color: "#faad14", type: "warning" };
+      return { text: t("desk.statusStopped"), status, color: "#faad14", type: "warning" };
     case "FAIL":
-      return { text: "执行失败", status, color: "#ff4d4f", type: "error" };
+      return { text: t("desk.statusFail"), status, color: "#ff4d4f", type: "error" };
     case "TODO":
     default:
-      return { text: "待执行", status: "TODO", color: "#d9d9d9", type: "default" };
+      return { text: t("desk.statusTodo"), status: "TODO", color: "#d9d9d9", type: "default" };
   }
 });
 
@@ -340,17 +341,16 @@ const currentExecuteStepCode = ref<string | undefined>(undefined);
 // 执行单个步骤
 const { loading: executingStep, executeStep } = useExecuteStep({
   onSuccess: () => {
-    message.success("执行成功")
+    message.success(t("desk.msgExecuteSuccess"));
     currentExecuteStepCode.value = undefined;
   },
 });
 
 const actionButtonProps = computed(() => {
   const status = statusInfo.value.status;
-  console.log("status",status)
   if (status === "DOING") {
     return {
-      text: "停止执行",
+      text: t("desk.stopExecute"),
       type: "primary" as const,
       danger: true,
       disabled: false,
@@ -359,7 +359,7 @@ const actionButtonProps = computed(() => {
   }
   if (status === "DONE") {
     return {
-      text: "已完成",
+      text: t("desk.done"),
       type: "default" as const,
       danger: false,
       disabled: true,
@@ -368,7 +368,7 @@ const actionButtonProps = computed(() => {
   }
   if (status === "STOPPED" || status === "FAIL") {
     return {
-      text: "继续执行",
+      text: t("desk.continueExecute"),
       type: "primary" as const,
       danger: false,
       disabled: false,
@@ -376,7 +376,7 @@ const actionButtonProps = computed(() => {
     };
   }
   return {
-    text: "执行合同",
+    text: t("desk.executeContract"),
     type: "primary" as const,
     danger: false,
     disabled: false,
@@ -456,11 +456,11 @@ const searchInputRef = ref<any>(null);
 const roleFilteredValue = ref<string | null>(null);
 const roleOptions = computed(() => {
   const roleMap: Record<string, string> = {
-    EXPORTER: '出口商',
-    IMPORTER: '进口商',
-    SUPPLIER: '供应商',
-    ISSUING_BANK: '进口地银行',
-    NEGOTIATING_BANK: '出口地银行',
+    EXPORTER: t('desk.roleExporter'),
+    IMPORTER: t('desk.roleImporter'),
+    SUPPLIER: t('desk.roleSupplier'),
+    ISSUING_BANK: t('desk.roleImportBank'),
+    NEGOTIATING_BANK: t('desk.roleExportBank'),
   };
   return Object.entries(roleMap).map(([value, label]) => ({ value, label }));
 });
@@ -567,15 +567,15 @@ const handleRoleReset = (clearFilters: () => void) => {
   clearFilters();
 };
 
-// 角色编码转换为中文名称
+// 角色编码转换为名称（随语言）
 const getRoleName = (roleCode?: string): string => {
   if (!roleCode) return '-';
   const roleMap: Record<string, string> = {
-    EXPORTER: '出口商',
-    IMPORTER: '进口商',
-    SUPPLIER: '供应商',
-    ISSUING_BANK: '进口地银行',
-    NEGOTIATING_BANK: '出口地银行',
+    EXPORTER: t('desk.roleExporter'),
+    IMPORTER: t('desk.roleImporter'),
+    SUPPLIER: t('desk.roleSupplier'),
+    ISSUING_BANK: t('desk.roleImportBank'),
+    NEGOTIATING_BANK: t('desk.roleExportBank'),
   };
   return roleMap[roleCode] || roleCode;
 };

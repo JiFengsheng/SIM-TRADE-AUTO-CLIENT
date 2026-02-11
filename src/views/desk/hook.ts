@@ -1,4 +1,5 @@
 import { computed, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import contractApi from "../../apis/contract";
 import processStepApi from "../../apis/processStep";
 import harborApi from "../../apis/harbor";
@@ -100,6 +101,7 @@ export const useStopContract = (options?: { onSuccess?: () => void }) => {
  * 执行单个步骤
  */
 export const useExecuteStep = (options?: { onSuccess?: () => void }) => {
+  const { t } = useI18n();
   const loading = ref(false);
 
   const executeStep = async (contractId?: string, stepCode?: string) => {
@@ -108,9 +110,9 @@ export const useExecuteStep = (options?: { onSuccess?: () => void }) => {
     try {
       await contractApi.executeStep(contractId, stepCode);
       options?.onSuccess?.();
-    } catch (error) {
+    } catch (error: any) {
       console.error("执行步骤失败", error);
-      message.error("执行步骤失败:"+error.message);
+      message.error(t("desk.msgStepFailed") + (error?.message ? ": " + error.message : ""));
     } finally {
       loading.value = false;
     }

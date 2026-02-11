@@ -172,6 +172,8 @@ const handleSave = async () => {
       setLocale(configToSave.language as 'zh' | 'en');
       // 确保主题色已更新
       window.dispatchEvent(new CustomEvent('theme-color-change', { detail: { color: configToSave.themeColor } }));
+      window.dispatchEvent(new CustomEvent('theme-mode-change', { detail: { mode: configToSave.themeMode } }));
+
       message.success(t('common.settingsSaved'));
     } else {
       message.error(t('common.saveFailed') + ': ' + (result.error || t('common.unknownError')));

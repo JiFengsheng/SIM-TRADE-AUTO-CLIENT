@@ -1,4 +1,5 @@
 import { ref, computed, watch, onBeforeUnmount } from "vue";
+import { useI18n } from "vue-i18n";
 import contractApi from "../../apis/contract";
 import processStepApi from "../../apis/processStep";
 import contractTaskHistoryApi from "../../apis/contractTaskHistory";
@@ -289,24 +290,24 @@ export const useContractLatestLogs = (params: {
 };
 
 export const useGetCrawlRate = () => {
+  const { t } = useI18n();
   const crawlRate = ref<CrawlRateRespVo>({});
   const loading = ref(false);
-  const getCrawlRate = async (account: string,password: string) => {
-    try{
-      const res = await businessConfigApi.getCrawlRate(account,password);
+  const getCrawlRate = async (account: string, password: string) => {
+    try {
+      const res = await businessConfigApi.getCrawlRate(account, password);
       crawlRate.value = unwrapApiData<CrawlRateRespVo>(res) || {};
-      message.success("获取信息成功");
-    }catch(error){
+      message.success(t("contract.msgCrawlSuccess"));
+    } catch (error) {
       console.error("获取信息失败", error);
-      message.error("获取信息失败");
-    }finally{
+      message.error(t("contract.msgCrawlFail"));
+    } finally {
       loading.value = false;
     }
-
-  }
+  };
   return {
     crawlRate,
     loading,
     getCrawlRate,
-  }
-}
+  };
+};

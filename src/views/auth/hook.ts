@@ -1,11 +1,13 @@
 import { useAuthStore } from "../../stores/auth";
 import { reactive, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { message } from "ant-design-vue";
 import tokenApi from "../../apis/token";
 import type { TempTokenData } from "../../apis/token";
 import { unwrapApiData } from "../../utils/request";
 
 export const useAuth = () => {
+  const { t } = useI18n();
   const authStore = useAuthStore();
   const form = reactive<{ token: string }>({
     token: "",
@@ -17,7 +19,7 @@ export const useAuth = () => {
   const handleSubmit = async (): Promise<boolean> => {
     const token = form.token?.trim();
     if (!token) {
-      message.warning("请输入认证 Token");
+      message.warning(t("auth.tokenRequired"));
       return false;
     }
 
@@ -32,7 +34,7 @@ export const useAuth = () => {
       const tokenList = unwrapApiData<string[]>(adminTokens)||[]
       if (tokenList.includes(token)) {
         authStore.setAuthAsAdmin(token);
-        message.success("认证成功");
+        message.success(t("auth.msgSuccess"));
         return true;
       }
 
@@ -43,21 +45,21 @@ export const useAuth = () => {
         const now = new Date();
         if (expiration.getTime() < now.getTime()){
           authStore.clearAuth();
-          message.error("认证失败，Token 已过期");
+          message.error(t("auth.msgExpired"));
           return false;
         } else {
           authStore.setAuthAsTemp(token, tempToken.expirationTime);
-          message.success(`认证成功`);
+          message.success(t("auth.msgSuccess"));
           return true;
         }
       }
 
       authStore.clearAuth();
-      message.error("认证失败，Token 无效或已过期");
+      message.error(t("auth.msgInvalid"));
       return false;
     } catch (err) {
       authStore.clearAuth();
-      message.error("认证请求失败，请检查网络后重试");
+      message.error(t("auth.msgRequestFailed"));
       console.error(err);
       return false;
     } finally {

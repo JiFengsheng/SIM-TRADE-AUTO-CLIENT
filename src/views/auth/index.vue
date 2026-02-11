@@ -4,16 +4,16 @@
     <div class="auth-page__overlay" />
     <div class="auth-page__content">
       <div class="auth-card">
-        <h1 class="auth-card__title">身份认证</h1>
-        <p class="auth-card__desc">请输入您的认证 Token 以继续使用</p>
+        <h1 class="auth-card__title">{{ $t('auth.pageTitle') }}</h1>
+        <p class="auth-card__desc">{{ $t('auth.desc') }}</p>
         <a-form :model="form" layout="vertical" class="auth-card__form" @submit.prevent="onSubmit">
-          <a-form-item name="token" :rules="[{ required: true, message: '请输入认证 Token' }]">
-            <a-input-password v-model:value="form.token" placeholder="请输入认证 Token" size="large" allow-clear
+          <a-form-item name="token" :rules="[{ required: true, message: $t('auth.tokenRequired') }]">
+            <a-input-password v-model:value="form.token" :placeholder="$t('auth.tokenPlaceholder')" size="large" allow-clear
               :disabled="loading" autocomplete="off" />
           </a-form-item>
           <a-form-item class="auth-card__submit">
             <a-button type="primary" html-type="submit" size="large" block :loading="loading">
-              认证
+              {{ $t('auth.submit') }}
             </a-button>
           </a-form-item>
         </a-form>
@@ -24,8 +24,10 @@
 
 <script setup lang="ts">
 import { useRoute, useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
 import { useAuth } from "./hook";
 
+const { t } = useI18n();
 const route = useRoute();
 const router = useRouter();
 const { form, loading, handleSubmit } = useAuth();

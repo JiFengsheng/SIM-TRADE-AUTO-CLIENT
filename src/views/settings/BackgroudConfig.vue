@@ -1,13 +1,13 @@
 <template>
   <div class="setting-page w-full h-full overflow-y-auto scrollbar-w-none">
     <div class="w-full max-w-3xl mx-auto py-8 px-8">
-      <h1 class="text-2xl font-bold mb-6 text-center">后台配置</h1>
+      <h1 class="text-2xl font-bold mb-6 text-center">{{ $t('backgroundConfig.pageTitle') }}</h1>
 
       <a-card class="config-card">
         <a-form :model="config" layout="vertical" class="space-y-6">
-          <a-form-item label="请求路径" name="baseUrl" :rules="[
-              { required: true, message: '请输入 请求路径' },
-              { type: 'url', message: '请输入有效的 URL 地址' }
+          <a-form-item :label="$t('backgroundConfig.baseUrlLabel')" name="baseUrl" :rules="[
+              { required: true, message: $t('backgroundConfig.baseUrlRequired') },
+              { type: 'url', message: $t('backgroundConfig.baseUrlInvalid') }
             ]">
             <a-input v-model:value="config.baseUrl" placeholder="http://localhost:9090" class="w-full" size="large">
               <template #prefix>
@@ -15,25 +15,25 @@
               </template>
             </a-input>
             <div class="text-sm setting-text-secondary mt-2">
-              应用请求后端 API 的基础地址，用于所有接口请求
+              {{ $t('backgroundConfig.baseUrlHint') }}
             </div>
           </a-form-item>
 
-          <a-form-item label="端口号" name="port" :rules="[
-              { required: true, message: '请输入端口号' },
-              { type: 'number', min: 1, max: 65535, message: '端口号范围：1-65535' }
+          <a-form-item :label="$t('backgroundConfig.portLabel')" name="port" :rules="[
+              { required: true, message: $t('backgroundConfig.portRequired') },
+              { type: 'number', min: 1, max: 65535, message: $t('backgroundConfig.portRange') }
             ]">
             <a-input-number v-model:value="config.port" :min="1" :max="65535" :step="1" class="w-full" size="large"
               placeholder="9090" />
             <div class="text-sm setting-text-secondary mt-2">
-              用于指定启动本地后端服务运行的端口号
+              {{ $t('backgroundConfig.portHint') }}
             </div>
           </a-form-item>
 
-          <a-form-item label="是否自动启动后台" name="autoStart">
-            <a-switch v-model:checked="config.autoStart" checked-children="是" un-checked-children="否" />
+          <a-form-item :label="$t('backgroundConfig.autoStartLabel')" name="autoStart">
+            <a-switch v-model:checked="config.autoStart" :checked-children="$t('backgroundConfig.yes')" :un-checked-children="$t('backgroundConfig.no')" />
             <div class="text-sm setting-text-secondary mt-2">
-              开启后，下次应用启动时将自动启动后台服务（仅在本地服务时生效）
+              {{ $t('backgroundConfig.autoStartHint') }}
             </div>
           </a-form-item>
 
@@ -42,31 +42,31 @@
           <div class="flex items-center justify-between">
             <div class="text-sm setting-text-secondary">
               <Icon icon="radix-icons:info-circled" class="inline mr-1" />
-              配置保存后将立即生效，影响所有 API 请求
+              {{ $t('backgroundConfig.saveHint') }}
             </div>
             <a-button type="primary" @click="handleSave" :loading="saving" size="large" class="min-w-[120px]">
-              保存配置
+              {{ $t('backgroundConfig.saveConfig') }}
             </a-button>
           </div>
         </a-form>
       </a-card>
 
       <!-- 配置预览 -->
-      <a-card class="config-preview-card mt-6" title="配置预览">
+      <a-card hoverable class="config-preview-card mt-6" :title="$t('backgroundConfig.configPreview')">
         <div class="space-y-2">
           <div class="flex items-center justify-between py-2 border-b setting-border">
-            <span class="setting-text-secondary">完整 API 地址：</span>
+            <span class="setting-text-secondary">{{ $t('backgroundConfig.fullApiUrl') }}</span>
             <code class="text-sm setting-code-bg px-3 py-1 rounded">{{ fullApiUrl }}</code>
           </div>
           <div class="text-xs setting-text-tertiary mt-2">
             <Icon icon="radix-icons:lightbulb" class="inline mr-1" />
-            示例接口：{{ fullApiUrl }}/api/example
+            {{ $t('backgroundConfig.exampleApi', { url: fullApiUrl }) }}
           </div>
         </div>
       </a-card>
 
       <!-- 服务状态 -->
-      <a-card class="service-status-card mt-6" title="服务状态">
+      <a-card hoverable class="service-status-card mt-6" :title="$t('backgroundConfig.serviceStatus')">
         <div class="flex items-center justify-between">
           <div class="flex items-center gap-3">
             <div class="status-indicator"
@@ -76,10 +76,10 @@
             </div>
             <div>
               <div class="font-medium setting-text">
-                {{ serviceStatus === 'running' ? '服务运行中' : serviceStatus === 'stopped' ? '服务已停止' : '检查中...' }}
+                {{ serviceStatus === 'running' ? $t('backgroundConfig.statusRunning') : serviceStatus === 'stopped' ? $t('backgroundConfig.statusStopped') : $t('backgroundConfig.statusChecking') }}
               </div>
               <div class="text-sm setting-text-secondary mt-1">
-                {{ serviceStatus === 'running' ? '后端服务正常运行' : serviceStatus === 'stopped' ? '后端服务未运行或无法连接' : '正在检查服务状态'
+                {{ serviceStatus === 'running' ? $t('backgroundConfig.statusRunningDesc') : serviceStatus === 'stopped' ? $t('backgroundConfig.statusStoppedDesc') : $t('backgroundConfig.statusCheckingDesc')
                 }}
               </div>
             </div>
@@ -90,7 +90,7 @@
               <template #icon>
                 <Icon icon="radix-icons:reload" class="service-btn-icon" />
               </template>
-              检查
+              {{ $t('backgroundConfig.check') }}
             </a-button>
             <a-button v-if="isLocalService" :type="serviceStatus === 'running' ? 'default' : 'primary'"
               :danger="serviceStatus === 'running'" @click="handleServiceAction" :disabled="isChecking" size="large"
@@ -99,7 +99,7 @@
                 <Icon :icon="serviceStatus === 'running' ? 'radix-icons:stop' : 'radix-icons:play'"
                   class="service-btn-icon" />
               </template>
-              {{ serviceStatus === 'running' ? '停止' : '启动' }}
+              {{ serviceStatus === 'running' ? $t('backgroundConfig.stop') : $t('backgroundConfig.start') }}
             </a-button>
           </div>
         </div>
@@ -110,11 +110,14 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue';
+import { useI18n } from 'vue-i18n';
 import { message } from 'ant-design-vue';
 import type { BackgroundConfig } from '../../../interface';
 import { Icon } from '@iconify/vue';
 import statusApi from '../../apis/status';
 import { useLoadBackgroundConfig as loadConfig, useCheckBackgroundStatus } from '../../hooks/BackgroundConfig';
+
+const { t } = useI18n();
 
 const config = ref<BackgroundConfig>({
   baseUrl: 'http://localhost:9090',
@@ -182,30 +185,30 @@ const handleServiceAction = async () => {
           if (serviceStatus.value !== 'running' || checkCount >= maxChecks) {
             clearInterval(checkInterval);
             if (serviceStatus.value !== 'running') {
-              message.success('服务停止成功');
+              message.success(t('backgroundConfig.msgStopSuccess'));
             } else {
-              message.warning('服务停止失败，请手动关闭');
+              message.warning(t('backgroundConfig.msgStopFail'));
             }
           }
         }, 3000);
       } else {
-        message.error('停止服务失败');
+        message.error(t('backgroundConfig.msgStopError'));
       }
     } catch (error) {
       console.error('停止服务失败:', error);
-      message.error('停止服务失败');
+      message.error(t('backgroundConfig.msgStopError'));
     }
   } else {
     // 启动服务
     if (!config.value.port) {
-      message.error('请先配置端口号');
+      message.error(t('backgroundConfig.msgPortRequired'));
       return;
     }
     
     try {
       const result = await window.electronAPI.runJar(config.value.port);
       if (result.success) {
-        message.success('服务启动中，请稍候...');
+        message.success(t('backgroundConfig.msgStarting'));
         // 轮询检查服务状态，最多检查5次
         let checkCount = 0;
         const maxChecks = 5;
@@ -216,18 +219,18 @@ const handleServiceAction = async () => {
           if (serviceStatus.value === 'running' || checkCount >= maxChecks) {
             clearInterval(checkInterval);
             if (serviceStatus.value === 'running') {
-              message.success('服务启动成功');
+              message.success(t('backgroundConfig.msgStartSuccess'));
             } else {
-              message.warning('服务启动超时，请手动检查服务状态');
+              message.warning(t('backgroundConfig.msgStartTimeout'));
             }
           }
         }, 3000);
       } else {
-        message.error('启动服务失败: ' + (result.error || '未知错误'));
+        message.error(t('backgroundConfig.msgStartError') + ': ' + (result.error || t('common.unknownError')));
       }
     } catch (error) {
       console.error('启动服务失败:', error);
-      message.error('启动服务失败');
+      message.error(t('backgroundConfig.msgStartError'));
     }
   }
 };
@@ -236,7 +239,7 @@ const handleServiceAction = async () => {
 const handleSave = async () => {
   // 验证配置
   if (!config.value.baseUrl || !config.value.port) {
-    message.error('请填写完整的配置信息');
+    message.error(t('backgroundConfig.msgConfigRequired'));
     return;
   }
 
@@ -244,13 +247,13 @@ const handleSave = async () => {
   try {
     new URL(config.value.baseUrl);
   } catch {
-    message.error('Base URL 格式不正确');
+    message.error(t('backgroundConfig.msgBaseUrlInvalid'));
     return;
   }
 
   // 验证端口号范围
   if (config.value.port < 1 || config.value.port > 65535) {
-    message.error('端口号范围：1-65535');
+    message.error(t('backgroundConfig.portRange'));
     return;
   }
 
@@ -264,7 +267,7 @@ const handleSave = async () => {
     console.log('configToSave', configToSave);
     const result = await window.electronAPI.saveBackgroundConfig(configToSave);
     if (result.success) {
-      message.success('配置保存成功');
+      message.success(t('backgroundConfig.msgSaveSuccess'));
       // 更新全局 API base URL（如果需要在 request.ts 中使用）
       if (typeof window !== 'undefined') {
         (window as Window & { __API_BASE_URL__?: string }).__API_BASE_URL__ = configToSave.baseUrl;
@@ -272,11 +275,11 @@ const handleSave = async () => {
       // 配置保存后重新检查服务状态
       await checkServiceStatus(false);
     } else {
-      message.error('保存失败: ' + (result.error || '未知错误'));
+      message.error(t('backgroundConfig.msgSaveFail') + ': ' + (result.error || t('common.unknownError')));
     }
   } catch (error) {
     console.error('保存配置失败:', error);
-    message.error('保存配置失败');
+    message.error(t('backgroundConfig.msgSaveError'));
   } finally {
     saving.value = false;
   }
@@ -306,17 +309,24 @@ onMounted(async () => {
   background-color: var(--app-bg-container);
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
-  transition: all 0.3s ease;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
 .config-card:hover {
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.26);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.14);
 }
 
 .config-preview-card {
   background-color: var(--app-bg-container);
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.config-preview-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.14);
 }
 
 .config-preview-card :deep(.ant-card-head) {
@@ -363,6 +373,12 @@ onMounted(async () => {
   background-color: var(--app-bg-container);
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.service-status-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.14);
 }
 
 .service-status-card :deep(.ant-card-head) {

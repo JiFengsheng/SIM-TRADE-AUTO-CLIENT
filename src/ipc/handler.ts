@@ -77,7 +77,7 @@ export function registerIpcHandlers(
       if (!mainWindow || mainWindow.isDestroyed()) {
         console.error("Window not available for menu update");
       } else {
-        await updateMenu(mainWindow);
+        // await updateMenu(mainWindow);
       }
     }
     
