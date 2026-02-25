@@ -1,0 +1,31 @@
+现在需要实现邮箱管理页面，可以使用ant-design-vue的组件和tailwind css样式，要求界面简洁美观好看
+
+下面是邮箱管理的描述：
+邮箱管理有两块内容，一块是业务操作，一块是通用邮箱，使用两个tab页进行分别展示，业务操作对应于 
+BusinessEmail.vue 这个作为相应的界面组件，通用对应于 NormalEmail.vue 这个作为相应的界面组件。
+
+业务操作界面描述：
+业务操作：在这个板块里面有8个表单，分别指8种类型的邮箱发送，类型分别如下：
+"EXPORTER_TO_IMPORTER_FIRST" 对应 "由出口商发送给进口商第一次发送邮件"
+"IMPORTER_TO_EXPORTER_FIRST" 对应 "由进口商回复出口商邮件第一次发送邮件"
+"EXPORTER_TO_IMPORTER_SECOND" 对应 "由出口商发送给进口商第二次发送邮件"
+"IMPORTER_TO_EXPORTER_SECOND" 对应 "由进口商回复出口商邮件第二次发送邮件"
+"EXPORTER_TO_SUPPLIER_FIRST" 对应 "由出口商发送给工厂第一次发送邮件"
+"SUPPLIER_TO_EXPORTER_FIRST" 对应 "由工厂回复出口商邮件第一次发送邮件"
+"EXPORTER_TO_SUPPLIER_SECOND" 对应 "由出口商回复工厂邮件第二次发送邮件"
+"SUPPLIER_TO_EXPORTER_SECOND" 对应 "由工厂回复出口商邮件第二次发送邮件"
+这8个表单每个表单都是两个表单项，一个是主题(title)，一个是内容(content)，进入页面的时候需要调用 email.ts
+里面的getEmailContent方法获取对应的内容初始化表单项，然后右下角是两个按钮，一个 保存，调用的是 saveEmailContent 
+请求方法，一个是 发送，调用的是 sendEmail 这个请求方法，每个表单都要卡片化，按照上面类型声明的顺序排列.
+
+
+通用邮箱界面描述：
+这个界面是用来发送通用邮件的，主体是一个表单，有 发送者账号，发送者密码，发送者角色，接收邮箱，邮箱内容 5 个表达项
+右下角是一个发送按钮，点击触发 sendNormalEmail 这个请求方法的调用，发送者角色类型如下：
+EXPORTER: '出口商',
+IMPORTER: '进口商',
+SUPPLIER: '供应商',
+ISSUING_BANK: '进口地银行',
+NEGOTIATING_BANK: '出口地银行'
+
+要求：界面简洁美观好看，可以使用卡片式的设计，接口回调方法的编写写在 hook.ts 这个文件方便复用，可以参考别的示例

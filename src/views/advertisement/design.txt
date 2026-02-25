@@ -1,0 +1,35 @@
+现在需要实现广告管理页面，可以使用ant-design-vue的组件和tailwind css样式，要求界面简洁美观好看
+
+下面是广告管理的描述：
+邮箱管理有两块内容，一块是发布广告，一块是发布信息，请使用两个tab页进行分别展示，发布广告对应于 
+PublishAds.vue 这个作为相应的界面组件，发布信息对应于 PublishInfo.vue 这个作为相应的界面组件。
+
+发布广告界面描述：
+这个界面是用来发布广告的，主题是一个表单，有账号（account）、密码（password）、角色（roleCode）、标题（title）、
+关键字（keywords）、发布类型（advertisementType）、产品编号（goodsNo）、内容（content）这几个表单项，其中角色类型如下：
+EXPORTER: '出口商',
+IMPORTER: '进口商',
+SUPPLIER: '供应商',
+ISSUING_BANK: '进口地银行',
+NEGOTIATING_BANK: '出口地银行'
+发布类型如下：
+COMPANY：公司
+GOODS：产品
+当发布类型选择产品时，产品编号这个输入项才显示，否则都不显示
+右下角是一个 “发布广告” 按钮，点击触发 advertisement.ts 里面的 publishAds 方法
+
+通用邮箱界面描述：
+这个界面是用来发布信息的，主题是一个表单，有账号（account）、密码（password）、角色（roleCode）、标题（title）、
+关键字（keywords）、发布类型（advertisementType）、内容（content）这几个表单项，其中角色类型如下：
+EXPORTER: '出口商',
+IMPORTER: '进口商',
+SUPPLIER: '供应商',
+ISSUING_BANK: '进口地银行',
+NEGOTIATING_BANK: '出口地银行'
+发布类型如下：
+SUPPLY：供应信息
+DEMAND：需求信息
+OTHER：其他
+右下角是一个 “发布信息” 按钮，点击触发 advertisement.ts 里面的 publishInfo 方法
+
+要求：界面简洁美观好看，可以使用卡片式的设计，接口回调方法的编写写在 hook.ts 这个文件方便复用，可以参考别的示例
