@@ -634,6 +634,66 @@ export interface GoodsInfo {
 }
 
 /**
+ * 市场货品相关类型定义
+ */
+
+/**
+ * 市场货品对象
+ * 对应文档定义：MarketGoodsInfo对象
+ */
+export interface MarketGoodsInfo {
+  /** 基础地址 */
+  baseUrl?: string;
+  /** 成本金额（如38.62） */
+  cost?: number;
+  /** 成本单位（如RMB） */
+  costUnit?: string;
+  /** 创建时间 */
+  createTime?: string;
+  /** 创建人 */
+  createUser?: string;
+  /** 货号（如01001） */
+  goodsCode?: string;
+  /** 商品描述（如每箱24罐，每罐425克） */
+  goodsDesc?: string;
+  /** 商品英文描述 */
+  goodsDescEng?: string;
+  /** 主键ID */
+  goodsId?: string;
+  /** 商品名称（如洋菇罐头(整粒)） */
+  goodsName?: string;
+  /** 商品英文名称 */
+  goodsNameEng?: string;
+  /** 计量单位（如CARTON） */
+  goodsUnit?: string;
+  /** 进口商国家 */
+  importCountry?: string;
+  /** 进口商市场价格 */
+  importPrice?: number;
+  /** 进口商价格单位 */
+  importPriceUnit?: string;
+  /** 最新更新时间 */
+  lastUpdateTime?: string;
+  /** 最新更新人 */
+  lastUpdateUser?: string;
+}
+
+/**
+ * 根据 code 获取市场货品请求参数
+ * 对应文档定义：GetMarketReqVo
+ */
+export interface GetMarketReqVo {
+  /** 账号 */
+  account?: string;
+  /** 基础地址 */
+  baseUrl?: string;
+  /** 货品编码 */
+  code?: string;
+  /** 密码 */
+  password?: string;
+}
+
+/**
  * 港口信息相关类型定义
  */
 
@@ -777,3 +837,10 @@ export type EmailSendType =
   | "SUPPLIER_TO_EXPORTER_FIRST"
   | "EXPORTER_TO_SUPPLIER_SECOND"
   | "SUPPLIER_TO_EXPORTER_SECOND";
+
+
+export interface GetCrawlRate {
+  baseUrl?: string
+  account?: string
+  password?: string
+}

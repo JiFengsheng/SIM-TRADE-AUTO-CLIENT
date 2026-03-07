@@ -15,6 +15,7 @@ import type {
 import businessConfigApi from "../../apis/businessConfig";
 import harborApi from "../../apis/harbor";
 import { message } from "ant-design-vue";
+import { GetCrawlRate } from "../../apis/types";
 
 // request.ts 的类型定义里 get/post 返回 Promise<T | ApiResponse<T>>
 // 这里统一做一次解包，避免各处赋值时报类型错误
@@ -293,9 +294,9 @@ export const useGetCrawlRate = () => {
   const { t } = useI18n();
   const crawlRate = ref<CrawlRateRespVo>({});
   const loading = ref(false);
-  const getCrawlRate = async (account: string, password: string) => {
+  const getCrawlRate = async (data: GetCrawlRate) => {
     try {
-      const res = await businessConfigApi.getCrawlRate(account, password);
+      const res = await businessConfigApi.getCrawlRate(data);
       crawlRate.value = unwrapApiData<CrawlRateRespVo>(res) || {};
       message.success(t("contract.msgCrawlSuccess"));
     } catch (error) {

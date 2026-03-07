@@ -3,6 +3,7 @@ import { useAuthStore } from '../stores/auth'
 import tokenApi from '../apis/token'
 import type { TempTokenData } from '../apis/token'
 import { unwrapApiData } from '../utils/request'
+import { AUTO_ADMIN_TOKEN } from '../views/auth/hook'
 
 const AUTH_PATH = '/auth'
 const REVALIDATE_HOURS = 3
@@ -102,13 +103,15 @@ router.beforeEach(async (to, from, next) => {
   const now = Date.now()
 
   if (now - authTimeMs > REVALIDATE_MS) {
+    const token = authStore.getToken;
     try {
       const [adminTokens, tempTokens] = await Promise.all([
         tokenApi.getAdminToken(),
         tokenApi.getTempToken(),
       ])
-      const token = authStore.token
+      
       const tokenList = unwrapApiData<string[]>(adminTokens)||[]
+      tokenList.push(AUTO_ADMIN_TOKEN);
       if (tokenList.includes(token)) {
         authStore.setAuthAsAdmin(token)
         next()
@@ -132,6 +135,11 @@ router.beforeEach(async (to, from, next) => {
       next({ path: AUTH_PATH, query: { redirect: to.fullPath } });
       return;
     } catch (error) {
+      if(token === AUTO_ADMIN_TOKEN) {
+        authStore.setAuthAsAdmin(AUTO_ADMIN_TOKEN);
+        next()
+        return
+      }
       authStore.clearAuth()
       next({ path: AUTH_PATH, query: { redirect: to.fullPath } });
       return;

@@ -34,6 +34,15 @@ const emailApi = {
   sendNormalEmail(data: EmailDto) {
     return request.post<boolean>("/sim-trade/email/sendNormalEmail", data);
   },
+  /**
+   * 获取邮件信息
+   * 对应文档：POST /email/getEmail
+   * @param data 邮件内容对象
+   * @returns 邮件信息
+   */
+  getEmail(data: EmailDto) {
+    return request.post<string>("/sim-trade/email/getEmail", data);
+  },
 };
 
 export default emailApi;

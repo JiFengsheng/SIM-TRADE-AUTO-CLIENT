@@ -1,5 +1,5 @@
 import request from "../utils/request";
-import type { BusinessConfig,CrawlRateRespVo } from "./types";
+import type { BusinessConfig,CrawlRateRespVo, GetCrawlRate } from "./types";
 
 const businessConfigApi = {
   /**
@@ -46,8 +46,8 @@ const businessConfigApi = {
   /**
    * 获取汇率
    */
-  getCrawlRate(account: string,password: string) {
-    return request.get<CrawlRateRespVo>(`/sim-trade/businessConfig/getCrawlRate?account=${account}&password=${password}`);
+  getCrawlRate(data: GetCrawlRate) {
+    return request.post<CrawlRateRespVo>(`/sim-trade/businessConfig/getCrawlRate`,data);
   },
 };
 

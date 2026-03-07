@@ -122,7 +122,7 @@
             <a-timeline-item v-for="step in allSteps" :key="step.stepId || step.stepCode"
               :color="doneStepCodes.has(step.stepCode || '') ? 'green' : 'gray'">
               <div class="text-xs font-medium desk-text flex items-center gap-2">
-                <span>{{ step.stepDesc || '-' }}</span>
+                <span>【{{ getRoleName(step.roleCode)}} 】{{ step.stepDesc || '-' }}</span>
                 <a-tag v-if="doneStepCodes.has(step.stepCode || '')" size="small" color="success"
                   class="border-0 text-[10px]">
                   {{ $t('desk.stepDone') }}

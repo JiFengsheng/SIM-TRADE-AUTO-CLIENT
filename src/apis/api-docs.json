@@ -96,8 +96,8 @@
                         "description": "advertisementDto",
                         "required": true,
                         "schema": {
-                            "originalRef": "AdvertisementDto",
-                            "$ref": "#/definitions/AdvertisementDto"
+                            "$ref": "#/definitions/AdvertisementDto",
+                            "originalRef": "AdvertisementDto"
                         }
                     }
                 ],
@@ -105,8 +105,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -146,8 +146,8 @@
                         "description": "publishInfoDto",
                         "required": true,
                         "schema": {
-                            "originalRef": "PublishInfoDto",
-                            "$ref": "#/definitions/PublishInfoDto"
+                            "$ref": "#/definitions/PublishInfoDto",
+                            "originalRef": "PublishInfoDto"
                         }
                     }
                 ],
@@ -155,8 +155,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -190,8 +190,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«List«BusinessConfig对象»»",
-                            "$ref": "#/definitions/通用响应结果«List«BusinessConfig对象»»"
+                            "$ref": "#/definitions/通用响应结果«List«BusinessConfig对象»»",
+                            "originalRef": "通用响应结果«List«BusinessConfig对象»»"
                         }
                     },
                     "401": {
@@ -226,8 +226,8 @@
                         "description": "reqVo",
                         "required": true,
                         "schema": {
-                            "originalRef": "BusinessConfig对象",
-                            "$ref": "#/definitions/BusinessConfig对象"
+                            "$ref": "#/definitions/BusinessConfig对象",
+                            "originalRef": "BusinessConfig对象"
                         }
                     }
                 ],
@@ -235,8 +235,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -256,39 +256,41 @@
             }
         },
         "/businessConfig/getCrawlRate": {
-            "get": {
+            "post": {
                 "tags": [
                     "业务基本配置接口"
                 ],
                 "summary": "获取汇率",
                 "description": "获取汇率",
-                "operationId": "getCrawlRateUsingGET",
+                "operationId": "getCrawlRateUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "*/*"
                 ],
                 "parameters": [
                     {
-                        "name": "account",
-                        "in": "query",
-                        "description": "account",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "password",
-                        "in": "query",
-                        "description": "password",
-                        "required": false,
-                        "type": "string"
+                        "in": "body",
+                        "name": "getCrawlRateReqVo",
+                        "description": "getCrawlRateReqVo",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GetCrawlRateReqVo",
+                            "originalRef": "GetCrawlRateReqVo"
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«CrawlRateRespVo»",
-                            "$ref": "#/definitions/通用响应结果«CrawlRateRespVo»"
+                            "$ref": "#/definitions/通用响应结果«CrawlRateRespVo»",
+                            "originalRef": "通用响应结果«CrawlRateRespVo»"
                         }
+                    },
+                    "201": {
+                        "description": "Created"
                     },
                     "401": {
                         "description": "Unauthorized"
@@ -318,8 +320,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«BusinessConfig对象»",
-                            "$ref": "#/definitions/通用响应结果«BusinessConfig对象»"
+                            "$ref": "#/definitions/通用响应结果«BusinessConfig对象»",
+                            "originalRef": "通用响应结果«BusinessConfig对象»"
                         }
                     },
                     "401": {
@@ -359,8 +361,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«BusinessConfig对象»",
-                            "$ref": "#/definitions/通用响应结果«BusinessConfig对象»"
+                            "$ref": "#/definitions/通用响应结果«BusinessConfig对象»",
+                            "originalRef": "通用响应结果«BusinessConfig对象»"
                         }
                     },
                     "401": {
@@ -402,8 +404,8 @@
                         "description": "reqVo",
                         "required": true,
                         "schema": {
-                            "originalRef": "BusinessConfig对象",
-                            "$ref": "#/definitions/BusinessConfig对象"
+                            "$ref": "#/definitions/BusinessConfig对象",
+                            "originalRef": "BusinessConfig对象"
                         }
                     }
                 ],
@@ -411,8 +413,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«BusinessConfig对象»",
-                            "$ref": "#/definitions/通用响应结果«BusinessConfig对象»"
+                            "$ref": "#/definitions/通用响应结果«BusinessConfig对象»",
+                            "originalRef": "通用响应结果«BusinessConfig对象»"
                         }
                     },
                     "201": {
@@ -453,8 +455,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "204": {
@@ -541,8 +543,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -576,8 +578,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«List«ContractInfo对象»»",
-                            "$ref": "#/definitions/通用响应结果«List«ContractInfo对象»»"
+                            "$ref": "#/definitions/通用响应结果«List«ContractInfo对象»»",
+                            "originalRef": "通用响应结果«List«ContractInfo对象»»"
                         }
                     },
                     "401": {
@@ -612,8 +614,8 @@
                         "description": "reqVo",
                         "required": true,
                         "schema": {
-                            "originalRef": "ContractInfo对象",
-                            "$ref": "#/definitions/ContractInfo对象"
+                            "$ref": "#/definitions/ContractInfo对象",
+                            "originalRef": "ContractInfo对象"
                         }
                     }
                 ],
@@ -621,8 +623,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -662,8 +664,8 @@
                         "description": "reqVo",
                         "required": true,
                         "schema": {
-                            "originalRef": "ExecuteContractReqVo",
-                            "$ref": "#/definitions/ExecuteContractReqVo"
+                            "$ref": "#/definitions/ExecuteContractReqVo",
+                            "originalRef": "ExecuteContractReqVo"
                         }
                     }
                 ],
@@ -671,8 +673,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -725,8 +727,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -760,8 +762,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«ContractInfo对象»",
-                            "$ref": "#/definitions/通用响应结果«ContractInfo对象»"
+                            "$ref": "#/definitions/通用响应结果«ContractInfo对象»",
+                            "originalRef": "通用响应结果«ContractInfo对象»"
                         }
                     },
                     "401": {
@@ -798,8 +800,8 @@
                         "description": "contractInfoListVo",
                         "required": true,
                         "schema": {
-                            "originalRef": "ContractInfoListVo",
-                            "$ref": "#/definitions/ContractInfoListVo"
+                            "$ref": "#/definitions/ContractInfoListVo",
+                            "originalRef": "ContractInfoListVo"
                         }
                     }
                 ],
@@ -807,8 +809,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«IPage«ContractInfo对象»»",
-                            "$ref": "#/definitions/通用响应结果«IPage«ContractInfo对象»»"
+                            "$ref": "#/definitions/通用响应结果«IPage«ContractInfo对象»»",
+                            "originalRef": "通用响应结果«IPage«ContractInfo对象»»"
                         }
                     },
                     "201": {
@@ -861,8 +863,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -905,8 +907,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«ContractInfo对象»",
-                            "$ref": "#/definitions/通用响应结果«ContractInfo对象»"
+                            "$ref": "#/definitions/通用响应结果«ContractInfo对象»",
+                            "originalRef": "通用响应结果«ContractInfo对象»"
                         }
                     },
                     "401": {
@@ -948,8 +950,8 @@
                         "description": "reqVo",
                         "required": true,
                         "schema": {
-                            "originalRef": "ContractInfo对象",
-                            "$ref": "#/definitions/ContractInfo对象"
+                            "$ref": "#/definitions/ContractInfo对象",
+                            "originalRef": "ContractInfo对象"
                         }
                     }
                 ],
@@ -957,8 +959,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -999,8 +1001,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "204": {
@@ -1031,8 +1033,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«List«ContractTaskHistory对象»»",
-                            "$ref": "#/definitions/通用响应结果«List«ContractTaskHistory对象»»"
+                            "$ref": "#/definitions/通用响应结果«List«ContractTaskHistory对象»»",
+                            "originalRef": "通用响应结果«List«ContractTaskHistory对象»»"
                         }
                     },
                     "401": {
@@ -1067,8 +1069,8 @@
                         "description": "reqVo",
                         "required": true,
                         "schema": {
-                            "originalRef": "ContractTaskHistory对象",
-                            "$ref": "#/definitions/ContractTaskHistory对象"
+                            "$ref": "#/definitions/ContractTaskHistory对象",
+                            "originalRef": "ContractTaskHistory对象"
                         }
                     }
                 ],
@@ -1076,8 +1078,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -1111,8 +1113,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«List«ContractTaskHistory对象»»",
-                            "$ref": "#/definitions/通用响应结果«List«ContractTaskHistory对象»»"
+                            "$ref": "#/definitions/通用响应结果«List«ContractTaskHistory对象»»",
+                            "originalRef": "通用响应结果«List«ContractTaskHistory对象»»"
                         }
                     },
                     "401": {
@@ -1152,8 +1154,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«Set«ContractTaskHistory对象»»",
-                            "$ref": "#/definitions/通用响应结果«Set«ContractTaskHistory对象»»"
+                            "$ref": "#/definitions/通用响应结果«Set«ContractTaskHistory对象»»",
+                            "originalRef": "通用响应结果«Set«ContractTaskHistory对象»»"
                         }
                     },
                     "401": {
@@ -1193,8 +1195,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«List«ContractTaskHistory对象»»",
-                            "$ref": "#/definitions/通用响应结果«List«ContractTaskHistory对象»»"
+                            "$ref": "#/definitions/通用响应结果«List«ContractTaskHistory对象»»",
+                            "originalRef": "通用响应结果«List«ContractTaskHistory对象»»"
                         }
                     },
                     "401": {
@@ -1241,8 +1243,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«List«ContractTaskHistory对象»»",
-                            "$ref": "#/definitions/通用响应结果«List«ContractTaskHistory对象»»"
+                            "$ref": "#/definitions/通用响应结果«List«ContractTaskHistory对象»»",
+                            "originalRef": "通用响应结果«List«ContractTaskHistory对象»»"
                         }
                     },
                     "401": {
@@ -1282,8 +1284,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«ContractTaskHistory对象»",
-                            "$ref": "#/definitions/通用响应结果«ContractTaskHistory对象»"
+                            "$ref": "#/definitions/通用响应结果«ContractTaskHistory对象»",
+                            "originalRef": "通用响应结果«ContractTaskHistory对象»"
                         }
                     },
                     "401": {
@@ -1325,8 +1327,8 @@
                         "description": "reqVo",
                         "required": true,
                         "schema": {
-                            "originalRef": "ContractTaskHistory对象",
-                            "$ref": "#/definitions/ContractTaskHistory对象"
+                            "$ref": "#/definitions/ContractTaskHistory对象",
+                            "originalRef": "ContractTaskHistory对象"
                         }
                     }
                 ],
@@ -1334,8 +1336,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -1376,8 +1378,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "204": {
@@ -1408,8 +1410,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«List«DocumentInfo对象»»",
-                            "$ref": "#/definitions/通用响应结果«List«DocumentInfo对象»»"
+                            "$ref": "#/definitions/通用响应结果«List«DocumentInfo对象»»",
+                            "originalRef": "通用响应结果«List«DocumentInfo对象»»"
                         }
                     },
                     "401": {
@@ -1444,8 +1446,8 @@
                         "description": "reqVo",
                         "required": true,
                         "schema": {
-                            "originalRef": "DocumentInfo对象",
-                            "$ref": "#/definitions/DocumentInfo对象"
+                            "$ref": "#/definitions/DocumentInfo对象",
+                            "originalRef": "DocumentInfo对象"
                         }
                     }
                 ],
@@ -1453,8 +1455,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -1497,8 +1499,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«DocumentInfo对象»",
-                            "$ref": "#/definitions/通用响应结果«DocumentInfo对象»"
+                            "$ref": "#/definitions/通用响应结果«DocumentInfo对象»",
+                            "originalRef": "通用响应结果«DocumentInfo对象»"
                         }
                     },
                     "401": {
@@ -1540,8 +1542,8 @@
                         "description": "reqVo",
                         "required": true,
                         "schema": {
-                            "originalRef": "DocumentInfo对象",
-                            "$ref": "#/definitions/DocumentInfo对象"
+                            "$ref": "#/definitions/DocumentInfo对象",
+                            "originalRef": "DocumentInfo对象"
                         }
                     }
                 ],
@@ -1549,8 +1551,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -1591,8 +1593,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "204": {
@@ -1603,6 +1605,55 @@
                     },
                     "403": {
                         "description": "Forbidden"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/email/getEmail": {
+            "post": {
+                "tags": [
+                    "邮件接口"
+                ],
+                "summary": "获取邮件信息",
+                "description": "获取邮件信息",
+                "operationId": "getEmailUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "emailDto",
+                        "description": "emailDto",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/EmailDto",
+                            "originalRef": "EmailDto"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
                     }
                 },
                 "deprecated": false
@@ -1623,8 +1674,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«EmailTemplateDto»",
-                            "$ref": "#/definitions/通用响应结果«EmailTemplateDto»"
+                            "$ref": "#/definitions/通用响应结果«EmailTemplateDto»",
+                            "originalRef": "通用响应结果«EmailTemplateDto»"
                         }
                     },
                     "401": {
@@ -1661,8 +1712,8 @@
                         "description": "emailTemplateDto",
                         "required": true,
                         "schema": {
-                            "originalRef": "EmailTemplateDto",
-                            "$ref": "#/definitions/EmailTemplateDto"
+                            "$ref": "#/definitions/EmailTemplateDto",
+                            "originalRef": "EmailTemplateDto"
                         }
                     }
                 ],
@@ -1670,8 +1721,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -1711,8 +1762,8 @@
                         "description": "emailDto",
                         "required": true,
                         "schema": {
-                            "originalRef": "EmailDto",
-                            "$ref": "#/definitions/EmailDto"
+                            "$ref": "#/definitions/EmailDto",
+                            "originalRef": "EmailDto"
                         }
                     },
                     {
@@ -1727,8 +1778,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -1768,8 +1819,8 @@
                         "description": "emailDto",
                         "required": true,
                         "schema": {
-                            "originalRef": "EmailDto",
-                            "$ref": "#/definitions/EmailDto"
+                            "$ref": "#/definitions/EmailDto",
+                            "originalRef": "EmailDto"
                         }
                     }
                 ],
@@ -1777,8 +1828,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -1812,8 +1863,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«List«FulfillmentProcessStep对象»»",
-                            "$ref": "#/definitions/通用响应结果«List«FulfillmentProcessStep对象»»"
+                            "$ref": "#/definitions/通用响应结果«List«FulfillmentProcessStep对象»»",
+                            "originalRef": "通用响应结果«List«FulfillmentProcessStep对象»»"
                         }
                     },
                     "401": {
@@ -1848,8 +1899,8 @@
                         "description": "reqVo",
                         "required": true,
                         "schema": {
-                            "originalRef": "FulfillmentProcessStep对象",
-                            "$ref": "#/definitions/FulfillmentProcessStep对象"
+                            "$ref": "#/definitions/FulfillmentProcessStep对象",
+                            "originalRef": "FulfillmentProcessStep对象"
                         }
                     }
                 ],
@@ -1857,8 +1908,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -1908,8 +1959,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«List«FulfillmentProcessStep对象»»",
-                            "$ref": "#/definitions/通用响应结果«List«FulfillmentProcessStep对象»»"
+                            "$ref": "#/definitions/通用响应结果«List«FulfillmentProcessStep对象»»",
+                            "originalRef": "通用响应结果«List«FulfillmentProcessStep对象»»"
                         }
                     },
                     "401": {
@@ -1949,8 +2000,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«FulfillmentProcessStep对象»",
-                            "$ref": "#/definitions/通用响应结果«FulfillmentProcessStep对象»"
+                            "$ref": "#/definitions/通用响应结果«FulfillmentProcessStep对象»",
+                            "originalRef": "通用响应结果«FulfillmentProcessStep对象»"
                         }
                     },
                     "401": {
@@ -1990,8 +2041,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«FulfillmentProcessStep对象»",
-                            "$ref": "#/definitions/通用响应结果«FulfillmentProcessStep对象»"
+                            "$ref": "#/definitions/通用响应结果«FulfillmentProcessStep对象»",
+                            "originalRef": "通用响应结果«FulfillmentProcessStep对象»"
                         }
                     },
                     "401": {
@@ -2038,8 +2089,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«List«FulfillmentProcessStep对象»»",
-                            "$ref": "#/definitions/通用响应结果«List«FulfillmentProcessStep对象»»"
+                            "$ref": "#/definitions/通用响应结果«List«FulfillmentProcessStep对象»»",
+                            "originalRef": "通用响应结果«List«FulfillmentProcessStep对象»»"
                         }
                     },
                     "401": {
@@ -2086,8 +2137,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«Map«string,List«FulfillmentProcessStep对象»»»",
-                            "$ref": "#/definitions/通用响应结果«Map«string,List«FulfillmentProcessStep对象»»»"
+                            "$ref": "#/definitions/通用响应结果«Map«string,List«FulfillmentProcessStep对象»»»",
+                            "originalRef": "通用响应结果«Map«string,List«FulfillmentProcessStep对象»»»"
                         }
                     },
                     "401": {
@@ -2134,8 +2185,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«List«FulfillmentProcessStep对象»»",
-                            "$ref": "#/definitions/通用响应结果«List«FulfillmentProcessStep对象»»"
+                            "$ref": "#/definitions/通用响应结果«List«FulfillmentProcessStep对象»»",
+                            "originalRef": "通用响应结果«List«FulfillmentProcessStep对象»»"
                         }
                     },
                     "401": {
@@ -2172,8 +2223,8 @@
                         "description": "listReqVo",
                         "required": true,
                         "schema": {
-                            "originalRef": "FulfillmentProcessStepListReqVo列表对象",
-                            "$ref": "#/definitions/FulfillmentProcessStepListReqVo列表对象"
+                            "$ref": "#/definitions/FulfillmentProcessStepListReqVo列表对象",
+                            "originalRef": "FulfillmentProcessStepListReqVo列表对象"
                         }
                     }
                 ],
@@ -2181,8 +2232,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«IPage«FulfillmentProcessStep对象»»",
-                            "$ref": "#/definitions/通用响应结果«IPage«FulfillmentProcessStep对象»»"
+                            "$ref": "#/definitions/通用响应结果«IPage«FulfillmentProcessStep对象»»",
+                            "originalRef": "通用响应结果«IPage«FulfillmentProcessStep对象»»"
                         }
                     },
                     "201": {
@@ -2225,8 +2276,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«List«FulfillmentProcessStep对象»»",
-                            "$ref": "#/definitions/通用响应结果«List«FulfillmentProcessStep对象»»"
+                            "$ref": "#/definitions/通用响应结果«List«FulfillmentProcessStep对象»»",
+                            "originalRef": "通用响应结果«List«FulfillmentProcessStep对象»»"
                         }
                     },
                     "401": {
@@ -2266,8 +2317,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«FulfillmentProcessStep对象»",
-                            "$ref": "#/definitions/通用响应结果«FulfillmentProcessStep对象»"
+                            "$ref": "#/definitions/通用响应结果«FulfillmentProcessStep对象»",
+                            "originalRef": "通用响应结果«FulfillmentProcessStep对象»"
                         }
                     },
                     "401": {
@@ -2309,8 +2360,8 @@
                         "description": "reqVo",
                         "required": true,
                         "schema": {
-                            "originalRef": "FulfillmentProcessStep对象",
-                            "$ref": "#/definitions/FulfillmentProcessStep对象"
+                            "$ref": "#/definitions/FulfillmentProcessStep对象",
+                            "originalRef": "FulfillmentProcessStep对象"
                         }
                     }
                 ],
@@ -2318,8 +2369,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -2360,8 +2411,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "204": {
@@ -2392,8 +2443,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«List«FulfillmentProcessType对象»»",
-                            "$ref": "#/definitions/通用响应结果«List«FulfillmentProcessType对象»»"
+                            "$ref": "#/definitions/通用响应结果«List«FulfillmentProcessType对象»»",
+                            "originalRef": "通用响应结果«List«FulfillmentProcessType对象»»"
                         }
                     },
                     "401": {
@@ -2428,8 +2479,8 @@
                         "description": "reqVo",
                         "required": true,
                         "schema": {
-                            "originalRef": "FulfillmentProcessType对象",
-                            "$ref": "#/definitions/FulfillmentProcessType对象"
+                            "$ref": "#/definitions/FulfillmentProcessType对象",
+                            "originalRef": "FulfillmentProcessType对象"
                         }
                     }
                 ],
@@ -2437,8 +2488,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -2481,8 +2532,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«FulfillmentProcessType对象»",
-                            "$ref": "#/definitions/通用响应结果«FulfillmentProcessType对象»"
+                            "$ref": "#/definitions/通用响应结果«FulfillmentProcessType对象»",
+                            "originalRef": "通用响应结果«FulfillmentProcessType对象»"
                         }
                     },
                     "401": {
@@ -2524,8 +2575,8 @@
                         "description": "reqVo",
                         "required": true,
                         "schema": {
-                            "originalRef": "FulfillmentProcessType对象",
-                            "$ref": "#/definitions/FulfillmentProcessType对象"
+                            "$ref": "#/definitions/FulfillmentProcessType对象",
+                            "originalRef": "FulfillmentProcessType对象"
                         }
                     }
                 ],
@@ -2533,8 +2584,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -2575,8 +2626,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "204": {
@@ -2607,8 +2658,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«List«GoodsInfo对象»»",
-                            "$ref": "#/definitions/通用响应结果«List«GoodsInfo对象»»"
+                            "$ref": "#/definitions/通用响应结果«List«GoodsInfo对象»»",
+                            "originalRef": "通用响应结果«List«GoodsInfo对象»»"
                         }
                     },
                     "401": {
@@ -2643,8 +2694,8 @@
                         "description": "reqVo",
                         "required": true,
                         "schema": {
-                            "originalRef": "GoodsInfo对象",
-                            "$ref": "#/definitions/GoodsInfo对象"
+                            "$ref": "#/definitions/GoodsInfo对象",
+                            "originalRef": "GoodsInfo对象"
                         }
                     }
                 ],
@@ -2652,8 +2703,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -2696,8 +2747,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«GoodsInfo对象»",
-                            "$ref": "#/definitions/通用响应结果«GoodsInfo对象»"
+                            "$ref": "#/definitions/通用响应结果«GoodsInfo对象»",
+                            "originalRef": "通用响应结果«GoodsInfo对象»"
                         }
                     },
                     "401": {
@@ -2739,8 +2790,8 @@
                         "description": "reqVo",
                         "required": true,
                         "schema": {
-                            "originalRef": "GoodsInfo对象",
-                            "$ref": "#/definitions/GoodsInfo对象"
+                            "$ref": "#/definitions/GoodsInfo对象",
+                            "originalRef": "GoodsInfo对象"
                         }
                     }
                 ],
@@ -2748,8 +2799,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -2790,8 +2841,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "204": {
@@ -2822,8 +2873,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«List«HarborInfo对象»»",
-                            "$ref": "#/definitions/通用响应结果«List«HarborInfo对象»»"
+                            "$ref": "#/definitions/通用响应结果«List«HarborInfo对象»»",
+                            "originalRef": "通用响应结果«List«HarborInfo对象»»"
                         }
                     },
                     "401": {
@@ -2858,8 +2909,8 @@
                         "description": "reqVo",
                         "required": true,
                         "schema": {
-                            "originalRef": "HarborInfo对象",
-                            "$ref": "#/definitions/HarborInfo对象"
+                            "$ref": "#/definitions/HarborInfo对象",
+                            "originalRef": "HarborInfo对象"
                         }
                     }
                 ],
@@ -2867,8 +2918,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -2911,8 +2962,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«List«HarborInfo对象»»",
-                            "$ref": "#/definitions/通用响应结果«List«HarborInfo对象»»"
+                            "$ref": "#/definitions/通用响应结果«List«HarborInfo对象»»",
+                            "originalRef": "通用响应结果«List«HarborInfo对象»»"
                         }
                     },
                     "401": {
@@ -2943,8 +2994,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«List«HarborInfo对象»»",
-                            "$ref": "#/definitions/通用响应结果«List«HarborInfo对象»»"
+                            "$ref": "#/definitions/通用响应结果«List«HarborInfo对象»»",
+                            "originalRef": "通用响应结果«List«HarborInfo对象»»"
                         }
                     },
                     "401": {
@@ -2984,8 +3035,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«HarborInfo对象»",
-                            "$ref": "#/definitions/通用响应结果«HarborInfo对象»"
+                            "$ref": "#/definitions/通用响应结果«HarborInfo对象»",
+                            "originalRef": "通用响应结果«HarborInfo对象»"
                         }
                     },
                     "401": {
@@ -3027,8 +3078,8 @@
                         "description": "reqVo",
                         "required": true,
                         "schema": {
-                            "originalRef": "HarborInfo对象",
-                            "$ref": "#/definitions/HarborInfo对象"
+                            "$ref": "#/definitions/HarborInfo对象",
+                            "originalRef": "HarborInfo对象"
                         }
                     }
                 ],
@@ -3036,8 +3087,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -3078,8 +3129,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "204": {
@@ -3110,8 +3161,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«List«MarketGoodsInfo对象»»",
-                            "$ref": "#/definitions/通用响应结果«List«MarketGoodsInfo对象»»"
+                            "$ref": "#/definitions/通用响应结果«List«MarketGoodsInfo对象»»",
+                            "originalRef": "通用响应结果«List«MarketGoodsInfo对象»»"
                         }
                     },
                     "401": {
@@ -3146,8 +3197,8 @@
                         "description": "reqVo",
                         "required": true,
                         "schema": {
-                            "originalRef": "MarketGoodsInfo对象",
-                            "$ref": "#/definitions/MarketGoodsInfo对象"
+                            "$ref": "#/definitions/MarketGoodsInfo对象",
+                            "originalRef": "MarketGoodsInfo对象"
                         }
                     }
                 ],
@@ -3155,8 +3206,58 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/market-goods-info/get": {
+            "post": {
+                "tags": [
+                    "市场货品接口"
+                ],
+                "summary": "根据code获取市场货品",
+                "description": "根据code获取市场货品记录",
+                "operationId": "getMarketGoodsInfoUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "reqVo",
+                        "description": "reqVo",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GetMarketReqVo",
+                            "originalRef": "GetMarketReqVo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/通用响应结果«MarketGoodsInfo对象»",
+                            "originalRef": "通用响应结果«MarketGoodsInfo对象»"
                         }
                     },
                     "201": {
@@ -3199,8 +3300,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«MarketGoodsInfo对象»",
-                            "$ref": "#/definitions/通用响应结果«MarketGoodsInfo对象»"
+                            "$ref": "#/definitions/通用响应结果«MarketGoodsInfo对象»",
+                            "originalRef": "通用响应结果«MarketGoodsInfo对象»"
                         }
                     },
                     "401": {
@@ -3244,8 +3345,8 @@
                         "description": "reqVo",
                         "required": true,
                         "schema": {
-                            "originalRef": "MarketGoodsInfo对象",
-                            "$ref": "#/definitions/MarketGoodsInfo对象"
+                            "$ref": "#/definitions/MarketGoodsInfo对象",
+                            "originalRef": "MarketGoodsInfo对象"
                         }
                     }
                 ],
@@ -3253,8 +3354,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -3295,8 +3396,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "204": {
@@ -3326,8 +3427,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "401": {
@@ -3357,8 +3458,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "401": {
@@ -3389,8 +3490,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«List«SysProfileParameter对象»»",
-                            "$ref": "#/definitions/通用响应结果«List«SysProfileParameter对象»»"
+                            "$ref": "#/definitions/通用响应结果«List«SysProfileParameter对象»»",
+                            "originalRef": "通用响应结果«List«SysProfileParameter对象»»"
                         }
                     },
                     "401": {
@@ -3425,8 +3526,8 @@
                         "description": "reqVo",
                         "required": true,
                         "schema": {
-                            "originalRef": "SysProfileParameter对象",
-                            "$ref": "#/definitions/SysProfileParameter对象"
+                            "$ref": "#/definitions/SysProfileParameter对象",
+                            "originalRef": "SysProfileParameter对象"
                         }
                     }
                 ],
@@ -3434,8 +3535,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -3481,8 +3582,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«AccountInfoDto»",
-                            "$ref": "#/definitions/通用响应结果«AccountInfoDto»"
+                            "$ref": "#/definitions/通用响应结果«AccountInfoDto»",
+                            "originalRef": "通用响应结果«AccountInfoDto»"
                         }
                     },
                     "201": {
@@ -3625,8 +3726,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«IPage«SysProfileParameter对象»»",
-                            "$ref": "#/definitions/通用响应结果«IPage«SysProfileParameter对象»»"
+                            "$ref": "#/definitions/通用响应结果«IPage«SysProfileParameter对象»»",
+                            "originalRef": "通用响应结果«IPage«SysProfileParameter对象»»"
                         }
                     },
                     "401": {
@@ -3670,8 +3771,8 @@
                         "description": "companyInfoDto",
                         "required": true,
                         "schema": {
-                            "originalRef": "CompanyInfoDto",
-                            "$ref": "#/definitions/CompanyInfoDto"
+                            "$ref": "#/definitions/CompanyInfoDto",
+                            "originalRef": "CompanyInfoDto"
                         }
                     }
                 ],
@@ -3679,8 +3780,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -3723,8 +3824,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«SysProfileParameter对象»",
-                            "$ref": "#/definitions/通用响应结果«SysProfileParameter对象»"
+                            "$ref": "#/definitions/通用响应结果«SysProfileParameter对象»",
+                            "originalRef": "通用响应结果«SysProfileParameter对象»"
                         }
                     },
                     "401": {
@@ -3766,8 +3867,8 @@
                         "description": "reqVo",
                         "required": true,
                         "schema": {
-                            "originalRef": "SysProfileParameter对象",
-                            "$ref": "#/definitions/SysProfileParameter对象"
+                            "$ref": "#/definitions/SysProfileParameter对象",
+                            "originalRef": "SysProfileParameter对象"
                         }
                     }
                 ],
@@ -3775,8 +3876,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "201": {
@@ -3817,8 +3918,8 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "originalRef": "通用响应结果«boolean»",
-                            "$ref": "#/definitions/通用响应结果«boolean»"
+                            "$ref": "#/definitions/通用响应结果«boolean»",
+                            "originalRef": "通用响应结果«boolean»"
                         }
                     },
                     "204": {
@@ -4690,36 +4791,36 @@
             "type": "object",
             "properties": {
                 "exporterToImporterFirst": {
-                    "originalRef": "EmailDto",
-                    "$ref": "#/definitions/EmailDto"
+                    "$ref": "#/definitions/EmailDto",
+                    "originalRef": "EmailDto"
                 },
                 "exporterToImporterSecond": {
-                    "originalRef": "EmailDto",
-                    "$ref": "#/definitions/EmailDto"
+                    "$ref": "#/definitions/EmailDto",
+                    "originalRef": "EmailDto"
                 },
                 "exporterToSupplierFirst": {
-                    "originalRef": "EmailDto",
-                    "$ref": "#/definitions/EmailDto"
+                    "$ref": "#/definitions/EmailDto",
+                    "originalRef": "EmailDto"
                 },
                 "exporterToSupplierSecond": {
-                    "originalRef": "EmailDto",
-                    "$ref": "#/definitions/EmailDto"
+                    "$ref": "#/definitions/EmailDto",
+                    "originalRef": "EmailDto"
                 },
                 "importerToExporterFirst": {
-                    "originalRef": "EmailDto",
-                    "$ref": "#/definitions/EmailDto"
+                    "$ref": "#/definitions/EmailDto",
+                    "originalRef": "EmailDto"
                 },
                 "importerToExporterSecond": {
-                    "originalRef": "EmailDto",
-                    "$ref": "#/definitions/EmailDto"
+                    "$ref": "#/definitions/EmailDto",
+                    "originalRef": "EmailDto"
                 },
                 "supplierToExporterFirst": {
-                    "originalRef": "EmailDto",
-                    "$ref": "#/definitions/EmailDto"
+                    "$ref": "#/definitions/EmailDto",
+                    "originalRef": "EmailDto"
                 },
                 "supplierToExporterSecond": {
-                    "originalRef": "EmailDto",
-                    "$ref": "#/definitions/EmailDto"
+                    "$ref": "#/definitions/EmailDto",
+                    "originalRef": "EmailDto"
                 }
             },
             "title": "EmailTemplateDto"
@@ -4797,6 +4898,10 @@
                 "lastUpdateUser": {
                     "type": "string",
                     "description": "最新更新人"
+                },
+                "nextHandler": {
+                    "type": "string",
+                    "description": "下一步处理器"
                 },
                 "parentStepId": {
                     "type": "string",
@@ -4889,6 +4994,39 @@
             },
             "title": "FulfillmentProcessType对象",
             "description": "FulfillmentProcessType对象"
+        },
+        "GetCrawlRateReqVo": {
+            "type": "object",
+            "properties": {
+                "account": {
+                    "type": "string"
+                },
+                "baseUrl": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            },
+            "title": "GetCrawlRateReqVo"
+        },
+        "GetMarketReqVo": {
+            "type": "object",
+            "properties": {
+                "account": {
+                    "type": "string"
+                },
+                "baseUrl": {
+                    "type": "string"
+                },
+                "code": {
+                    "type": "string"
+                },
+                "password": {
+                    "type": "string"
+                }
+            },
+            "title": "GetMarketReqVo"
         },
         "GoodsInfo对象": {
             "type": "object",
@@ -5086,8 +5224,8 @@
                 "records": {
                     "type": "array",
                     "items": {
-                        "originalRef": "ContractInfo对象",
-                        "$ref": "#/definitions/ContractInfo对象"
+                        "$ref": "#/definitions/ContractInfo对象",
+                        "originalRef": "ContractInfo对象"
                     }
                 },
                 "searchCount": {
@@ -5121,8 +5259,8 @@
                 "records": {
                     "type": "array",
                     "items": {
-                        "originalRef": "FulfillmentProcessStep对象",
-                        "$ref": "#/definitions/FulfillmentProcessStep对象"
+                        "$ref": "#/definitions/FulfillmentProcessStep对象",
+                        "originalRef": "FulfillmentProcessStep对象"
                     }
                 },
                 "searchCount": {
@@ -5156,8 +5294,8 @@
                 "records": {
                     "type": "array",
                     "items": {
-                        "originalRef": "SysProfileParameter对象",
-                        "$ref": "#/definitions/SysProfileParameter对象"
+                        "$ref": "#/definitions/SysProfileParameter对象",
+                        "originalRef": "SysProfileParameter对象"
                     }
                 },
                 "searchCount": {
@@ -5178,8 +5316,8 @@
             "type": "object",
             "title": "Map«string,List«FulfillmentProcessStep对象»»",
             "additionalProperties": {
-                "originalRef": "List",
-                "$ref": "#/definitions/List"
+                "$ref": "#/definitions/List",
+                "originalRef": "List"
             }
         },
         "MarketGoodsInfo对象": {
@@ -5336,8 +5474,8 @@
                 },
                 "data": {
                     "description": "响应数据",
-                    "originalRef": "AccountInfoDto",
-                    "$ref": "#/definitions/AccountInfoDto"
+                    "$ref": "#/definitions/AccountInfoDto",
+                    "originalRef": "AccountInfoDto"
                 },
                 "message": {
                     "type": "string",
@@ -5361,8 +5499,8 @@
                 },
                 "data": {
                     "description": "响应数据",
-                    "originalRef": "BusinessConfig对象",
-                    "$ref": "#/definitions/BusinessConfig对象"
+                    "$ref": "#/definitions/BusinessConfig对象",
+                    "originalRef": "BusinessConfig对象"
                 },
                 "message": {
                     "type": "string",
@@ -5386,8 +5524,8 @@
                 },
                 "data": {
                     "description": "响应数据",
-                    "originalRef": "ContractInfo对象",
-                    "$ref": "#/definitions/ContractInfo对象"
+                    "$ref": "#/definitions/ContractInfo对象",
+                    "originalRef": "ContractInfo对象"
                 },
                 "message": {
                     "type": "string",
@@ -5411,8 +5549,8 @@
                 },
                 "data": {
                     "description": "响应数据",
-                    "originalRef": "ContractTaskHistory对象",
-                    "$ref": "#/definitions/ContractTaskHistory对象"
+                    "$ref": "#/definitions/ContractTaskHistory对象",
+                    "originalRef": "ContractTaskHistory对象"
                 },
                 "message": {
                     "type": "string",
@@ -5436,8 +5574,8 @@
                 },
                 "data": {
                     "description": "响应数据",
-                    "originalRef": "CrawlRateRespVo",
-                    "$ref": "#/definitions/CrawlRateRespVo"
+                    "$ref": "#/definitions/CrawlRateRespVo",
+                    "originalRef": "CrawlRateRespVo"
                 },
                 "message": {
                     "type": "string",
@@ -5461,8 +5599,8 @@
                 },
                 "data": {
                     "description": "响应数据",
-                    "originalRef": "DocumentInfo对象",
-                    "$ref": "#/definitions/DocumentInfo对象"
+                    "$ref": "#/definitions/DocumentInfo对象",
+                    "originalRef": "DocumentInfo对象"
                 },
                 "message": {
                     "type": "string",
@@ -5486,8 +5624,8 @@
                 },
                 "data": {
                     "description": "响应数据",
-                    "originalRef": "EmailTemplateDto",
-                    "$ref": "#/definitions/EmailTemplateDto"
+                    "$ref": "#/definitions/EmailTemplateDto",
+                    "originalRef": "EmailTemplateDto"
                 },
                 "message": {
                     "type": "string",
@@ -5511,8 +5649,8 @@
                 },
                 "data": {
                     "description": "响应数据",
-                    "originalRef": "FulfillmentProcessStep对象",
-                    "$ref": "#/definitions/FulfillmentProcessStep对象"
+                    "$ref": "#/definitions/FulfillmentProcessStep对象",
+                    "originalRef": "FulfillmentProcessStep对象"
                 },
                 "message": {
                     "type": "string",
@@ -5536,8 +5674,8 @@
                 },
                 "data": {
                     "description": "响应数据",
-                    "originalRef": "FulfillmentProcessType对象",
-                    "$ref": "#/definitions/FulfillmentProcessType对象"
+                    "$ref": "#/definitions/FulfillmentProcessType对象",
+                    "originalRef": "FulfillmentProcessType对象"
                 },
                 "message": {
                     "type": "string",
@@ -5561,8 +5699,8 @@
                 },
                 "data": {
                     "description": "响应数据",
-                    "originalRef": "GoodsInfo对象",
-                    "$ref": "#/definitions/GoodsInfo对象"
+                    "$ref": "#/definitions/GoodsInfo对象",
+                    "originalRef": "GoodsInfo对象"
                 },
                 "message": {
                     "type": "string",
@@ -5586,8 +5724,8 @@
                 },
                 "data": {
                     "description": "响应数据",
-                    "originalRef": "HarborInfo对象",
-                    "$ref": "#/definitions/HarborInfo对象"
+                    "$ref": "#/definitions/HarborInfo对象",
+                    "originalRef": "HarborInfo对象"
                 },
                 "message": {
                     "type": "string",
@@ -5611,8 +5749,8 @@
                 },
                 "data": {
                     "description": "响应数据",
-                    "originalRef": "IPage«ContractInfo对象»",
-                    "$ref": "#/definitions/IPage«ContractInfo对象»"
+                    "$ref": "#/definitions/IPage«ContractInfo对象»",
+                    "originalRef": "IPage«ContractInfo对象»"
                 },
                 "message": {
                     "type": "string",
@@ -5636,8 +5774,8 @@
                 },
                 "data": {
                     "description": "响应数据",
-                    "originalRef": "IPage«FulfillmentProcessStep对象»",
-                    "$ref": "#/definitions/IPage«FulfillmentProcessStep对象»"
+                    "$ref": "#/definitions/IPage«FulfillmentProcessStep对象»",
+                    "originalRef": "IPage«FulfillmentProcessStep对象»"
                 },
                 "message": {
                     "type": "string",
@@ -5661,8 +5799,8 @@
                 },
                 "data": {
                     "description": "响应数据",
-                    "originalRef": "IPage«SysProfileParameter对象»",
-                    "$ref": "#/definitions/IPage«SysProfileParameter对象»"
+                    "$ref": "#/definitions/IPage«SysProfileParameter对象»",
+                    "originalRef": "IPage«SysProfileParameter对象»"
                 },
                 "message": {
                     "type": "string",
@@ -5688,8 +5826,8 @@
                     "type": "array",
                     "description": "响应数据",
                     "items": {
-                        "originalRef": "BusinessConfig对象",
-                        "$ref": "#/definitions/BusinessConfig对象"
+                        "$ref": "#/definitions/BusinessConfig对象",
+                        "originalRef": "BusinessConfig对象"
                     }
                 },
                 "message": {
@@ -5716,8 +5854,8 @@
                     "type": "array",
                     "description": "响应数据",
                     "items": {
-                        "originalRef": "ContractInfo对象",
-                        "$ref": "#/definitions/ContractInfo对象"
+                        "$ref": "#/definitions/ContractInfo对象",
+                        "originalRef": "ContractInfo对象"
                     }
                 },
                 "message": {
@@ -5744,8 +5882,8 @@
                     "type": "array",
                     "description": "响应数据",
                     "items": {
-                        "originalRef": "ContractTaskHistory对象",
-                        "$ref": "#/definitions/ContractTaskHistory对象"
+                        "$ref": "#/definitions/ContractTaskHistory对象",
+                        "originalRef": "ContractTaskHistory对象"
                     }
                 },
                 "message": {
@@ -5772,8 +5910,8 @@
                     "type": "array",
                     "description": "响应数据",
                     "items": {
-                        "originalRef": "DocumentInfo对象",
-                        "$ref": "#/definitions/DocumentInfo对象"
+                        "$ref": "#/definitions/DocumentInfo对象",
+                        "originalRef": "DocumentInfo对象"
                     }
                 },
                 "message": {
@@ -5800,8 +5938,8 @@
                     "type": "array",
                     "description": "响应数据",
                     "items": {
-                        "originalRef": "FulfillmentProcessStep对象",
-                        "$ref": "#/definitions/FulfillmentProcessStep对象"
+                        "$ref": "#/definitions/FulfillmentProcessStep对象",
+                        "originalRef": "FulfillmentProcessStep对象"
                     }
                 },
                 "message": {
@@ -5828,8 +5966,8 @@
                     "type": "array",
                     "description": "响应数据",
                     "items": {
-                        "originalRef": "FulfillmentProcessType对象",
-                        "$ref": "#/definitions/FulfillmentProcessType对象"
+                        "$ref": "#/definitions/FulfillmentProcessType对象",
+                        "originalRef": "FulfillmentProcessType对象"
                     }
                 },
                 "message": {
@@ -5856,8 +5994,8 @@
                     "type": "array",
                     "description": "响应数据",
                     "items": {
-                        "originalRef": "GoodsInfo对象",
-                        "$ref": "#/definitions/GoodsInfo对象"
+                        "$ref": "#/definitions/GoodsInfo对象",
+                        "originalRef": "GoodsInfo对象"
                     }
                 },
                 "message": {
@@ -5884,8 +6022,8 @@
                     "type": "array",
                     "description": "响应数据",
                     "items": {
-                        "originalRef": "HarborInfo对象",
-                        "$ref": "#/definitions/HarborInfo对象"
+                        "$ref": "#/definitions/HarborInfo对象",
+                        "originalRef": "HarborInfo对象"
                     }
                 },
                 "message": {
@@ -5912,8 +6050,8 @@
                     "type": "array",
                     "description": "响应数据",
                     "items": {
-                        "originalRef": "MarketGoodsInfo对象",
-                        "$ref": "#/definitions/MarketGoodsInfo对象"
+                        "$ref": "#/definitions/MarketGoodsInfo对象",
+                        "originalRef": "MarketGoodsInfo对象"
                     }
                 },
                 "message": {
@@ -5940,8 +6078,8 @@
                     "type": "array",
                     "description": "响应数据",
                     "items": {
-                        "originalRef": "SysProfileParameter对象",
-                        "$ref": "#/definitions/SysProfileParameter对象"
+                        "$ref": "#/definitions/SysProfileParameter对象",
+                        "originalRef": "SysProfileParameter对象"
                     }
                 },
                 "message": {
@@ -5970,8 +6108,8 @@
                     "additionalProperties": {
                         "type": "array",
                         "items": {
-                            "originalRef": "FulfillmentProcessStep对象",
-                            "$ref": "#/definitions/FulfillmentProcessStep对象"
+                            "$ref": "#/definitions/FulfillmentProcessStep对象",
+                            "originalRef": "FulfillmentProcessStep对象"
                         }
                     }
                 },
@@ -5997,8 +6135,8 @@
                 },
                 "data": {
                     "description": "响应数据",
-                    "originalRef": "MarketGoodsInfo对象",
-                    "$ref": "#/definitions/MarketGoodsInfo对象"
+                    "$ref": "#/definitions/MarketGoodsInfo对象",
+                    "originalRef": "MarketGoodsInfo对象"
                 },
                 "message": {
                     "type": "string",
@@ -6024,8 +6162,8 @@
                     "type": "array",
                     "description": "响应数据",
                     "items": {
-                        "originalRef": "ContractTaskHistory对象",
-                        "$ref": "#/definitions/ContractTaskHistory对象"
+                        "$ref": "#/definitions/ContractTaskHistory对象",
+                        "originalRef": "ContractTaskHistory对象"
                     }
                 },
                 "message": {
@@ -6050,8 +6188,8 @@
                 },
                 "data": {
                     "description": "响应数据",
-                    "originalRef": "SysProfileParameter对象",
-                    "$ref": "#/definitions/SysProfileParameter对象"
+                    "$ref": "#/definitions/SysProfileParameter对象",
+                    "originalRef": "SysProfileParameter对象"
                 },
                 "message": {
                     "type": "string",

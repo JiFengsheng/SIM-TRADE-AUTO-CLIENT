@@ -8,10 +8,12 @@ export interface TempTokenData {
   expirationTime: string;
 }
 
-const ADMIN_TOKEN_URL =
-  "https://mock.presstime.cn/mock/6983fed6202af9ad2f183659/sim-trade/admin-token";
-const TEMP_TOKEN_URL =
-  "https://mock.presstime.cn/mock/6983fed6202af9ad2f183659/sim-trade/temp-token";
+// const ADMIN_TOKEN_URL =
+//   "https://mock.presstime.cn/mock/6983fed6202af9ad2f183659/sim-trade/admin-token";
+const ADMIN_TOKEN_URL = "https://mock.mengxuegu.com/mock/69a0f4a742a747044f6dbb9b/sim-trade/admin-token"
+// const TEMP_TOKEN_URL =
+//   "https://mock.presstime.cn/mock/6983fed6202af9ad2f183659/sim-trade/temp-token";
+const TEMP_TOKEN_URL = "https://mock.mengxuegu.com/mock/69a0f4a742a747044f6dbb9b/sim-trade/temp-token"
 
 const tokenApi = {
   /**

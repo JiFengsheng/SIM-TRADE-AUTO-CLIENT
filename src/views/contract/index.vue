@@ -207,7 +207,13 @@
               </a-form-item>
             </a-col>
             <a-col :xs="24" :md="12">
-              <a-form-item :label="$t('contract.goodsNo')" name="goodsNo">
+              <a-form-item name="goodsNo">
+                <template #label>
+                  <span>{{ $t('contract.goodsNo') }}</span>
+                  <a-button type="link" size="small" class="ml-1" :loading="goodsDetailLoading" @click="handleGetGoodsDetail">
+                    {{ $t('contract.getGoodsDetailBtn') }}
+                  </a-button>
+                </template>
                 <a-input v-model:value="form.goodsNo" :placeholder="$t('contract.placeholderGoodsNo')" size="large" />
               </a-form-item>
             </a-col>
@@ -223,6 +229,9 @@
                 <a-input-number v-model:value="form.marketPrice" :min="0" :precision="2" class="w-full"
                   :placeholder="$t('contract.placeholderMarketPrice')" size="large" />
               </a-form-item>
+              <div v-if="marketGoodsDetail?.importPrice != null" class="rmb-tip">
+                {{ $t('contract.goodsImportPriceTip', { value: formatGoodsPrice(marketGoodsDetail.importPrice, marketGoodsDetail.importPriceUnit) }) }}
+              </div>
             </a-col>
 
             <a-col :xs="24" :md="12">
@@ -230,6 +239,7 @@
                 <a-input-number v-model:value="form.exportPrice" :min="0" :precision="2" class="w-full"
                   :placeholder="$t('contract.placeholderExportPrice')" size="large" />
               </a-form-item>
+              <div class="rmb-tip">{{ $t('contract.rmbConversion', { rmb: exportPriceRmb }) }}</div>
             </a-col>
             <a-col :xs="24" :md="12">
               <a-form-item name="exportPriceUnit">
@@ -259,8 +269,26 @@
                   <span>{{ $t('contract.exchangeRate') }}</span>
                   <span><a-button type="link" size="small" @click="handleGetCrawlRate">{{ $t('contract.getBtn') }}</a-button></span>
                 </template>
-                <a-input-number v-model:value="form.exchangeRate" :min="0" :precision="4" class="w-full"
-                  :placeholder="$t('contract.placeholderExchangeRate')" size="large" />
+                <a-input-number
+                  v-model:value="form.exchangeRate"
+                  :min="0"
+                  :precision="4"
+                  class="w-full"
+                  :placeholder="$t('contract.placeholderExchangeRate')"
+                  size="large"
+                />
+              </a-form-item>
+            </a-col>
+            <a-col :xs="24" :md="12">
+              <a-form-item :label="$t('contract.premiumRate')" name="premiumRate">
+                <a-input-number
+                  v-model:value="form.premiumRate"
+                  :min="0"
+                  :precision="4"
+                  class="w-full"
+                  :placeholder="$t('contract.placeholderPremiumRate')"
+                  size="large"
+                />
               </a-form-item>
             </a-col>
             <a-col :xs="24" :md="12">
@@ -274,6 +302,9 @@
                 <a-input-number v-model:value="form.supplierPrice" :min="0" :precision="2" class="w-full"
                   :placeholder="$t('contract.placeholderSupplierPrice')" size="large" />
               </a-form-item>
+              <div v-if="marketGoodsDetail?.cost != null" class="rmb-tip">
+                {{ $t('contract.goodsCostTip', { value: formatGoodsPrice(marketGoodsDetail.cost, marketGoodsDetail.costUnit) }) }}
+              </div>
             </a-col>
 
             <a-col :xs="24" :md="12">
@@ -298,6 +329,55 @@
           </a-row>
         </a-card>
 
+        <!-- 商品详情弹窗 -->
+        <a-modal
+          v-model:open="goodsDetailModalVisible"
+          :title="$t('contract.goodsDetailModalTitle')"
+          width="560px"
+          :destroy-on-close="true"
+          @cancel="handleCloseGoodsDetailModal"
+        >
+          <a-spin :spinning="goodsDetailLoading">
+            <div v-if="goodsDetailForModal" class="goods-detail-content">
+              <div class="goods-detail-row">
+                <span class="goods-detail-label">{{ $t('contract.goodsDetailGoodsCode') }}</span>
+                <span class="goods-detail-value">{{ goodsDetailForModal.goodsCode || '--' }}</span>
+              </div>
+              <div class="goods-detail-row">
+                <span class="goods-detail-label">{{ $t('contract.goodsDetailGoodsName') }}</span>
+                <span class="goods-detail-value">{{ goodsDetailForModal.goodsName || '--' }}</span>
+              </div>
+              <div class="goods-detail-row">
+                <span class="goods-detail-label">{{ $t('contract.goodsDetailGoodsNameEng') }}</span>
+                <span class="goods-detail-value">{{ goodsDetailForModal.goodsNameEng || '--' }}</span>
+              </div>
+              <div class="goods-detail-row">
+                <span class="goods-detail-label">{{ $t('contract.goodsDetailGoodsDesc') }}</span>
+                <span class="goods-detail-value goods-detail-desc">{{ goodsDetailForModal.goodsDesc || '--' }}</span>
+              </div>
+              <div class="goods-detail-row">
+                <span class="goods-detail-label">{{ $t('contract.goodsDetailGoodsDescEng') }}</span>
+                <span class="goods-detail-value goods-detail-desc">{{ goodsDetailForModal.goodsDescEng || '--' }}</span>
+              </div>
+              <div class="goods-detail-row">
+                <span class="goods-detail-label">{{ $t('contract.goodsDetailGoodsUnit') }}</span>
+                <span class="goods-detail-value">{{ goodsDetailForModal.goodsUnit || '--' }}</span>
+              </div>
+              <div class="goods-detail-row">
+                <span class="goods-detail-label">{{ $t('contract.goodsDetailCost') }}</span>
+                <span class="goods-detail-value">{{ formatGoodsPrice(goodsDetailForModal.cost, goodsDetailForModal.costUnit) }}</span>
+              </div>
+              <div class="goods-detail-row">
+                <span class="goods-detail-label">{{ $t('contract.goodsDetailImportPrice') }}</span>
+                <span class="goods-detail-value">{{ formatGoodsPrice(goodsDetailForModal.importPrice, goodsDetailForModal.importPriceUnit) }}</span>
+              </div>
+            </div>
+          </a-spin>
+          <template #footer>
+            <a-button type="primary" @click="handleCloseGoodsDetailModal">{{ $t('contract.goodsDetailClose') }}</a-button>
+          </template>
+        </a-modal>
+
         <!-- 操作按钮 -->
         <div class="flex items-center justify-end gap-3">
           <a-button size="large" @click="goToDesk">
@@ -317,16 +397,27 @@ import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { message } from 'ant-design-vue';
-import type { BusinessConfig } from '../../apis/types';
+import type { BusinessConfig, MarketGoodsInfo } from '../../apis/types';
 import businessConfigApi from '../../apis/businessConfig';
+import marketGoodsApi from '../../apis/marketGoods';
 import { useGetCurrentInfo,useGetCrawlRate } from './hook';
 import { useListHarbors, useListInPort } from './hook';
 
 const { t } = useI18n();
 const { getCurrentInfo, loading: loadingCurrentInfo, currentInfo: currentInfoCurrentInfo  } = useGetCurrentInfo();
 const { crawlRate, loading: loadingCrawlRate, getCrawlRate } = useGetCrawlRate();
+const exportPriceRmb = computed(() => {
+  const exportPrice = Number(form.value.exportPrice);
+  const exchangeRate = Number(form.value.exchangeRate);
+  if (!Number.isFinite(exportPrice) || !Number.isFinite(exchangeRate)) return '--';
+  return (exportPrice * exchangeRate).toFixed(2);
+});
 const handleGetCrawlRate = async () => {
-  await getCrawlRate(form.value.importAccount,form.value.importPassword);
+  await getCrawlRate({
+    baseUrl: form.value.baseUrl,
+    account: form.value.importAccount,
+    password: form.value.importPassword
+  });
   form.value.usdRate = crawlRate.value.usdRate || form.value.usdRate;
   form.value.exportPriceUnit = crawlRate.value.exportPriceUnit || form.value.exportPriceUnit;
   form.value.exchangeRate = crawlRate.value.exchangeRate || form.value.exchangeRate;
@@ -360,7 +451,66 @@ const handleExportPortEngChange = (event: any) => {
 }
 const form = ref<BusinessConfig>({
   exportPriceUnit: 'USD',
+  premiumRate: 0.0088,
 });
+
+// 商品详情弹窗：弹窗内展示的数据 / 关闭后用于下方蓝色提示的数据
+const goodsDetailModalVisible = ref(false);
+const goodsDetailLoading = ref(false);
+const goodsDetailForModal = ref<MarketGoodsInfo | null>(null);
+const marketGoodsDetail = ref<MarketGoodsInfo | null>(null);
+
+const unwrapGoodsData = (res: unknown): MarketGoodsInfo | null => {
+  if (res && typeof res === 'object' && 'data' in (res as Record<string, unknown>)) {
+    return (res as { data: MarketGoodsInfo }).data ?? null;
+  }
+  return res as MarketGoodsInfo | null;
+};
+
+function formatGoodsPrice(amount: number | undefined, unit?: string): string {
+  if (amount == null || !Number.isFinite(amount)) return '--';
+  const u = (unit || '').trim();
+  return u ? `${amount} ${u}` : String(amount);
+}
+
+const handleGetGoodsDetail = async () => {
+  const code = form.value.goodsNo?.trim();
+  if (!code) {
+    message.warning(t('contract.msgGoodsNoRequired'));
+    return;
+  }
+  goodsDetailModalVisible.value = true;
+  goodsDetailForModal.value = null;
+  goodsDetailLoading.value = true;
+  try {
+    const res = await marketGoodsApi.getByCodePost({
+      baseUrl: form.value.baseUrl,
+      account: form.value.importAccount,
+      password: form.value.importPassword,
+      code,
+    });
+    const data = unwrapGoodsData(res);
+    goodsDetailForModal.value = data;
+    if (data) {
+      message.success(t('contract.msgGoodsDetailSuccess'));
+    } else {
+      message.warning(t('contract.msgGoodsDetailFail'));
+    }
+  } catch (err) {
+    console.error('获取商品详情失败', err);
+    message.error(t('contract.msgGoodsDetailFail'));
+  } finally {
+    goodsDetailLoading.value = false;
+  }
+};
+
+const handleCloseGoodsDetailModal = () => {
+  if (goodsDetailForModal.value) {
+    marketGoodsDetail.value = { ...goodsDetailForModal.value };
+  }
+  goodsDetailModalVisible.value = false;
+  goodsDetailForModal.value = null;
+};
 
 const rules = computed(() => ({
   exportAccount: [{ required: true, message: t('contract.placeholderExportAccount'), trigger: 'blur' }],
@@ -391,6 +541,7 @@ const loadConfig = async () => {
     if (res) {
       form.value = {
         exportPriceUnit: 'USD',
+        premiumRate: 0.0088,
         ...res,
       };
     }
@@ -474,5 +625,48 @@ onMounted(async () => {
 ::deep(.ant-form-item-label > label) {
   font-weight: 500;
   color: var(--app-color-text);
+}
+
+.rmb-tip {
+  margin-top: -18px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  line-height: 1.4;
+  color: #1677ff;
+}
+
+.ml-1 {
+  margin-left: 4px;
+}
+
+.goods-detail-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 8px 0;
+}
+
+.goods-detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 13px;
+}
+
+.goods-detail-label {
+  flex-shrink: 0;
+  width: 120px;
+  color: var(--app-color-text-secondary);
+}
+
+.goods-detail-value {
+  flex: 1;
+  color: var(--app-color-text);
+  word-break: break-word;
+}
+
+.goods-detail-desc {
+  line-height: 1.5;
+  white-space: pre-wrap;
 }
 </style>
