@@ -1,6 +1,8 @@
 import { ref } from "vue";
 import processStepApi from "../../apis/processStep";
 import type { FulfillmentProcessStep, FulfillmentProcessStepListReqVo, IPage } from "../../apis/types";
+import { message } from "ant-design-vue";
+import { useI18n } from "vue-i18n";
 
 /**
  * 获取流程步骤列表（分页）
@@ -138,3 +140,32 @@ export const useUpdateProcessStep = (options?: { onSuccess?: () => void }) => {
     updateStep,
   };
 };
+
+
+export const useDelayProcessStep = () => {
+  const { t } = useI18n();
+
+  const loading = ref(false);
+  const delayProcessStep = async (data: FulfillmentProcessStep) => {
+    if (loading.value) return;
+    loading.value = true;
+    try {
+      console.log("data", data);
+      const res = await processStepApi.batchUpdate(data);
+      console.log("res", res);
+      message.success(t("process.msgDelaySuccess"));
+      return true;
+    }catch(error) {
+      console.error("延迟流程步骤失败", error);
+      message.error(t("process.msgDelayFail"));
+      throw error;
+    } finally {
+      loading.value = false;
+    }
+  };
+  return {
+    loading,
+    delayProcessStep,
+  };
+  
+}

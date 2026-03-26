@@ -1,5 +1,5 @@
 import request from "../utils/request";
-import type { EmailDto, EmailTemplateDto, EmailSendType } from "./types";
+import type { EmailDto, EmailTemplateDto, EmailSendType,ReadEmailReqVo } from "./types";
 
 const emailApi = {
   /**
@@ -43,6 +43,19 @@ const emailApi = {
   getEmail(data: EmailDto) {
     return request.post<string>("/sim-trade/email/getEmail", data);
   },
+  /**
+   * 读取邮件
+   * 对应文档：POST /email/readEmails
+   * @param data 
+   * @returns 邮件信息
+   */
+  readEmails(data: ReadEmailReqVo) {
+    return request.post<boolean>("/sim-trade/email/readEmails", data, {
+      timeout: 120000, // 120秒超时
+    });
+  },
+
+
 };
 
 export default emailApi;

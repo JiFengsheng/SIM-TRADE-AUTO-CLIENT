@@ -72,7 +72,7 @@ const sysProfileParameterApi = {
       `/sim-trade/sys-profile-parameter/updateCompany/${companyCode}`,
       data,
       {
-        timeout: 30000, // 30秒超时
+        timeout: 60000, // 30秒超时
       }
     );
   },

@@ -325,7 +325,47 @@
                   :placeholder="$t('contract.placeholderUsdRate')" size="large" />
               </a-form-item>
             </a-col>
+            <a-col :xs="24" :md="12">
+              <a-form-item :label="$t('contract.fillDate')" name="fillDate">
+                <a-input v-model:value="form.fillDate" class="w-full"
+                  :placeholder="$t('contract.placeholderFillDate')" size="large" />
+              </a-form-item>
+            </a-col>
+          </a-row>
+        </a-card>
 
+        <!-- 其他设置 -->
+        <a-card class="desk-card mb-6" :bordered="false">
+          <template #title>
+            <div class="section-header">
+              <span class="section-title">{{ $t('contract.otherSection') }}</span>
+              <span class="section-subtitle">{{ $t('contract.otherSectionDesc') }}</span>
+            </div>
+          </template>
+
+          <a-row :gutter="16">
+            <a-col :xs="24" :md="24">
+              <a-form-item :label="$t('contract.shipment')" name="shipment">
+                <a-textarea
+                  v-model:value="form.shipment"
+                  :placeholder="$t('contract.placeholderShipment')"
+                  :rows="4"
+                  size="large"
+                  allow-clear
+                />
+              </a-form-item>
+            </a-col>
+            <a-col :xs="24" :md="24">
+              <a-form-item :label="$t('contract.shippingMark')" name="shippingMark">
+                <a-textarea
+                  v-model:value="form.shippingMark"
+                  :placeholder="$t('contract.placeholderShippingMark')"
+                  :rows="4"
+                  size="large"
+                  allow-clear
+                />
+              </a-form-item>
+            </a-col>
           </a-row>
         </a-card>
 
@@ -371,6 +411,22 @@
                 <span class="goods-detail-label">{{ $t('contract.goodsDetailImportPrice') }}</span>
                 <span class="goods-detail-value">{{ formatGoodsPrice(goodsDetailForModal.importPrice, goodsDetailForModal.importPriceUnit) }}</span>
               </div>
+              <div class="goods-detail-row">
+                <span class="goods-detail-label">{{ $t('contract.goodsDetailHsCode') }}</span>
+                <span class="goods-detail-value">{{ goodsDetailForModal.hsCode || '--' }}</span>
+              </div>
+              <div class="goods-detail-row">
+                <span class="goods-detail-label">{{ $t('contract.goodsDetailPreferentialImportDuty') }}</span>
+                <span class="goods-detail-value">{{ formatGoodsPrice(goodsDetailForModal.preferentialImportDuty,"%") }}</span>
+              </div>
+              <div class="goods-detail-row">
+                <span class="goods-detail-label">{{ $t('contract.goodsDetailVat') }}</span>
+                <span class="goods-detail-value">{{ formatGoodsPrice(goodsDetailForModal.vat,"%") }}</span>
+              </div>
+              <div class="goods-detail-row">
+                <span class="goods-detail-label">{{ $t('contract.goodsDetailTaxRefund') }}</span>
+                <span class="goods-detail-value">{{ formatGoodsPrice(goodsDetailForModal.taxRefund,"%") }}</span>
+              </div>
             </div>
           </a-spin>
           <template #footer>
@@ -397,7 +453,7 @@ import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { message } from 'ant-design-vue';
-import type { BusinessConfig, MarketGoodsInfo } from '../../apis/types';
+import type { BusinessConfig, GetMarketGoodsInfoRespVo, MarketGoodsInfo } from '../../apis/types';
 import businessConfigApi from '../../apis/businessConfig';
 import marketGoodsApi from '../../apis/marketGoods';
 import { useGetCurrentInfo,useGetCrawlRate } from './hook';
@@ -413,17 +469,24 @@ const exportPriceRmb = computed(() => {
   return (exportPrice * exchangeRate).toFixed(2);
 });
 const handleGetCrawlRate = async () => {
-  await getCrawlRate({
-    baseUrl: form.value.baseUrl,
-    account: form.value.importAccount,
-    password: form.value.importPassword
-  });
-  form.value.usdRate = crawlRate.value.usdRate || form.value.usdRate;
-  form.value.exportPriceUnit = crawlRate.value.exportPriceUnit || form.value.exportPriceUnit;
-  form.value.exchangeRate = crawlRate.value.exchangeRate || form.value.exchangeRate;
-  form.value.importCityEng = crawlRate.value.countryEnglish || form.value.importCityEng
-  form.value.importCity = crawlRate.value.countryChinese || form.value.importCity
-  await fetchHarbors(crawlRate.value.countryEnglish);
+  const hideLoading = message.loading(t('contract.msgFetchingRateAndCountry'), 0);
+  try {
+    await getCrawlRate({
+      baseUrl: form.value.baseUrl,
+      account: form.value.importAccount,
+      password: form.value.importPassword,
+    });
+    form.value.usdRate = crawlRate.value.usdRate ?? form.value.usdRate;
+    form.value.exportPriceUnit = crawlRate.value.exportPriceUnit ?? form.value.exportPriceUnit;
+    form.value.exchangeRate = crawlRate.value.exchangeRate ?? form.value.exchangeRate;
+    form.value.importCityEng = crawlRate.value.countryEnglish ?? form.value.importCityEng;
+    form.value.importCity = crawlRate.value.countryChinese ?? form.value.importCity;
+    await fetchHarbors(crawlRate.value.countryEnglish);
+  } catch {
+    // 错误提示由 hook 内 getCrawlRate 的 message.error 统一处理
+  } finally {
+    hideLoading();
+  }
 }
 
 const { loading: harborsLoading, harbors, engToChn, chnToEng, fetchHarbors } = useListHarbors();
@@ -457,14 +520,14 @@ const form = ref<BusinessConfig>({
 // 商品详情弹窗：弹窗内展示的数据 / 关闭后用于下方蓝色提示的数据
 const goodsDetailModalVisible = ref(false);
 const goodsDetailLoading = ref(false);
-const goodsDetailForModal = ref<MarketGoodsInfo | null>(null);
-const marketGoodsDetail = ref<MarketGoodsInfo | null>(null);
+const goodsDetailForModal = ref<GetMarketGoodsInfoRespVo | null>(null);
+const marketGoodsDetail = ref<GetMarketGoodsInfoRespVo | null>(null);
 
-const unwrapGoodsData = (res: unknown): MarketGoodsInfo | null => {
+const unwrapGoodsData = (res: unknown): GetMarketGoodsInfoRespVo | null => {
   if (res && typeof res === 'object' && 'data' in (res as Record<string, unknown>)) {
-    return (res as { data: MarketGoodsInfo }).data ?? null;
+    return (res as { data: GetMarketGoodsInfoRespVo }).data ?? null;
   }
-  return res as MarketGoodsInfo | null;
+  return res as GetMarketGoodsInfoRespVo | null;
 };
 
 function formatGoodsPrice(amount: number | undefined, unit?: string): string {
@@ -482,6 +545,7 @@ const handleGetGoodsDetail = async () => {
   goodsDetailModalVisible.value = true;
   goodsDetailForModal.value = null;
   goodsDetailLoading.value = true;
+  const hideLoading = message.loading(t('contract.msgFetchingGoodsDetail'), 0);
   try {
     const res = await marketGoodsApi.getByCodePost({
       baseUrl: form.value.baseUrl,
@@ -500,6 +564,7 @@ const handleGetGoodsDetail = async () => {
     console.error('获取商品详情失败', err);
     message.error(t('contract.msgGoodsDetailFail'));
   } finally {
+    hideLoading();
     goodsDetailLoading.value = false;
   }
 };

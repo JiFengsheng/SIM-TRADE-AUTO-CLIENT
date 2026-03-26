@@ -725,7 +725,8 @@ const en = {
     backgroundConfig: "Backend Settings",
     auth: "Authentication",
     email: "Email",
-    advertisement: "Advertisement"
+    advertisement: "Advertisement",
+    loan: "Loan"
   },
   common: {
     settings: "Settings",
@@ -895,6 +896,8 @@ const en = {
     placeholderPayment: "Select payment",
     placeholderSearch: "Enter search keyword",
     btnSearch: "Search",
+    btnImport: "Import",
+    btnExport: "Export",
     showTotal: "{total} record(s) in total",
     columnStepDesc: "Step name",
     columnStepCode: "Step code",
@@ -905,6 +908,8 @@ const en = {
     skipNo: "No skip",
     columnAction: "Actions",
     btnEdit: "Edit",
+    btnMoveUp: "Move up",
+    btnMoveDown: "Move down",
     roleExporter: "Exporter",
     roleImporter: "Importer",
     roleSupplier: "Supplier",
@@ -927,7 +932,26 @@ const en = {
     msgSaveSuccess: "Saved successfully",
     msgGetStepFail: "Failed to load step details",
     msgStepIdMissing: "Step ID is missing",
-    msgSaveFail: "Save failed, please try again later"
+    msgSaveFail: "Save failed, please try again later",
+    modalImportTitle: "Import process steps",
+    modalOk: "Import",
+    modalCancel: "Cancel",
+    selectFile: "Select file",
+    importHint: "Select a file to import process steps (export template recommended).",
+    msgSelectFile: "Please select a file to import first",
+    msgImportSuccess: "Process steps imported successfully",
+    msgImportFail: "Failed to import process steps, please try again later",
+    msgExportSuccess: "Process steps exported successfully: {filename}",
+    msgExportFail: "Failed to export process steps, please try again later",
+    msgMoveSuccess: "Operation succeeded",
+    msgMoveFail: "Operation failed, please try again later",
+    delay: "Delay",
+    msgDelaySuccess: "Delay successful",
+    msgDelayFail: "Delay failed, please try again later",
+    modalDelayTitle: "Delay process step",
+    labelDelaySeconds: "Delay time (seconds)",
+    delayModalOk: "OK",
+    delayModalCancel: "Cancel"
   },
   email: {
     pageTitle: "Email Management",
@@ -987,7 +1011,17 @@ const en = {
     msgFillAccountPassword: "Please enter sender account and password",
     msgSelectSenderRole: "Please select sender role",
     msgFillReceiver: "Please enter recipient email",
-    msgFillContent: "Please enter email content"
+    msgFillContent: "Please enter email content",
+    msgReadEmailsSuccess: "Read emails successfully",
+    msgReadEmailsFail: "Failed to read emails",
+    msgReadEmailsFailRetry: "Failed to read emails, please try again later",
+    btnReadEmailsExporter: "Read all exporter emails",
+    btnReadEmailsImporter: "Read all importer emails",
+    btnReadEmailsSupplier: "Read all supplier emails",
+    btnReadEmailsIssuingBank: "Read all issuing bank emails",
+    btnReadEmailsNegotiatingBank: "Read all negotiating bank emails",
+    readingEmails: "Reading emails...",
+    loadEmailTemplate: "loading..."
   },
   advertisement: {
     pageTitle: "Advertisement",
@@ -1048,6 +1082,35 @@ const en = {
     msgPublishInfoSuccess: "Info published successfully",
     msgPublishInfoFail: "Failed to publish info",
     msgPublishInfoFailRetry: "Failed to publish info, please try again later"
+  },
+  loan: {
+    pageTitle: "Loan Management",
+    sectionTitle: "One-click Loan Application",
+    sectionSubtitle: "Submit a loan application to a bank as Exporter, Importer, or Supplier.",
+    labelBankCode: "Bank Code",
+    placeholderBankCode: "Enter bank code",
+    labelMoney: "Amount",
+    placeholderMoney: "Enter amount",
+    labelMoneyType: "Currency",
+    placeholderMoneyType: "Select currency",
+    labelMessage: "Loan Notes",
+    placeholderMessage: "Enter loan notes (optional)",
+    labelRole: "Role",
+    placeholderRole: "Select role",
+    btnApply: "Apply for Loan",
+    btnReset: "Reset",
+    roleExporter: "Exporter",
+    roleImporter: "Importer",
+    roleSupplier: "Supplier",
+    msgApplying: "Requesting...",
+    msgFillBankCode: "Please enter bank code",
+    msgFillMoney: "Please enter amount",
+    msgMoneyMustBePositive: "Amount must be greater than 0",
+    msgSelectMoneyType: "Please select currency",
+    msgSelectRole: "Please select role",
+    msgApplySuccess: "Loan application submitted",
+    msgApplyFail: "Loan application failed",
+    msgApplyFailRetry: "Loan application failed, please try again later"
   },
   history: {
     pageTitle: "History contracts",
@@ -1151,6 +1214,8 @@ const en = {
     saveSettings: "Save settings",
     msgSaveSuccess: "Settings saved successfully",
     msgSaveFail: "Failed to save, please try again later",
+    msgFetchingGoodsDetail: "Fetching goods detail…",
+    msgFetchingRateAndCountry: "Fetching exchange rate and import country…",
     msgCrawlSuccess: "Data fetched successfully",
     msgCrawlFail: "Failed to fetch data",
     rmbConversion: "RMB conversion: {rmb} RMB",
@@ -1169,7 +1234,23 @@ const en = {
     goodsCostTip: "Product cost: {value}",
     msgGoodsDetailFail: "Failed to get goods detail",
     msgGoodsDetailSuccess: "Goods detail loaded",
-    msgGoodsNoRequired: "Please enter goods No. first"
+    msgGoodsNoRequired: "Please enter goods No. first",
+    otherSection: "Other Settings",
+    otherSectionDesc: "Configure shipment and shipping mark",
+    shipment: "Shipment",
+    shippingMark: "Shipping Mark",
+    placeholderShipment: "Enter Shipment content",
+    placeholderShippingMark: "Enter Shipping Mark content",
+    fillDate: "Draft date",
+    placeholderFillDate: "Enter draft date",
+    goodsDetailPreferentialImportDuty: "Preferential import duty",
+    goodsDetailVat: "VAT",
+    goodsDetailTaxRefund: "Tax refund",
+    goodsDetailConsumptionTaxAdValorem: "Consumption tax ad valorem",
+    goodsDetailExportDuty: "Export duty",
+    goodsDetailGeneralImportDuty: "General import duty",
+    goodsDetailSpecificConsumptionTax: "Specific consumption tax",
+    goodsDetailHsCode: "HS code"
   },
   desk: {
     currentContract: "Current contract: ",
@@ -1219,11 +1300,42 @@ const en = {
     statusTodo: "Pending",
     msgExecuteSuccess: "Success",
     msgStepFailed: "Step execution failed",
+    executeTo: "to:",
+    executeFrom: "from:",
+    executeFromPlaceholder: "Select a step",
+    executeToPlaceholder: "Select a step",
+    selectAll: "Select all",
+    batchExecute: "Batch execute",
+    detail: "Details",
+    cancel: "Cancel",
+    execState: "Execution status",
+    execResult: "Result/Reason",
+    batchDetailTitle: "Batch execution details",
+    batchDetailHint: "{total} step(s) in total. They will be executed in ascending order of the sort field.",
+    execStateIdle: "Not started",
+    execStateQueued: "Queued",
+    execStateRunning: "Running",
+    execStateSuccess: "Success",
+    execStateFailed: "Failed",
+    execStateSkipped: "Skipped",
+    msgContractCodeEmpty: "Contract code is empty. Unable to execute.",
+    msgSelectStepsToExecute: "Please select the steps to execute.",
+    execResultSuccess: "Executed successfully",
+    execResultFailed: "Execution failed",
+    msgStepExecSuccess: 'Step "{name}" executed successfully',
+    msgStepExecFailed: 'Step "{name}" execution failed',
+    msgBatchDone: "Batch execution finished",
+    batchConfirmTitle: "Confirm batch execution?",
+    batchConfirmContent: "Execute {total} step(s) sequentially. Continue?",
     roleExporter: "Exporter",
     roleImporter: "Importer",
     roleSupplier: "Supplier",
     roleImportBank: "Import bank",
-    roleExportBank: "Export bank"
+    roleExportBank: "Export bank",
+    notifyDoneTitle: "Contract execution completed",
+    notifyStoppedTitle: "Contract execution stopped",
+    notifyBody: "Contract execution status has been updated.",
+    notifyBodyWithCode: "Contract {code} execution status has been updated."
   },
   home: {
     subtitle: "Sim Trade Platform Automation Tool",
@@ -1322,7 +1434,8 @@ const zh = {
     backgroundConfig: "后台配置",
     auth: "身份认证",
     email: "邮箱管理",
-    advertisement: "广告管理"
+    advertisement: "广告管理",
+    loan: "贷款管理"
   },
   common: {
     settings: "应用设置",
@@ -1492,6 +1605,8 @@ const zh = {
     placeholderPayment: "请选择结算方式",
     placeholderSearch: "请输入搜索关键词",
     btnSearch: "搜索",
+    btnImport: "导入",
+    btnExport: "导出",
     showTotal: "共 {total} 条记录",
     columnStepDesc: "步骤名称",
     columnStepCode: "步骤编码",
@@ -1502,6 +1617,8 @@ const zh = {
     skipNo: "不跳过",
     columnAction: "操作",
     btnEdit: "修改",
+    btnMoveUp: "上移",
+    btnMoveDown: "下移",
     roleExporter: "出口商",
     roleImporter: "进口商",
     roleSupplier: "供应商",
@@ -1524,7 +1641,26 @@ const zh = {
     msgSaveSuccess: "保存成功",
     msgGetStepFail: "获取步骤详情失败",
     msgStepIdMissing: "步骤ID不存在",
-    msgSaveFail: "保存失败，请稍后重试"
+    msgSaveFail: "保存失败，请稍后重试",
+    modalImportTitle: "导入流程步骤",
+    modalOk: "开始导入",
+    modalCancel: "取消",
+    selectFile: "选择文件",
+    importHint: "请选择要导入的流程步骤文件（建议使用导出模板）。",
+    msgSelectFile: "请先选择要导入的文件",
+    msgImportSuccess: "流程步骤导入成功",
+    msgImportFail: "流程步骤导入失败，请稍后重试",
+    msgExportSuccess: "流程步骤导出成功：{filename}",
+    msgExportFail: "流程步骤导出失败，请稍后重试",
+    msgMoveSuccess: "操作成功",
+    msgMoveFail: "操作失败，请稍后重试",
+    delay: "延迟",
+    msgDelaySuccess: "延迟成功",
+    msgDelayFail: "延迟失败，请稍后重试",
+    modalDelayTitle: "延迟流程步骤",
+    labelDelaySeconds: "延迟时间（秒）",
+    delayModalOk: "确定",
+    delayModalCancel: "取消"
   },
   email: {
     pageTitle: "邮箱管理",
@@ -1584,7 +1720,17 @@ const zh = {
     msgFillAccountPassword: "请填写发件人账号和密码",
     msgSelectSenderRole: "请选择发件人角色",
     msgFillReceiver: "请填写收件人邮箱",
-    msgFillContent: "请填写邮件内容"
+    msgFillContent: "请填写邮件内容",
+    msgReadEmailsSuccess: "读取邮件成功",
+    msgReadEmailsFail: "读取邮件失败",
+    msgReadEmailsFailRetry: "读取邮件失败，请稍后重试",
+    btnReadEmailsExporter: "一键已读出口商",
+    btnReadEmailsImporter: "一键已读进口商",
+    btnReadEmailsSupplier: "一键已读供应商",
+    btnReadEmailsIssuingBank: "一键已读进口地银行",
+    btnReadEmailsNegotiatingBank: "一键已读出口地银行",
+    readingEmails: "读取邮件中...",
+    loadEmailTemplate: "加载中..."
   },
   advertisement: {
     pageTitle: "广告管理",
@@ -1645,6 +1791,35 @@ const zh = {
     msgPublishInfoSuccess: "发布信息成功",
     msgPublishInfoFail: "发布信息失败",
     msgPublishInfoFailRetry: "发布信息失败，请稍后重试"
+  },
+  loan: {
+    pageTitle: "贷款管理",
+    sectionTitle: "一键贷款申请",
+    sectionSubtitle: "以出口商、进口商或供应商角色向指定银行提交贷款申请。",
+    labelBankCode: "银行编号",
+    placeholderBankCode: "请输入银行编号",
+    labelMoney: "金额",
+    placeholderMoney: "请输入金额",
+    labelMoneyType: "币种",
+    placeholderMoneyType: "请选择币种",
+    labelMessage: "贷款说明",
+    placeholderMessage: "请输入贷款说明（可选）",
+    labelRole: "角色",
+    placeholderRole: "请选择角色",
+    btnApply: "申请贷款",
+    btnReset: "重置",
+    roleExporter: "出口商",
+    roleImporter: "进口商",
+    roleSupplier: "供应商",
+    msgApplying: "请求中...",
+    msgFillBankCode: "请填写银行编号",
+    msgFillMoney: "请填写金额",
+    msgMoneyMustBePositive: "金额必须大于 0",
+    msgSelectMoneyType: "请选择币种",
+    msgSelectRole: "请选择角色",
+    msgApplySuccess: "申请贷款成功",
+    msgApplyFail: "申请贷款失败",
+    msgApplyFailRetry: "申请贷款失败，请稍后重试"
   },
   history: {
     pageTitle: "历史合同",
@@ -1748,6 +1923,8 @@ const zh = {
     saveSettings: "保存设置",
     msgSaveSuccess: "配置保存成功",
     msgSaveFail: "配置保存失败，请稍后重试",
+    msgFetchingGoodsDetail: "正在获取商品详情…",
+    msgFetchingRateAndCountry: "正在获取汇率及进口地国家信息…",
     msgCrawlSuccess: "获取信息成功",
     msgCrawlFail: "获取信息失败",
     rmbConversion: "人名币换算：{rmb} RMB",
@@ -1766,7 +1943,23 @@ const zh = {
     goodsCostTip: "商品生产价格：{value}",
     msgGoodsDetailFail: "获取商品详情失败",
     msgGoodsDetailSuccess: "获取商品详情成功",
-    msgGoodsNoRequired: "请先输入商品编号"
+    msgGoodsNoRequired: "请先输入商品编号",
+    otherSection: "其他设置",
+    otherSectionDesc: "配置运输方式与唛头等附加信息",
+    shipment: "运输方式",
+    shippingMark: "唛头",
+    placeholderShipment: "请输入运输方式",
+    placeholderShippingMark: "请输入唛头",
+    fillDate: "起草日期",
+    placeholderFillDate: "请输入起草日期",
+    goodsDetailPreferentialImportDuty: "优惠进口税",
+    goodsDetailVat: "增值税",
+    goodsDetailTaxRefund: "退税",
+    goodsDetailConsumptionTaxAdValorem: "消费税从价",
+    goodsDetailExportDuty: "出口税",
+    goodsDetailGeneralImportDuty: "普通进口税",
+    goodsDetailSpecificConsumptionTax: "消费税从量",
+    goodsDetailHsCode: "海关编码"
   },
   desk: {
     currentContract: "当前合同：",
@@ -1816,11 +2009,42 @@ const zh = {
     statusTodo: "待执行",
     msgExecuteSuccess: "执行成功",
     msgStepFailed: "执行步骤失败",
+    executeTo: "到：",
+    executeFrom: "从：",
+    executeToPlaceholder: "请选择步骤",
+    executeFromPlaceholder: "请选择步骤",
+    selectAll: "全选",
+    batchExecute: "批量执行",
+    detail: "详情",
+    cancel: "取消",
+    execState: "执行状态",
+    execResult: "结果/原因",
+    batchDetailTitle: "批量执行详情",
+    batchDetailHint: "共 {total} 个步骤，按排序字段从小到大执行。",
+    execStateIdle: "未开始",
+    execStateQueued: "排队中",
+    execStateRunning: "执行中",
+    execStateSuccess: "成功",
+    execStateFailed: "失败",
+    execStateSkipped: "已跳过",
+    msgContractCodeEmpty: "当前合同编码为空，无法执行",
+    msgSelectStepsToExecute: "请勾选要执行的步骤",
+    execResultSuccess: "执行成功",
+    execResultFailed: "执行失败",
+    msgStepExecSuccess: "步骤【{name}】执行成功",
+    msgStepExecFailed: "步骤【{name}】执行失败",
+    msgBatchDone: "批量执行完成",
+    batchConfirmTitle: "确认批量执行？",
+    batchConfirmContent: "将依次执行 {total} 个步骤，是否继续？",
     roleExporter: "出口商",
     roleImporter: "进口商",
     roleSupplier: "供应商",
     roleImportBank: "进口地银行",
-    roleExportBank: "出口地银行"
+    roleExportBank: "出口地银行",
+    notifyDoneTitle: "合同执行完成",
+    notifyStoppedTitle: "合同执行已停止",
+    notifyBody: "合同执行状态已更新。",
+    notifyBodyWithCode: "合同 {code} 执行状态已更新。"
   },
   home: {
     subtitle: "外贸实习平台自动化工具",
@@ -16541,14 +16765,7 @@ var _eval = EvalError;
 var range = RangeError;
 var ref = ReferenceError;
 var syntax = SyntaxError;
-var type;
-var hasRequiredType;
-function requireType() {
-  if (hasRequiredType) return type;
-  hasRequiredType = 1;
-  type = TypeError;
-  return type;
-}
+var type = TypeError;
 var uri = URIError;
 var abs$1 = Math.abs;
 var floor$1 = Math.floor;
@@ -16794,7 +17011,7 @@ function requireCallBindApplyHelpers() {
   if (hasRequiredCallBindApplyHelpers) return callBindApplyHelpers;
   hasRequiredCallBindApplyHelpers = 1;
   var bind3 = functionBind;
-  var $TypeError2 = requireType();
+  var $TypeError2 = type;
   var $call2 = requireFunctionCall();
   var $actualApply = requireActualApply();
   callBindApplyHelpers = function callBindBasic(args) {
@@ -16867,7 +17084,7 @@ var $EvalError = _eval;
 var $RangeError = range;
 var $ReferenceError = ref;
 var $SyntaxError = syntax;
-var $TypeError$1 = requireType();
+var $TypeError$1 = type;
 var $URIError = uri;
 var abs = abs$1;
 var floor = floor$1;
@@ -17198,7 +17415,7 @@ var GetIntrinsic2 = getIntrinsic;
 var $defineProperty = GetIntrinsic2("%Object.defineProperty%", true);
 var hasToStringTag = requireShams()();
 var hasOwn$1 = hasown;
-var $TypeError = requireType();
+var $TypeError = type;
 var toStringTag = hasToStringTag ? Symbol.toStringTag : null;
 var esSetTostringtag = function setToStringTag(object2, value) {
   var overrideIfSet = arguments.length > 2 && !!arguments[2] && arguments[2].force;
@@ -17239,9 +17456,9 @@ var asynckit = asynckit$1;
 var setToStringTag2 = esSetTostringtag;
 var hasOwn = hasown;
 var populate = populate$1;
-function FormData$1(options) {
-  if (!(this instanceof FormData$1)) {
-    return new FormData$1(options);
+function FormData$2(options) {
+  if (!(this instanceof FormData$2)) {
+    return new FormData$2(options);
   }
   this._overheadLength = 0;
   this._valueLength = 0;
@@ -17252,10 +17469,10 @@ function FormData$1(options) {
     this[option] = options[option];
   }
 }
-util.inherits(FormData$1, CombinedStream);
-FormData$1.LINE_BREAK = "\r\n";
-FormData$1.DEFAULT_CONTENT_TYPE = "application/octet-stream";
-FormData$1.prototype.append = function(field, value, options) {
+util.inherits(FormData$2, CombinedStream);
+FormData$2.LINE_BREAK = "\r\n";
+FormData$2.DEFAULT_CONTENT_TYPE = "application/octet-stream";
+FormData$2.prototype.append = function(field, value, options) {
   options = options || {};
   if (typeof options === "string") {
     options = { filename: options };
@@ -17275,7 +17492,7 @@ FormData$1.prototype.append = function(field, value, options) {
   append2(footer);
   this._trackLength(header, value, options);
 };
-FormData$1.prototype._trackLength = function(header, value, options) {
+FormData$2.prototype._trackLength = function(header, value, options) {
   var valueLength = 0;
   if (options.knownLength != null) {
     valueLength += Number(options.knownLength);
@@ -17285,7 +17502,7 @@ FormData$1.prototype._trackLength = function(header, value, options) {
     valueLength = Buffer.byteLength(value);
   }
   this._valueLength += valueLength;
-  this._overheadLength += Buffer.byteLength(header) + FormData$1.LINE_BREAK.length;
+  this._overheadLength += Buffer.byteLength(header) + FormData$2.LINE_BREAK.length;
   if (!value || !value.path && !(value.readable && hasOwn(value, "httpVersion")) && !(value instanceof Stream)) {
     return;
   }
@@ -17293,7 +17510,7 @@ FormData$1.prototype._trackLength = function(header, value, options) {
     this._valuesToMeasure.push(value);
   }
 };
-FormData$1.prototype._lengthRetriever = function(value, callback) {
+FormData$2.prototype._lengthRetriever = function(value, callback) {
   if (hasOwn(value, "fd")) {
     if (value.end != void 0 && value.end != Infinity && value.start != void 0) {
       callback(null, value.end + 1 - (value.start ? value.start : 0));
@@ -17319,7 +17536,7 @@ FormData$1.prototype._lengthRetriever = function(value, callback) {
     callback("Unknown stream");
   }
 };
-FormData$1.prototype._multiPartHeader = function(field, value, options) {
+FormData$2.prototype._multiPartHeader = function(field, value, options) {
   if (typeof options.header === "string") {
     return options.header;
   }
@@ -17346,13 +17563,13 @@ FormData$1.prototype._multiPartHeader = function(field, value, options) {
         header = [header];
       }
       if (header.length) {
-        contents += prop + ": " + header.join("; ") + FormData$1.LINE_BREAK;
+        contents += prop + ": " + header.join("; ") + FormData$2.LINE_BREAK;
       }
     }
   }
-  return "--" + this.getBoundary() + FormData$1.LINE_BREAK + contents + FormData$1.LINE_BREAK;
+  return "--" + this.getBoundary() + FormData$2.LINE_BREAK + contents + FormData$2.LINE_BREAK;
 };
-FormData$1.prototype._getContentDisposition = function(value, options) {
+FormData$2.prototype._getContentDisposition = function(value, options) {
   var filename;
   if (typeof options.filepath === "string") {
     filename = path.normalize(options.filepath).replace(/\\/g, "/");
@@ -17365,7 +17582,7 @@ FormData$1.prototype._getContentDisposition = function(value, options) {
     return 'filename="' + filename + '"';
   }
 };
-FormData$1.prototype._getContentType = function(value, options) {
+FormData$2.prototype._getContentType = function(value, options) {
   var contentType = options.contentType;
   if (!contentType && value && value.name) {
     contentType = mime.lookup(value.name);
@@ -17380,13 +17597,13 @@ FormData$1.prototype._getContentType = function(value, options) {
     contentType = mime.lookup(options.filepath || options.filename);
   }
   if (!contentType && value && typeof value === "object") {
-    contentType = FormData$1.DEFAULT_CONTENT_TYPE;
+    contentType = FormData$2.DEFAULT_CONTENT_TYPE;
   }
   return contentType;
 };
-FormData$1.prototype._multiPartFooter = function() {
+FormData$2.prototype._multiPartFooter = function() {
   return (function(next) {
-    var footer = FormData$1.LINE_BREAK;
+    var footer = FormData$2.LINE_BREAK;
     var lastPart = this._streams.length === 0;
     if (lastPart) {
       footer += this._lastBoundary();
@@ -17394,10 +17611,10 @@ FormData$1.prototype._multiPartFooter = function() {
     next(footer);
   }).bind(this);
 };
-FormData$1.prototype._lastBoundary = function() {
-  return "--" + this.getBoundary() + "--" + FormData$1.LINE_BREAK;
+FormData$2.prototype._lastBoundary = function() {
+  return "--" + this.getBoundary() + "--" + FormData$2.LINE_BREAK;
 };
-FormData$1.prototype.getHeaders = function(userHeaders) {
+FormData$2.prototype.getHeaders = function(userHeaders) {
   var header;
   var formHeaders = {
     "content-type": "multipart/form-data; boundary=" + this.getBoundary()
@@ -17409,19 +17626,19 @@ FormData$1.prototype.getHeaders = function(userHeaders) {
   }
   return formHeaders;
 };
-FormData$1.prototype.setBoundary = function(boundary) {
+FormData$2.prototype.setBoundary = function(boundary) {
   if (typeof boundary !== "string") {
     throw new TypeError("FormData boundary must be a string");
   }
   this._boundary = boundary;
 };
-FormData$1.prototype.getBoundary = function() {
+FormData$2.prototype.getBoundary = function() {
   if (!this._boundary) {
     this._generateBoundary();
   }
   return this._boundary;
 };
-FormData$1.prototype.getBuffer = function() {
+FormData$2.prototype.getBuffer = function() {
   var dataBuffer = new Buffer.alloc(0);
   var boundary = this.getBoundary();
   for (var i = 0, len = this._streams.length; i < len; i++) {
@@ -17432,16 +17649,16 @@ FormData$1.prototype.getBuffer = function() {
         dataBuffer = Buffer.concat([dataBuffer, Buffer.from(this._streams[i])]);
       }
       if (typeof this._streams[i] !== "string" || this._streams[i].substring(2, boundary.length + 2) !== boundary) {
-        dataBuffer = Buffer.concat([dataBuffer, Buffer.from(FormData$1.LINE_BREAK)]);
+        dataBuffer = Buffer.concat([dataBuffer, Buffer.from(FormData$2.LINE_BREAK)]);
       }
     }
   }
   return Buffer.concat([dataBuffer, Buffer.from(this._lastBoundary())]);
 };
-FormData$1.prototype._generateBoundary = function() {
+FormData$2.prototype._generateBoundary = function() {
   this._boundary = "--------------------------" + crypto.randomBytes(12).toString("hex");
 };
-FormData$1.prototype.getLengthSync = function() {
+FormData$2.prototype.getLengthSync = function() {
   var knownLength = this._overheadLength + this._valueLength;
   if (this._streams.length) {
     knownLength += this._lastBoundary().length;
@@ -17451,14 +17668,14 @@ FormData$1.prototype.getLengthSync = function() {
   }
   return knownLength;
 };
-FormData$1.prototype.hasKnownLength = function() {
+FormData$2.prototype.hasKnownLength = function() {
   var hasKnownLength = true;
   if (this._valuesToMeasure.length) {
     hasKnownLength = false;
   }
   return hasKnownLength;
 };
-FormData$1.prototype.getLength = function(cb) {
+FormData$2.prototype.getLength = function(cb) {
   var knownLength = this._overheadLength + this._valueLength;
   if (this._streams.length) {
     knownLength += this._lastBoundary().length;
@@ -17478,7 +17695,7 @@ FormData$1.prototype.getLength = function(cb) {
     cb(null, knownLength);
   });
 };
-FormData$1.prototype.submit = function(params, cb) {
+FormData$2.prototype.submit = function(params, cb) {
   var request;
   var options;
   var defaults2 = { method: "post" };
@@ -17525,19 +17742,19 @@ FormData$1.prototype.submit = function(params, cb) {
   }).bind(this));
   return request;
 };
-FormData$1.prototype._error = function(err) {
+FormData$2.prototype._error = function(err) {
   if (!this.error) {
     this.error = err;
     this.pause();
     this.emit("error", err);
   }
 };
-FormData$1.prototype.toString = function() {
+FormData$2.prototype.toString = function() {
   return "[object FormData]";
 };
-setToStringTag2(FormData$1.prototype, "FormData");
-var form_data = FormData$1;
-const FormData$2 = /* @__PURE__ */ getDefaultExportFromCjs(form_data);
+setToStringTag2(FormData$2.prototype, "FormData");
+var form_data = FormData$2;
+const FormData$1 = /* @__PURE__ */ getDefaultExportFromCjs(form_data);
 function isVisitable(thing) {
   return utils$1.isPlainObject(thing) || utils$1.isArray(thing);
 }
@@ -17561,7 +17778,7 @@ function toFormData$1(obj, formData, options) {
   if (!utils$1.isObject(obj)) {
     throw new TypeError("target must be an object");
   }
-  formData = formData || new (FormData$2 || FormData)();
+  formData = formData || new (FormData$1 || FormData)();
   options = utils$1.toFlatObject(options, {
     metaTokens: true,
     dots: false,
@@ -17797,7 +18014,7 @@ const platform$1 = {
   isNode: true,
   classes: {
     URLSearchParams: URLSearchParams$1,
-    FormData: FormData$2,
+    FormData: FormData$1,
     Blob: typeof Blob !== "undefined" && Blob || null
   },
   ALPHABET,
@@ -21893,7 +22110,7 @@ const createWindow = async () => {
   const backgroundManager = BackgroundManager.getInstance();
   const backgroundConfig = await backgroundManager.initialize();
   const mainWindow = new require$$3.BrowserWindow({
-    width: 1350,
+    width: 1400,
     height: 800,
     webPreferences: {
       preload: path$3.join(__dirname, "preload.js")

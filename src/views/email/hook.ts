@@ -31,7 +31,7 @@ export const useEmailTemplate = () => {
   const loading = ref(false);
   const saving = ref(false);
   const template = ref<EmailTemplateDto>({});
-
+  const hideLoading = message.loading(t('email.loadEmailTemplate'), 0);
   const fetchTemplate = async () => {
     loading.value = true;
     try {
@@ -42,6 +42,7 @@ export const useEmailTemplate = () => {
       message.error(t("email.msgFetchTemplateFail"));
     } finally {
       loading.value = false;
+      hideLoading()
     }
   };
 
@@ -186,3 +187,33 @@ export const useSendNormalEmail = () => {
   };
 };
 
+export const useReadEmails = () =>{
+  const { t } = useI18n();
+  const reading = ref(false);
+
+  const readEmails = async (role: string) => {
+    if (reading.value) return;
+    reading.value = true;
+    try {
+      const ok = await emailApi.readEmails({ role } );
+      if (ok) {
+        message.success(t("email.msgReadEmailsSuccess"));
+      } else {
+        message.error(t("email.msgReadEmailsFailRetry"));
+      }
+      return ok;
+    }catch(error) {
+      console.error("读取邮件失败", error);
+      message.error(t("email.msgReadEmailsFailRetry"));
+      return false;
+    } finally {
+      reading.value = false;
+    }
+    
+  };
+
+  return {
+    reading,
+    readEmails,
+  };
+};

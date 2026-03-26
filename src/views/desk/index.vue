@@ -3,9 +3,9 @@
     <!-- 合同基础信息 -->
     <a-card class="desk-card shadow-sm rounded-xl border-0 backdrop-blur-sm" :loading="contractLoading"
       :body-style="{ padding: '16px 20px 8px' }">
-      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-3">
+      <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-2 mb-2">
         <div>
-          <div class="text-base font-medium desk-text flex flex-wrap items-center gap-3">
+          <div class="text-base font-medium desk-text flex flex-wrap items-center gap-1">
             <span>{{ $t('desk.currentContract') }}</span>
             <span class="desk-text-secondary">
               {{ currentInfo?.contractCode || $t('desk.noContract') }}
@@ -18,8 +18,38 @@
             </a-tag>
           </div>
         </div>
-        <div class="flex items-center gap-3">
+        <div class="flex items-center gap-2">
           <a-space>
+            <div class="flex items-center gap-2">
+              <span class="text-xs desk-text-secondary opacity-80 whitespace-nowrap">
+                {{ t('desk.executeFrom') }}
+              </span>
+              <a-select
+                v-model:value="startStepCode"
+                allow-clear
+                show-search
+                class="min-w-[180px]"
+                :placeholder="t('desk.executeFromPlaceholder')"
+                :options="executeToOptions"
+                :disabled="allStepLoading || !executeToOptions.length || executing || stopping"
+                option-filter-prop="label"
+              />
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs desk-text-secondary opacity-80 whitespace-nowrap">
+                {{ t('desk.executeTo') }}
+              </span>
+              <a-select
+                v-model:value="stopStepCode"
+                allow-clear
+                show-search
+                class="min-w-[180px]"
+                :placeholder="t('desk.executeToPlaceholder')"
+                :options="executeToOptions"
+                :disabled="allStepLoading || !executeToOptions.length || executing || stopping"
+                option-filter-prop="label"
+              />
+            </div>
             <a-button class="px-5" @click="handleRefresh">{{ $t('desk.refresh') }}</a-button>
             <a-button class="px-5" @click="goToContract">
               {{ $t('sidebar.contract') }}
@@ -31,6 +61,7 @@
             </a-button>
           </a-space>
         </div>
+        
       </div>
 
       <a-divider class="!my-3" />
@@ -168,9 +199,11 @@
           current: undoStepCurrent,
           pageSize: undoStepPageSize,
           total: undoStepsTotal,
-          showSizeChanger: false,
+          showSizeChanger: true,
+          showQuickJumper: true,
           pageSizeOptions: ['10', '20', '50', '100'],
           onChange: handleUndoStepPageChange,
+          onShowSizeChange: handleUndoStepPageChange,
         }" size="small" row-key="stepId" class="custom-compact-table">
         <a-table-column key="stepDesc" :title="$t('desk.stepName')" data-index="stepDesc" />
         <a-table-column key="stepCode" :title="$t('desk.stepCode')" data-index="stepCode" />
@@ -186,17 +219,48 @@
     <!-- 所有步骤列表 -->
     <a-card class="desk-card shadow-sm rounded-xl border-0 backdrop-blur-sm" :loading="allStepLoading"
       :body-style="{ padding: '16px 16px 8px' }">
-      <div class="flex items-center justify-between mb-3">
+      <div class="flex items-center justify-between mb-3 gap-3">
         <div class="text-sm font-medium desk-text">{{ $t('desk.allStepsTitle') }}</div>
+        <div class="flex items-center gap-2">
+          <a-checkbox
+            :disabled="batchStarted"
+            :checked="isAllFilteredSelected"
+            :indeterminate="isFilteredIndeterminate"
+            @change="toggleSelectAllFiltered"
+          >
+            {{ t('desk.selectAll') }}
+          </a-checkbox>
+          <a-button
+            type="primary"
+            class="px-4"
+            :disabled="batchStarted || selectedStepCodes.length === 0"
+            :loading="batchRunning"
+            @click="handleBatchExecuteClick"
+          >
+            {{ t('desk.batchExecute') }}
+          </a-button>
+          <a-button v-if="selectedStepCodes.length !== 0" class="px-4" @click="batchDetailOpen = true">
+            {{ t('desk.detail') }}
+          </a-button>
+        </div>
       </div>
-      <a-table :data-source="pagedAllSteps" :pagination="{
+      <a-table
+        :data-source="filteredAllSteps"
+        :row-selection="rowSelection"
+        :pagination="{
           current: allStepCurrent,
           pageSize: allStepPageSize,
           total: allStepsTotal,
-          showSizeChanger: false,
+          showSizeChanger: true,
+          showQuickJumper: true,
           pageSizeOptions: ['10', '20', '50', '100'],
           onChange: handleAllStepPageChange,
-        }" size="small" row-key="stepId" class="custom-compact-table">
+          onShowSizeChange: handleAllStepPageChange,
+        }"
+        size="small"
+        row-key="stepCode"
+        class="custom-compact-table"
+      >
         <a-table-column key="stepDesc" :title="$t('desk.stepName')" data-index="stepDesc"
           :filtered-value="stepDescFilteredValue ? [stepDescFilteredValue] : null">
           <template #filterDropdown="{ setSelectedKeys, selectedKeys, confirm, clearFilters }">
@@ -258,6 +322,13 @@
           </template>
         </a-table-column>
         <a-table-column key="sort" :title="$t('desk.sort')" data-index="sort" />
+        <!-- <a-table-column key="execState" :title="t('desk.execState')" width="120">
+          <template #default="{ record }">
+            <a-tag :color="execStateColor(getStepExecState(record.stepCode))" class="border-0">
+              {{ execStateText(getStepExecState(record.stepCode)) }}
+            </a-tag>
+          </template>
+        </a-table-column> -->
         <a-table-column key="action" :title="$t('desk.control')" width="100">
           <template #default="{ record }">
             <a-button type="primary" size="small" :loading="executingStep && currentExecuteStepCode === record.stepCode"
@@ -268,6 +339,12 @@
         </a-table-column>
       </a-table>
     </a-card>
+    <BatchExecuteDetailModal
+      v-model:open="batchDetailOpen"
+      :steps="selectedStepsSorted"
+      :status-map="batchStatusMap"
+      :get-role-name="getRoleName"
+    />
   </div>
 </template>
 
@@ -287,7 +364,9 @@ import {
   useListProcessStepsByCode,
   useStopContract,
 } from "./hook";
-import { message } from 'ant-design-vue';
+import { Modal, message } from "ant-design-vue";
+import contractApi from "../../apis/contract";
+import BatchExecuteDetailModal from "./components/BatchExecuteDetailModal.vue";
 
 const { t } = useI18n();
 const router = useRouter();
@@ -308,6 +387,23 @@ const {
 const contractId = computed(() => currentInfo.value.contractId);
 const processCode = computed(() => currentInfo.value.processCode);
 
+const stopStepCode = ref<string | undefined>(undefined);
+const startStepCode = ref<string | undefined>(undefined);
+
+const executeToOptions = computed(() => {
+  const list = (allSteps.value || [])
+    .filter((s: any) => s?.stepCode)
+    .slice()
+    .sort((a: any, b: any) => Number(a?.sort ?? 0) - Number(b?.sort ?? 0));
+
+  return list.map((s: any) => {
+    const sort = s?.sort != null ? String(s.sort) : "";
+    const desc = s?.stepDesc ? String(s.stepDesc) : String(s.stepCode);
+    const label = sort ? `${sort}. ${desc}` : desc;
+    return { value: String(s.stepCode), label };
+  });
+});
+
 const statusInfo = computed(() => {
   const status = (executeStatus.value || "TODO").toUpperCase();
   switch (status) {
@@ -324,6 +420,63 @@ const statusInfo = computed(() => {
       return { text: t("desk.statusTodo"), status: "TODO", color: "#d9d9d9", type: "default" };
   }
 });
+
+// 合同执行完成 / 停止时提示音（通过系统通知触发 Windows 提示音）
+const notifyExecutionFinished = (status: "DONE" | "STOPPED") => {
+  const canUseNotification = typeof window !== "undefined" && "Notification" in window;
+  if (!canUseNotification) {
+    return;
+  }
+
+  const showNotification = () => {
+    const title =
+      status === "DONE"
+        ? t("desk.notifyDoneTitle")
+        : t("desk.notifyStoppedTitle");
+
+    const body = currentInfo.value?.contractCode
+      ? t("desk.notifyBodyWithCode", { code: currentInfo.value.contractCode })
+      : t("desk.notifyBody");
+
+    try {
+      // 在 Electron 环境下，这会触发系统通知与系统提示音
+      new Notification(title, { body });
+    } catch {
+      // 忽略异常，避免打断主流程
+    }
+  };
+
+  try {
+    if (Notification.permission === "granted") {
+      showNotification();
+    } else if (Notification.permission !== "denied") {
+      Notification.requestPermission().then((perm) => {
+        if (perm === "granted") {
+          showNotification();
+        }
+      });
+    }
+  } catch {
+    // 忽略异常
+  }
+};
+
+// 监听状态从执行中变为 完成/停止 时触发提示音
+let lastExecuteStatus: string | null = null;
+watch(
+  () => statusInfo.value.status,
+  (currentStatus) => {
+    const prev = (lastExecuteStatus || "").toUpperCase();
+    const curr = (currentStatus || "").toUpperCase();
+
+    if (prev === "DOING" && (curr === "DONE" || curr === "STOPPED")) {
+      notifyExecutionFinished(curr as "DONE" | "STOPPED");
+    }
+
+    lastExecuteStatus = curr;
+  },
+  { immediate: true },
+);
 
 // 执行 / 停止
 const { loading: executing, executeContract } = useExecuteContract({
@@ -389,6 +542,8 @@ const handleAction = async () => {
   if (action === "execute") {
     await executeContract({
       processCode: processCode.value,
+      stopStepCode: stopStepCode.value || undefined,
+      startStepCode: startStepCode.value || undefined,
     });
   } else if (action === "stop") {
     await stopContract(contractId.value, true);
@@ -497,6 +652,176 @@ const handleAllStepPageChange = (page: number, pageSize?: number) => {
   if (pageSize) {
     allStepPageSize.value = pageSize;
   }
+};
+
+type BatchExecState = "idle" | "queued" | "running" | "success" | "failed" | "skipped";
+type BatchExecRecord = { state: BatchExecState; message?: string };
+
+const selectedStepCodes = ref<string[]>([]);
+const batchStarted = ref(false);
+const batchRunning = ref(false);
+const batchDetailOpen = ref(false);
+const batchStatusMap = ref<Record<string, BatchExecRecord | undefined>>({});
+
+const rowSelection = computed(() => ({
+  selectedRowKeys: selectedStepCodes.value,
+  preserveSelectedRowKeys: true,
+  onChange: (keys: (string | number)[]) => {
+    if (batchStarted.value) return;
+    selectedStepCodes.value = keys.map(String);
+  },
+  getCheckboxProps: () => ({
+    disabled: batchStarted.value,
+  }),
+}));
+
+const selectedStepsSorted = computed(() => {
+  const stepMap = new Map<string, any>();
+  filteredAllSteps.value.forEach((s: any) => {
+    if (s?.stepCode) stepMap.set(String(s.stepCode), s);
+  });
+  const list = selectedStepCodes.value.map((code) => stepMap.get(code)).filter(Boolean);
+  return list.sort((a: any, b: any) => Number(a?.sort ?? 0) - Number(b?.sort ?? 0));
+});
+
+const isAllFilteredSelected = computed(() => {
+  const filteredCodes = filteredAllSteps.value
+    .map((s: any) => s?.stepCode)
+    .filter(Boolean)
+    .map(String);
+  if (filteredCodes.length === 0) return false;
+  const selectedSet = new Set(selectedStepCodes.value);
+  return filteredCodes.every((c) => selectedSet.has(c));
+});
+
+const isFilteredIndeterminate = computed(() => {
+  const filteredCodes = filteredAllSteps.value
+    .map((s: any) => s?.stepCode)
+    .filter(Boolean)
+    .map(String);
+  if (filteredCodes.length === 0) return false;
+  const selectedSet = new Set(selectedStepCodes.value);
+  const selectedCount = filteredCodes.filter((c) => selectedSet.has(c)).length;
+  return selectedCount > 0 && selectedCount < filteredCodes.length;
+});
+
+const toggleSelectAllFiltered = (e: any) => {
+  if (batchStarted.value) return;
+  const checked = Boolean(e?.target?.checked);
+  const filteredCodes = filteredAllSteps.value
+    .map((s: any) => s?.stepCode)
+    .filter(Boolean)
+    .map(String);
+  if (checked) {
+    selectedStepCodes.value = Array.from(new Set([...selectedStepCodes.value, ...filteredCodes]));
+  } else {
+    const removeSet = new Set(filteredCodes);
+    selectedStepCodes.value = selectedStepCodes.value.filter((c) => !removeSet.has(c));
+  }
+};
+
+const execStateText = (state: BatchExecState) => {
+  switch (state) {
+    case "queued":
+      return t("desk.execStateQueued");
+    case "running":
+      return t("desk.execStateRunning");
+    case "success":
+      return t("desk.execStateSuccess");
+    case "failed":
+      return t("desk.execStateFailed");
+    case "skipped":
+      return t("desk.execStateSkipped");
+    case "idle":
+    default:
+      return t("desk.execStateIdle");
+  }
+};
+
+const execStateColor = (state: BatchExecState) => {
+  switch (state) {
+    case "running":
+      return "processing";
+    case "success":
+      return "success";
+    case "failed":
+      return "error";
+    case "skipped":
+      return "warning";
+    case "queued":
+    case "idle":
+    default:
+      return "default";
+  }
+};
+
+const getStepExecState = (stepCode?: string): BatchExecState => {
+  if (!stepCode) return "idle";
+  return batchStatusMap.value[String(stepCode)]?.state ?? "idle";
+};
+
+const runBatchExecute = async () => {
+  if (!currentInfo.value?.contractCode) {
+    message.warning(t("desk.msgContractCodeEmpty"));
+    return;
+  }
+  const steps = selectedStepsSorted.value;
+  if (!steps.length) {
+    message.warning(t("desk.msgSelectStepsToExecute"));
+    return;
+  }
+
+  batchStarted.value = true;
+  batchRunning.value = true;
+
+  const nextMap: Record<string, BatchExecRecord | undefined> = { ...batchStatusMap.value };
+  steps.forEach((s: any) => {
+    if (!s?.stepCode) return;
+    nextMap[String(s.stepCode)] = { state: "queued" };
+  });
+  batchStatusMap.value = nextMap;
+
+  for (const step of steps) {
+    const stepCode = String(step?.stepCode || "");
+    if (!stepCode) continue;
+
+    batchStatusMap.value = { ...batchStatusMap.value, [stepCode]: { state: "running" } };
+    try {
+      await contractApi.executeStep(currentInfo.value.contractCode, stepCode);
+      batchStatusMap.value = {
+        ...batchStatusMap.value,
+        [stepCode]: { state: "success", message: t("desk.execResultSuccess") },
+      };
+      message.success(t("desk.msgStepExecSuccess", { name: step.stepDesc || stepCode }));
+    } catch (err: any) {
+      const msg = err?.message ? String(err.message) : t("desk.execResultFailed");
+      batchStatusMap.value = {
+        ...batchStatusMap.value,
+        [stepCode]: { state: "failed", message: msg },
+      };
+      message.error(t("desk.msgStepExecFailed", { name: step.stepDesc || stepCode }));
+    }
+  }
+  batchStarted.value = false;
+  batchRunning.value = false;
+  message.success(t("desk.msgBatchDone"));
+};
+
+const handleBatchExecuteClick = () => {
+  if (batchStarted.value) return;
+  if (selectedStepCodes.value.length === 0) {
+    message.warning(t("desk.msgSelectStepsToExecute"));
+    return;
+  }
+  Modal.confirm({
+    title: t("desk.batchConfirmTitle"),
+    content: t("desk.batchConfirmContent", { total: selectedStepCodes.value.length }),
+    okText: t("desk.confirm"),
+    cancelText: t("desk.cancel"),
+    onOk: async () => {
+      await runBatchExecute();
+    },
+  });
 };
 
 // 高亮文本处理函数

@@ -1,5 +1,13 @@
 <template>
   <div class="space-y-4">
+    <div class="space-x-2">
+      <a-button type="primary" @click="handleReadEmails('EXPORTER')">{{ $t('email.btnReadEmailsExporter') }}</a-button>
+      <a-button type="primary" @click="handleReadEmails('IMPORTER')">{{ $t('email.btnReadEmailsImporter') }}</a-button>
+      <a-button type="primary" @click="handleReadEmails('SUPPLIER')">{{ $t('email.btnReadEmailsSupplier') }}</a-button>
+      <a-button type="primary" @click="handleReadEmails('ISSUING_BANK')">{{ $t('email.btnReadEmailsIssuingBank') }}</a-button>
+      <a-button type="primary" @click="handleReadEmails('NEGOTIATING_BANK')">{{ $t('email.btnReadEmailsNegotiatingBank') }}</a-button>
+    </div>
+
     <a-card
       v-for="(item, index) in BUSINESS_EMAIL_CONFIG"
       :key="item.code"
@@ -82,14 +90,29 @@ import {
   BUSINESS_EMAIL_CONFIG,
   useEmailTemplate,
   useSendBusinessEmail,
+  useReadEmails
 } from "./hook";
+import { useI18n } from 'vue-i18n';
 
 type TemplateKey = keyof EmailTemplateDto;
 
 const { loading, saving, template, fetchTemplate, saveTemplate, getEmailByKey } = useEmailTemplate();
 const { sendingMap, sendBusinessEmail } = useSendBusinessEmail();
+const { reading, readEmails } = useReadEmails();
+const { t } = useI18n();
+const handleReadEmails = async (role: string) => {
+  const hideLoading = message.loading(t('email.readingEmails'), 0);
+  try{
+    const ok = await readEmails(role);
 
-
+  }catch(error) {
+    
+    
+  }finally{
+    hideLoading()
+  }
+  
+};
 
 const getEmail = (key: TemplateKey): EmailDto => {
   return getEmailByKey(key);

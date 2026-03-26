@@ -42,6 +42,8 @@ export const useContractHistoryList = () => {
   };
 
   const handlePageChange = (page: number, size?: number) => {
+    console.log("page", page);
+    console.log("size", size);
     current.value = page;
     if (size) {
       pageSize.value = size;

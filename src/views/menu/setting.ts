@@ -69,6 +69,13 @@ export function getMenuItems(t: MenuT) {
       route: '/advertisement',
     },
     {
+      key: '/loan',
+      icon: () => h(FileTextOutlined),
+      label: t('sidebar.loan'),
+      title: t('sidebar.loan'),
+      route: '/loan',
+    },
+    {
       key: '/history',
       icon: () => h(FileSearchOutlined),
       label: t('sidebar.history'),

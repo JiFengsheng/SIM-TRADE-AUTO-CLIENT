@@ -75,6 +75,12 @@ export const routes = [
     name: 'Advertisement',
     component: () => import('../views/advertisement/index.vue'),
     meta: { keepAlive: true },
+  },
+  {
+    path: '/loan',
+    name: 'Loan',
+    component: () => import('../views/loan/index.vue'),
+    meta: { keepAlive: true },
   }
 ]
 

@@ -121,6 +121,12 @@ export interface BusinessConfig {
   baseUrl?: string;
   /** 产地证明类型 */
   originType?: string;
+  /** 运输方式 */
+  shipment?: string;
+  /** 唛头 */
+  shippingMark?: string;
+  /** 填制日期 */
+  fillDate?: string;
 }
 
 /**
@@ -417,6 +423,12 @@ export interface ContractInfo {
   baseUrl?: string;
   /** 产地证明类型 */
   originType?: string;
+  /** 运输方式 */
+  shipment?: string;
+  /** 唛头 */
+  shippingMark?: string;
+  /** 填制日期 */
+  fillDate?: string;
 }
 
 /**
@@ -428,6 +440,8 @@ export interface ExecuteContractReqVo {
   processCode?: string;
   /** 停止执行的步骤编码 */
   stopStepCode?: string;
+  /** 开始执行的步骤编码 */
+  startStepCode?: string;
 }
 
 /**
@@ -678,6 +692,59 @@ export interface MarketGoodsInfo {
   lastUpdateUser?: string;
 }
 
+export interface GetMarketGoodsInfoRespVo {
+  /** 基础地址 */
+  baseUrl?: string;
+  /** 成本金额（如38.62） */
+  cost?: number;
+  /** 成本单位（如RMB） */
+  costUnit?: string;
+  /** 创建时间 */
+  createTime?: string;
+  /** 创建人 */
+  createUser?: string;
+  /** 货号（如01001） */
+  goodsCode?: string;
+  /** 商品描述（如每箱24罐，每罐425克） */
+  goodsDesc?: string;
+  /** 商品英文描述 */
+  goodsDescEng?: string;
+  /** 主键ID */
+  goodsId?: string;
+  /** 商品名称（如洋菇罐头(整粒)） */
+  goodsName?: string;
+  /** 商品英文名称 */
+  goodsNameEng?: string;
+  /** 计量单位（如CARTON） */
+  goodsUnit?: string;
+  /** 进口商国家 */
+  importCountry?: string;
+  /** 进口商市场价格 */
+  importPrice?: number;
+  /** 进口商价格单位 */
+  importPriceUnit?: string;
+  /** 最新更新时间 */
+  lastUpdateTime?: string;
+  /** 最新更新人 */
+  lastUpdateUser?: string;
+  /** 海关编码 */
+  hsCode?: string;
+  /** 优惠进口税 */
+  preferentialImportDuty?: number;
+  /** 增值税 */
+  vat?: number;
+  /** 消费税从量 */
+  specificConsumptionTax?: number;
+  /** 退税 */
+  taxRefund?: number;
+  /** 消费税从价 */
+  consumptionTaxAdValorem?: number;
+  /** 出口税 */
+  exportDuty?: number;
+  /** 普通进口税 */
+  generalImportDuty?: number;
+}
+
 /**
  * 根据 code 获取市场货品请求参数
  * 对应文档定义：GetMarketReqVo
@@ -801,6 +868,17 @@ export interface EmailDto {
   title?: string;
 }
 
+export interface ReadEmailReqVo {
+  /** 基础地址 */
+  baseUrl?: string;
+  /** 账号 */
+  account?: string;
+  /** 密码 */
+  password?: string;
+  /** 角色 */
+  role?: string;
+}
+
 /**
  * 邮件模板对象
  * 对应文档定义：EmailTemplateDto
@@ -843,4 +921,22 @@ export interface GetCrawlRate {
   baseUrl?: string
   account?: string
   password?: string
+}
+
+/**
+ * 贷款申请请求参数
+ * 对应文档定义：IssueLoanReqVo
+ * 对应接口：POST /loan/apply
+ */
+export interface IssueLoanReqVo {
+  /** 银行编号 */
+  bankCode?: string;
+  /** 描述 */
+  message?: string;
+  /** 金额 */
+  money?: number;
+  /** 币种 */
+  moneyType?: string;
+  /** 角色 */
+  role?: string;
 }

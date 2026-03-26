@@ -164,7 +164,7 @@ const getBaseURL = (): string => {
 // 创建 axios 实例
 const service: AxiosInstance = axios.create({
   baseURL: getBaseURL(),
-  timeout: 30000, // 30秒超时
+  timeout: 60000, // 30秒超时
   headers: {
     'Content-Type': 'application/json;charset=UTF-8',
   },

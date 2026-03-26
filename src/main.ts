@@ -50,7 +50,7 @@ const createWindow = async () => {
   const backgroundManager = BackgroundManager.getInstance();
   const backgroundConfig = await backgroundManager.initialize();
   const mainWindow = new BrowserWindow({
-    width: 1350,
+    width: 1400,
     height: 800,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),

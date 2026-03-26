@@ -1,5 +1,5 @@
 import request, { ApiResponse } from "../utils/request";
-import type { FulfillmentProcessStep, FulfillmentProcessStepResponse,FulfillmentProcessStepListReqVo, IPage } from "./types";
+import type { DownloadFileResult, FulfillmentProcessStep, FulfillmentProcessStepResponse,FulfillmentProcessStepListReqVo, IPage } from "./types";
 
 const processStepApi = {
   /**
@@ -96,6 +96,15 @@ const processStepApi = {
   },
 
   /**
+   * 批量更新流程步骤
+   * 对应文档：PUT /fulfillment-process-step/batchUpdate
+   * @returns 
+   */
+  batchUpdate(data: FulfillmentProcessStep){
+    return request.put<boolean>(`/sim-trade/fulfillment-process-step/batchUpdate`, data);
+  },
+
+  /**
    * 删除流程步骤详情
    * 对应文档：DELETE /fulfillment-process-step/{id}
    */
@@ -122,6 +131,44 @@ const processStepApi = {
       { params: { processCode, contractId } },
     );
   },
+
+  /**
+   * 导出流程步骤（文件流下载）
+   * 对应文档：GET /fulfillment-process-step/export
+   */
+  export(filename = "流程步骤.xlsx"): Promise<DownloadFileResult> {
+    return request.downloadFile("/sim-trade/fulfillment-process-step/export", {
+      filename,
+    });
+  },
+
+  /**
+   * 导入流程步骤
+   * 对应文档：POST /fulfillment-process-step/import
+   */
+  import(file: File | FormData) {
+    return request.upload<boolean>("/sim-trade/fulfillment-process-step/import", file);
+  },
+  /**
+   * 上移步骤
+   * 对应文档：GET /fulfillment-process-step/moveUp
+   * @param stepId 步骤ID
+   * @returns 
+   */
+  moveUp(stepId: string) {
+    return request.get<boolean>(`/sim-trade/fulfillment-process-step/moveUp`,{ params: { stepId } });
+  },
+  /**
+   * 下移步骤
+   * 对应文档：GET /fulfillment-process-step/moveDown
+   * @param stepId 
+   * @returns 
+   */
+  moveDown(stepId: string) {
+    return request.get<boolean>(`/sim-trade/fulfillment-process-step/moveDown`,{ params: { stepId } });
+  },
+
+  
 };
 
 export default processStepApi;

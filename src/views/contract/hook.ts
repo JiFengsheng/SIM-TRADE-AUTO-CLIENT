@@ -295,6 +295,7 @@ export const useGetCrawlRate = () => {
   const crawlRate = ref<CrawlRateRespVo>({});
   const loading = ref(false);
   const getCrawlRate = async (data: GetCrawlRate) => {
+    loading.value = true;
     try {
       const res = await businessConfigApi.getCrawlRate(data);
       crawlRate.value = unwrapApiData<CrawlRateRespVo>(res) || {};

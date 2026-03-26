@@ -27,7 +27,7 @@ const contractApi = {
    */
   executeContract(data: ExecuteContractReqVo) {
     return request.post<boolean>("/sim-trade/contract-info/executeContract", data, {
-      timeout: 60000, // 60秒超时
+      timeout: 120000, // 120秒超时
     });
   },
 
@@ -38,7 +38,7 @@ const contractApi = {
   executeStep(contractCode?: string, stepCode?: string) {
     return request.post<boolean>("/sim-trade/contract-info/executeStep", null, {
       params: { contractCode, stepCode },
-      timeout: 60000, // 60秒超时
+      timeout: 120000, // 60秒超时
     });
   },
 
