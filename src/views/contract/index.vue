@@ -94,38 +94,6 @@
           </a-row>
         </a-card>
 
-        <!-- 贸易设置 -->
-        <a-card class="desk-card mb-4" :bordered="false">
-          <template #title>
-            <div class="section-header">
-              <span class="section-title">{{ $t('contract.tradeSection') }}</span>
-              <span class="section-subtitle">{{ $t('contract.tradeSectionDesc') }}</span>
-            </div>
-          </template>
-          
-          <a-row :gutter="16">
-            <a-col :xs="24" :md="12">
-              <a-form-item :label="$t('contract.trade')" name="trade">
-                <a-select v-model:value="form.trade" :placeholder="$t('contract.selectTrade')" size="large" class="w-full">
-                  <a-select-option value="CIF">CIF</a-select-option>
-                  <a-select-option value="CFR">CFR</a-select-option>
-                  <a-select-option value="FOB">FOB</a-select-option>
-                </a-select>
-              </a-form-item>
-            </a-col>
-            <a-col :xs="24" :md="12">
-              <a-form-item :label="$t('contract.payment')" name="payment">
-                <a-select v-model:value="form.payment" :placeholder="$t('contract.selectPayment')" size="large" class="w-full">
-                  <a-select-option value="L/C">L/C</a-select-option>
-                  <a-select-option value="D/P">D/P</a-select-option>
-                  <a-select-option value="D/A">D/A</a-select-option>
-                  <a-select-option value="T/T">T/T</a-select-option>
-                </a-select>
-              </a-form-item>
-            </a-col>
-          </a-row>
-        </a-card>
-
         <!-- 通用设置 -->
         <a-card class="desk-card mb-4" :bordered="false">
           <template #title>
@@ -191,6 +159,40 @@
           </a-row>
         </a-card>
 
+        <!-- 贸易设置 -->
+        <a-card class="desk-card mb-4" :bordered="false">
+          <template #title>
+            <div class="section-header">
+              <span class="section-title">{{ $t('contract.tradeSection') }}</span>
+              <span class="section-subtitle">{{ $t('contract.tradeSectionDesc') }}</span>
+            </div>
+          </template>
+          
+          <a-row :gutter="16">
+            <a-col :xs="24" :md="12">
+              <a-form-item :label="$t('contract.trade')" name="trade">
+                <a-select v-model:value="form.trade" :placeholder="$t('contract.selectTrade')" size="large" class="w-full">
+                  <a-select-option value="CIF">CIF</a-select-option>
+                  <a-select-option value="CFR">CFR</a-select-option>
+                  <a-select-option value="FOB">FOB</a-select-option>
+                </a-select>
+              </a-form-item>
+            </a-col>
+            <a-col :xs="24" :md="12">
+              <a-form-item :label="$t('contract.payment')" name="payment">
+                <a-select v-model:value="form.payment" :placeholder="$t('contract.selectPayment')" size="large" class="w-full">
+                  <a-select-option value="L/C">L/C</a-select-option>
+                  <a-select-option value="D/P">D/P</a-select-option>
+                  <a-select-option value="D/A">D/A</a-select-option>
+                  <a-select-option value="T/T">T/T</a-select-option>
+                </a-select>
+              </a-form-item>
+            </a-col>
+          </a-row>
+        </a-card>
+
+
+
         <!-- 合同设置 -->
         <a-card class="desk-card mb-6" :bordered="false">
           <template #title>
@@ -216,22 +218,6 @@
                 </template>
                 <a-input v-model:value="form.goodsNo" :placeholder="$t('contract.placeholderGoodsNo')" size="large" />
               </a-form-item>
-            </a-col>
-
-            <a-col :xs="24" :md="12">
-              <a-form-item :label="$t('contract.transactionVolume')" name="transactionVolume">
-                <a-input-number v-model:value="form.transactionVolume" :min="0" :precision="0" class="w-full"
-                  :placeholder="$t('contract.placeholderTransactionVolume')" size="large" />
-              </a-form-item>
-            </a-col>
-            <a-col :xs="24" :md="12">
-              <a-form-item :label="$t('contract.marketPrice')" name="marketPrice">
-                <a-input-number v-model:value="form.marketPrice" :min="0" :precision="2" class="w-full"
-                  :placeholder="$t('contract.placeholderMarketPrice')" size="large" />
-              </a-form-item>
-              <div v-if="marketGoodsDetail?.importPrice != null" class="rmb-tip">
-                {{ $t('contract.goodsImportPriceTip', { value: formatGoodsPrice(marketGoodsDetail.importPrice, marketGoodsDetail.importPriceUnit) }) }}
-              </div>
             </a-col>
 
             <a-col :xs="24" :md="12">
@@ -262,6 +248,25 @@
                 </a-select>
               </a-form-item>
             </a-col>
+
+
+            <a-col :xs="24" :md="12">
+              <a-form-item :label="$t('contract.transactionVolume')" name="transactionVolume">
+                <a-input-number v-model:value="form.transactionVolume" :min="0" :precision="0" class="w-full"
+                  :placeholder="$t('contract.placeholderTransactionVolume')" size="large" />
+              </a-form-item>
+            </a-col>
+            <a-col :xs="24" :md="12">
+              <a-form-item :label="$t('contract.marketPrice')" name="marketPrice">
+                <a-input-number v-model:value="form.marketPrice" :min="0" :precision="2" class="w-full"
+                  :placeholder="$t('contract.placeholderMarketPrice')" size="large" />
+              </a-form-item>
+              <div v-if="marketGoodsDetail?.importPrice != null" class="rmb-tip">
+                {{ $t('contract.goodsImportPriceTip', { value: formatGoodsPrice(marketGoodsDetail.importPrice, marketGoodsDetail.importPriceUnit) }) }}
+              </div>
+            </a-col>
+
+
 
             <a-col :xs="24" :md="12">
               <a-form-item name="exchangeRate">
@@ -329,6 +334,21 @@
               <a-form-item :label="$t('contract.fillDate')" name="fillDate">
                 <a-input v-model:value="form.fillDate" class="w-full"
                   :placeholder="$t('contract.placeholderFillDate')" size="large" />
+              </a-form-item>
+            </a-col>
+            <a-col :xs="24" :md="12">
+              <a-form-item :label="$t('contract.contractTotalAmount')" class="contract-total-stack-item">
+                <div class="contract-total-metrics">
+                  <span class="contract-total-metric-line">
+                    {{ $t('contract.contractTotalImportLine', { amount: contractTotalImportDisplay }) }} , {{ $t('contract.contractTotalRmbLine', { amount: contractTotalRmbDisplay }) }}
+                  </span>
+                </div>
+                <div class="contract-total-metrics contract-factory-row">
+                  <span class="contract-total-metric-line">
+                    {{ $t('contract.contractFactoryRmbLine', { amount: contractFactoryRmbDisplay }) }} , {{  contractFactoryRmbChineseDisplay }} 
+                  </span>
+                  
+                </div>
               </a-form-item>
             </a-col>
           </a-row>
@@ -458,16 +478,81 @@ import businessConfigApi from '../../apis/businessConfig';
 import marketGoodsApi from '../../apis/marketGoods';
 import { useGetCurrentInfo,useGetCrawlRate } from './hook';
 import { useListHarbors, useListInPort } from './hook';
+import { convertPriceToChinese } from '../../utils/priceConverter';
 
 const { t } = useI18n();
 const { getCurrentInfo, loading: loadingCurrentInfo, currentInfo: currentInfoCurrentInfo  } = useGetCurrentInfo();
 const { crawlRate, loading: loadingCrawlRate, getCrawlRate } = useGetCrawlRate();
+
+/**
+ * 金额展示：整数部分从右往左每四位用逗号分隔（如 1000000 -> 100,0000.00）
+ */
+function formatAmountFourDigitGrouping(value: number, fractionDigits = 2): string {
+  if (!Number.isFinite(value)) return '--';
+  const negative = value < 0;
+  const abs = Math.abs(value);
+  const fixed = abs.toFixed(fractionDigits);
+  const [intRaw, decPart] = fixed.split('.');
+  const intDigits = negative ? intRaw.slice(1) : intRaw;
+  const rev = intDigits.split('').reverse();
+  const groups: string[] = [];
+  for (let i = 0; i < rev.length; i += 4) {
+    groups.unshift(rev.slice(i, i + 4).reverse().join(''));
+  }
+  const intFormatted = groups.join(',');
+  const signed = negative ? `-${intFormatted}` : intFormatted;
+  return decPart !== undefined ? `${signed}.${decPart}` : signed;
+}
+
 const exportPriceRmb = computed(() => {
   const exportPrice = Number(form.value.exportPrice);
   const exchangeRate = Number(form.value.exchangeRate);
   if (!Number.isFinite(exportPrice) || !Number.isFinite(exchangeRate)) return '--';
-  return (exportPrice * exchangeRate).toFixed(2);
+  return formatAmountFourDigitGrouping(exportPrice * exchangeRate, 2);
 });
+
+/** 合同总金额：进口币种 = 交易数量 × 出口报价；人民币 = 交易数量 × 出口报价 × 进口方汇率 */
+const contractTotalImportDisplay = computed(() => {
+  const qty = Number(form.value.transactionVolume);
+  const price = Number(form.value.exportPrice);
+  const unit = (form.value.exportPriceUnit || '').trim();
+  if (!Number.isFinite(qty) || !Number.isFinite(price)) return '--';
+  const total = qty * price;
+  // const formatted = total.toFixed(2);
+  const formatted = formatAmountFourDigitGrouping(total, 2);
+  return unit ? `${formatted} ${unit}` : formatted;
+});
+
+const contractTotalRmbDisplay = computed(() => {
+  const qty = Number(form.value.transactionVolume);
+  const price = Number(form.value.exportPrice);
+  const rate = Number(form.value.exchangeRate);
+  if (!Number.isFinite(qty) || !Number.isFinite(price) || !Number.isFinite(rate)) return '--';
+  return formatAmountFourDigitGrouping(qty * price * rate, 2);
+});
+
+/** 工厂金额：工厂报价 × 交易数量（RMB） */
+const contractFactoryRmbDisplay = computed(() => {
+  const qty = Number(form.value.transactionVolume);
+  const supplierPrice = Number(form.value.supplierPrice);
+  if (!Number.isFinite(qty) || !Number.isFinite(supplierPrice)) return '--';
+  return formatAmountFourDigitGrouping(qty * supplierPrice, 2);
+});
+
+/** 工厂金额中文大写（财务大写元角分，与 Java PriceConverter 一致；与左侧金额同一数值、保留两位小数） */
+const contractFactoryRmbChineseDisplay = computed(() => {
+  const qty = Number(form.value.transactionVolume);
+  const supplierPrice = Number(form.value.supplierPrice);
+  if (!Number.isFinite(qty) || !Number.isFinite(supplierPrice)) return '';
+  const amount = Math.round(qty * supplierPrice * 100) / 100;
+  if (!Number.isFinite(amount) || amount < 0) return '';
+  try {
+    return convertPriceToChinese(amount);
+  } catch {
+    return '';
+  }
+});
+
 const handleGetCrawlRate = async () => {
   const hideLoading = message.loading(t('contract.msgFetchingRateAndCountry'), 0);
   try {
@@ -549,8 +634,12 @@ const handleGetGoodsDetail = async () => {
   try {
     const res = await marketGoodsApi.getByCodePost({
       baseUrl: form.value.baseUrl,
-      account: form.value.importAccount,
-      password: form.value.importPassword,
+      importerAccount: form.value.importAccount,
+      importerPassword: form.value.importPassword,
+      exporterAccount: form.value.exportAccount,
+      exporterPassword: form.value.exportPassword,
+      supplierAccount: form.value.supplierAccount,
+      supplierPassword: form.value.supplierPassword,
       code,
     });
     const data = unwrapGoodsData(res);
@@ -579,15 +668,15 @@ const handleCloseGoodsDetailModal = () => {
 
 const rules = computed(() => ({
   exportAccount: [{ required: true, message: t('contract.placeholderExportAccount'), trigger: 'blur' }],
-  exportPassword: [{ required: true, message: t('contract.placeholderExportPassword'), trigger: 'blur' }],
+  // exportPassword: [{ required: true, message: t('contract.placeholderExportPassword'), trigger: 'blur' }],
   importAccount: [{ required: true, message: t('contract.placeholderImportAccount'), trigger: 'blur' }],
-  importPassword: [{ required: true, message: t('contract.placeholderImportPassword'), trigger: 'blur' }],
+  // importPassword: [{ required: true, message: t('contract.placeholderImportPassword'), trigger: 'blur' }],
   supplierAccount: [{ required: true, message: t('contract.placeholderSupplierAccount'), trigger: 'blur' }],
-  supplierPassword: [{ required: true, message: t('contract.placeholderSupplierPassword'), trigger: 'blur' }],
+  // supplierPassword: [{ required: true, message: t('contract.placeholderSupplierPassword'), trigger: 'blur' }],
   negotiatingBankAccount: [{ required: true, message: t('contract.placeholderNegotiatingBankAccount'), trigger: 'blur' }],
-  negotiatingBankPassword: [{ required: true, message: t('contract.placeholderNegotiatingBankPassword'), trigger: 'blur' }],
+  // negotiatingBankPassword: [{ required: true, message: t('contract.placeholderNegotiatingBankPassword'), trigger: 'blur' }],
   issuingBankAccount: [{ required: true, message: t('contract.placeholderIssuingBankAccount'), trigger: 'blur' }],
-  issuingBankPassword: [{ required: true, message: t('contract.placeholderIssuingBankPassword'), trigger: 'blur' }],
+  // issuingBankPassword: [{ required: true, message: t('contract.placeholderIssuingBankPassword'), trigger: 'blur' }],
 }));
 
 const saving = ref(false);
@@ -733,5 +822,40 @@ onMounted(async () => {
 .goods-detail-desc {
   line-height: 1.5;
   white-space: pre-wrap;
+}
+
+.contract-total-stack-item :deep(.ant-form-item-control-input) {
+  min-height: auto;
+}
+
+.contract-total-metrics {
+  padding-top: 1px;
+}
+
+.contract-total-metric-line {
+  font-size: 13px;
+  line-height: 1.4;
+  color: #1677ff;
+}
+
+.contract-total-metric-line + .contract-total-metric-line {
+  margin-top: 6px;
+}
+
+.contract-factory-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+
+.contract-total-metric-chinese {
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--app-color-text-secondary);
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
 }
 </style>

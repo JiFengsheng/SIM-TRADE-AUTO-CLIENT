@@ -35,7 +35,7 @@ export const usePublishAds = () => {
 
   const publishAds = async (payload: AdvertisementDto) => {
     if (submitting.value) return;
-    if (!payload.account || !payload.password) {
+    if (!payload.account) {
       message.warning(t("advertisement.msgFillAccountPassword"));
       return;
     }
@@ -89,7 +89,7 @@ export const usePublishInfo = () => {
 
   const publishInfo = async (payload: PublishInfoDto) => {
     if (submitting.value) return;
-    if (!payload.account || !payload.password) {
+    if (!payload.account) {
       message.warning(t("advertisement.msgFillAccountPassword"));
       return;
     }

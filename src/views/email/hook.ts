@@ -146,7 +146,7 @@ export const useSendNormalEmail = () => {
   const sendNormalEmail = async (payload: EmailDto) => {
     if (sending.value) return;
 
-    if (!payload.senderAccount || !payload.senderPassword) {
+    if (!payload.senderAccount) {
       message.warning(t("email.msgFillAccountPassword"));
       return;
     }

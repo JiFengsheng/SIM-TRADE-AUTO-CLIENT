@@ -751,13 +751,21 @@ export interface GetMarketGoodsInfoRespVo {
  */
 export interface GetMarketReqVo {
   /** 账号 */
-  account?: string;
+  importerAccount?: string;
   /** 基础地址 */
   baseUrl?: string;
   /** 货品编码 */
   code?: string;
   /** 密码 */
-  password?: string;
+  importerPassword?: string;
+  /** 出口商账号 */
+  exporterAccount?: string;
+  /** 出口商密码 */
+  exporterPassword?: string;
+  /** 供应商账号 */
+  supplierAccount?: string;
+  /** 供应商密码 */
+  supplierPassword?: string;
 }
 
 /**

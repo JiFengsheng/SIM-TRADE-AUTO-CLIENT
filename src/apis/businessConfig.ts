@@ -13,7 +13,9 @@ const businessConfigApi = {
    * 创建业务基本配置
    */
   create(data: BusinessConfig) {
-    return request.post<boolean>("/sim-trade/businessConfig", data);
+    return request.post<boolean>("/sim-trade/businessConfig", data, {
+      timeout: 300000, // 300秒超时
+    });
   },
 
   /**
@@ -34,7 +36,9 @@ const businessConfigApi = {
    * 更新业务基本配置
    */
   update(id: string, data: BusinessConfig) {
-    return request.put<BusinessConfig>(`/sim-trade/businessConfig/${id}`, data);
+    return request.put<BusinessConfig>(`/sim-trade/businessConfig/${id}`, data,{
+      timeout: 300000, // 300秒超时
+    });
   },
 
   /**

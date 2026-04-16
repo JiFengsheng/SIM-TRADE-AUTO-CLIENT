@@ -34,7 +34,6 @@
             <a-form-item
               :label="$t('advertisement.labelPassword')"
               name="password"
-              :rules="[{ required: true, message: t('advertisement.rulePassword') }]"
             >
               <a-input-password
                 v-model:value="form.password"
