@@ -1,1 +1,13 @@
-"use strict";const n=require("electron");n.contextBridge.exposeInMainWorld("electronAPI",{copyImageToUserDir:e=>n.ipcRenderer.invoke("copy-image-to-user-dir",e),getAppConfig:()=>n.ipcRenderer.invoke("get-app-config"),saveAppConfig:e=>n.ipcRenderer.invoke("save-app-config",e),updateMenu:e=>n.ipcRenderer.invoke("update-menu",e),showContextMenu:e=>n.ipcRenderer.invoke("show-context-menu",e),getBackgroundConfig:()=>n.ipcRenderer.invoke("get-background-config"),saveBackgroundConfig:e=>n.ipcRenderer.invoke("save-background-config",e),runJar:e=>n.ipcRenderer.invoke("run-jar",e),stopJar:()=>n.ipcRenderer.invoke("stop-jar")});
+"use strict";
+const electron = require("electron");
+electron.contextBridge.exposeInMainWorld("electronAPI", {
+  copyImageToUserDir: (content) => electron.ipcRenderer.invoke("copy-image-to-user-dir", content),
+  getAppConfig: () => electron.ipcRenderer.invoke("get-app-config"),
+  saveAppConfig: (config) => electron.ipcRenderer.invoke("save-app-config", config),
+  updateMenu: (language) => electron.ipcRenderer.invoke("update-menu", language),
+  showContextMenu: (conversationId) => electron.ipcRenderer.invoke("show-context-menu", conversationId),
+  getBackgroundConfig: () => electron.ipcRenderer.invoke("get-background-config"),
+  saveBackgroundConfig: (config) => electron.ipcRenderer.invoke("save-background-config", config),
+  runJar: (port) => electron.ipcRenderer.invoke("run-jar", port),
+  stopJar: () => electron.ipcRenderer.invoke("stop-jar")
+});

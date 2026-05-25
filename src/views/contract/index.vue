@@ -24,6 +24,15 @@
                 />
               </a-form-item>
             </a-col>
+            <a-col :xs="24" :md="24">
+              <a-form-item :label="$t('contract.versionLabel')" name="version">
+                <a-select v-model:value="form.version" :placeholder="$t('contract.selectVersion')" size="large" class="w-full">
+                  <a-select-option :value="6">6</a-select-option>
+                  <a-select-option :value="5.1">5.1</a-select-option>
+                  <a-select-option :value="5.0">5.0</a-select-option>
+                </a-select>
+              </a-form-item>
+            </a-col>
           </a-row>
         </a-card>
 
@@ -277,7 +286,7 @@
                 <a-input-number
                   v-model:value="form.exchangeRate"
                   :min="0"
-                  :precision="4"
+                  :precision="6"
                   class="w-full"
                   :placeholder="$t('contract.placeholderExchangeRate')"
                   size="large"
@@ -289,7 +298,7 @@
                 <a-input-number
                   v-model:value="form.premiumRate"
                   :min="0"
-                  :precision="4"
+                  :precision="6"
                   class="w-full"
                   :placeholder="$t('contract.placeholderPremiumRate')"
                   size="large"
@@ -326,7 +335,7 @@
                   <span>{{ $t('contract.usdRate') }}</span>
                   <span><a-button type="link" size="small" @click="handleGetCrawlRate">{{ $t('contract.getBtn') }}</a-button></span>
                 </template>
-                <a-input-number v-model:value="form.usdRate" :min="0" :precision="4" class="w-full"
+                <a-input-number v-model:value="form.usdRate" :min="0" :precision="6" class="w-full"
                   :placeholder="$t('contract.placeholderUsdRate')" size="large" />
               </a-form-item>
             </a-col>

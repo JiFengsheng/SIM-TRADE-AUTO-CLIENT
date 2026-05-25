@@ -127,6 +127,8 @@ export interface BusinessConfig {
   shippingMark?: string;
   /** 填制日期 */
   fillDate?: string;
+  /** 版本 */
+  version?: number;
 }
 
 /**
@@ -429,6 +431,8 @@ export interface ContractInfo {
   shippingMark?: string;
   /** 填制日期 */
   fillDate?: string;
+  /** 版本 */
+  version?: number;
 }
 
 /**

@@ -428,6 +428,8 @@ export default {
     urlSectionDesc: '配置外贸实习平台的域名地址',
     baseUrlLabel: '外贸实习平台网址',
     baseUrlPlaceholder: '请输入外贸实习平台的域名地址（示例：https://course01.simtrade.net）',
+    versionLabel: '版本设置',
+    selectVersion: '请选择版本',
     accountSection: '账号设置',
     accountSectionDesc: '配置贸易相关参与方的账号与密码',
     exportAccount: '出口商账号',

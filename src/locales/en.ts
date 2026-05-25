@@ -428,6 +428,8 @@ export default {
     urlSectionDesc: 'Configure the Sim Trade platform domain',
     baseUrlLabel: 'Sim Trade platform URL',
     baseUrlPlaceholder: 'Enter platform URL (e.g. https://course01.simtrade.net)',
+    versionLabel: 'Version',
+    selectVersion: 'Please select a version',
     accountSection: 'Account Settings',
     accountSectionDesc: 'Configure accounts and passwords for trade parties',
     exportAccount: 'Exporter account',
