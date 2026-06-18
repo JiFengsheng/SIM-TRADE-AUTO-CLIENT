@@ -33,6 +33,50 @@
                 </a-select>
               </a-form-item>
             </a-col>
+            <a-col :xs="24" :md="24">
+              <a-form-item :label="$t('contract.useVpnLabel')" name="useVpn">
+                <a-switch
+                  v-model:checked="form.useVpn"
+                  :checked-value="1"
+                  :un-checked-value="0"
+                  :checked-children="$t('contract.useVpnOn')"
+                  :un-checked-children="$t('contract.useVpnOff')"
+                />
+              </a-form-item>
+            </a-col>
+            <a-col :xs="24" :md="24">
+              <a-form-item :label="$t('contract.vpnUrlLabel')">
+                <div class="vpn-setting-row">
+                  <a-input
+                    v-model:value="form.vpnUrl"
+                    :placeholder="$t('contract.vpnUrlPlaceholder')"
+                    size="large"
+                    :disabled="(form.useVpn ?? 0) !== 1"
+                    allow-clear
+                  />
+                  <a-button
+                    type="primary"
+                    size="large"
+                    :loading="vpnLoginLoading"
+                    :disabled="(form.useVpn ?? 0) !== 1"
+                    @click="handleOpenVpnLogin"
+                  >
+                    {{ $t('contract.vpnSetupBtn') }}
+                  </a-button>
+                </div>
+              </a-form-item>
+            </a-col>
+            <a-col :xs="24" :md="24">
+              <a-form-item :label="$t('contract.vpnCookieLabel')">
+                <a-textarea
+                  v-model:value="form.cookies"
+                  :rows="2"
+                  :placeholder="$t('contract.vpnCookiePlaceholder')"
+                  :disabled="(form.useVpn ?? 0) !== 1"
+                  allow-clear
+                />
+              </a-form-item>
+            </a-col>
           </a-row>
         </a-card>
 
@@ -363,6 +407,61 @@
           </a-row>
         </a-card>
 
+        <!-- 港口信息设置 -->
+        <a-card class="desk-card mb-4" :bordered="false">
+          <template #title>
+            <div class="section-header">
+              <span class="section-title">{{ $t('contract.harborSection') }}</span>
+              <span class="section-subtitle">{{ $t('contract.harborSectionDesc') }}</span>
+            </div>
+          </template>
+
+          <a-spin :spinning="harborInfoLoading">
+            <a-row :gutter="16">
+              <a-col :xs="24" :md="12">
+                <a-form-item :label="$t('contract.mtq')" name="mtq">
+                  <a-input-number v-model:value="form.mtq" :min="0" class="w-full" :placeholder="$t('contract.placeholderMtq')" size="large" />
+                </a-form-item>
+              </a-col>
+              <a-col :xs="24" :md="12">
+                <a-form-item :label="$t('contract.tne')" name="tne">
+                  <a-input-number v-model:value="form.tne" :min="0" class="w-full" :placeholder="$t('contract.placeholderTne')" size="large" />
+                </a-form-item>
+              </a-col>
+              <a-col :xs="24" :md="12">
+                <a-form-item :label="$t('contract.freightTwenty')" name="freightTwenty">
+                  <a-input-number v-model:value="form.freightTwenty" :min="0" :precision="2" class="w-full" :placeholder="$t('contract.placeholderFreightTwenty')" size="large" />
+                </a-form-item>
+              </a-col>
+              <a-col :xs="24" :md="12">
+                <a-form-item :label="$t('contract.freightForty')" name="freightForty">
+                  <a-input-number v-model:value="form.freightForty" :min="0" :precision="2" class="w-full" :placeholder="$t('contract.placeholderFreightForty')" size="large" />
+                </a-form-item>
+              </a-col>
+              <a-col :xs="24" :md="12">
+                <a-form-item :label="$t('contract.portSurchargeTwenty')" name="portSurchargeTwenty">
+                  <a-input-number v-model:value="form.portSurchargeTwenty" :min="0" :precision="2" class="w-full" :placeholder="$t('contract.placeholderPortSurchargeTwenty')" size="large" />
+                </a-form-item>
+              </a-col>
+              <a-col :xs="24" :md="12">
+                <a-form-item :label="$t('contract.portSurchargeForty')" name="portSurchargeForty">
+                  <a-input-number v-model:value="form.portSurchargeForty" :min="0" :precision="2" class="w-full" :placeholder="$t('contract.placeholderPortSurchargeForty')" size="large" />
+                </a-form-item>
+              </a-col>
+              <a-col :xs="24" :md="12">
+                <a-form-item :label="$t('contract.fuelTwenty')" name="fuelTwenty">
+                  <a-input-number v-model:value="form.fuelTwenty" :min="0" :precision="2" class="w-full" :placeholder="$t('contract.placeholderFuelTwenty')" size="large" />
+                </a-form-item>
+              </a-col>
+              <a-col :xs="24" :md="12">
+                <a-form-item :label="$t('contract.fuelForty')" name="fuelForty">
+                  <a-input-number v-model:value="form.fuelForty" :min="0" :precision="2" class="w-full" :placeholder="$t('contract.placeholderFuelForty')" size="large" />
+                </a-form-item>
+              </a-col>
+            </a-row>
+          </a-spin>
+        </a-card>
+
         <!-- 其他设置 -->
         <a-card class="desk-card mb-6" :bordered="false">
           <template #title>
@@ -482,12 +581,15 @@ import { ref, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useI18n } from 'vue-i18n';
 import { message } from 'ant-design-vue';
-import type { BusinessConfig, GetMarketGoodsInfoRespVo, MarketGoodsInfo } from '../../apis/types';
+import type { BusinessConfig, GetMarketGoodsInfoRespVo, HarborInfo, MarketGoodsInfo } from '../../apis/types';
 import businessConfigApi from '../../apis/businessConfig';
+import harborApi from '../../apis/harbor';
 import marketGoodsApi from '../../apis/marketGoods';
 import { useGetCurrentInfo,useGetCrawlRate } from './hook';
 import { useListHarbors, useListInPort } from './hook';
 import { convertPriceToChinese } from '../../utils/priceConverter';
+
+const VPN_SETTINGS_STORAGE_KEY = 'contract-vpn-settings';
 
 const { t } = useI18n();
 const { getCurrentInfo, loading: loadingCurrentInfo, currentInfo: currentInfoCurrentInfo  } = useGetCurrentInfo();
@@ -569,13 +671,20 @@ const handleGetCrawlRate = async () => {
       baseUrl: form.value.baseUrl,
       account: form.value.importAccount,
       password: form.value.importPassword,
+      vpnCookies: form.value.useVpn ? form.value.cookies : '',
     });
     form.value.usdRate = crawlRate.value.usdRate ?? form.value.usdRate;
     form.value.exportPriceUnit = crawlRate.value.exportPriceUnit ?? form.value.exportPriceUnit;
     form.value.exchangeRate = crawlRate.value.exchangeRate ?? form.value.exchangeRate;
     form.value.importCityEng = crawlRate.value.countryEnglish ?? form.value.importCityEng;
     form.value.importCity = crawlRate.value.countryChinese ?? form.value.importCity;
-    await fetchHarbors(crawlRate.value.countryEnglish);
+    await fetchHarbors(crawlRate.value.countryEnglish,form.value.baseUrl,form.value.useVpn ? form.value.cookies : '',form.value.exportAccount,form.value.exportPassword);
+    await fetchInPort({
+      baseUrl: form.value.baseUrl,
+      vpnCookies: form.value.useVpn ? form.value.cookies : '',
+      exporterAccount: form.value.exportAccount,
+      exporterPassword: form.value.exportPassword,
+    });
   } catch {
     // 错误提示由 hook 内 getCrawlRate 的 message.error 统一处理
   } finally {
@@ -585,16 +694,61 @@ const handleGetCrawlRate = async () => {
 
 const { loading: harborsLoading, harbors, engToChn, chnToEng, fetchHarbors } = useListHarbors();
 const { loading: inPortLoading, inPort, engToChn: inPortEngToChn, chnToEng: inPortChnToEng, fetchInPort } = useListInPort();
-const handleImportPortChange = (event: any) => {
-  console.log("event",event)
+const harborInfoLoading = ref(false);
+
+const unwrapHarborData = (res: unknown): HarborInfo | null => {
+  if (res && typeof res === 'object' && 'data' in (res as Record<string, unknown>)) {
+    return (res as { data: HarborInfo }).data ?? null;
+  }
+  return (res as HarborInfo) ?? null;
+};
+
+const applyHarborInfoToForm = (info: HarborInfo) => {
+  form.value.mtq = info.mtq;
+  form.value.tne = info.tne;
+  form.value.freightTwenty = info.freightTwenty;
+  form.value.freightForty = info.freightForty;
+  form.value.portSurchargeTwenty = info.portSurchargeTwenty;
+  form.value.portSurchargeForty = info.portSurchargeForty;
+  form.value.fuelTwenty = info.fuelTwenty;
+  form.value.fuelForty = info.fuelForty;
+};
+
+const fetchHarborInfoByPortEnglish = async (harborPortEnglish?: string) => {
+  const port = harborPortEnglish?.trim();
+  if (!port) return;
+  harborInfoLoading.value = true;
+  try {
+    const res = await harborApi.getByHarborPortEnglish({
+      harborPortEnglish: port,
+      baseUrl: form.value.baseUrl,
+      vpnCookies: form.value.useVpn ? form.value.cookies : '',
+      exporterAccount: form.value.exportAccount,
+      exporterPassword: form.value.exportPassword,
+    });
+    const info = unwrapHarborData(res);
+    if (info) {
+      applyHarborInfoToForm(info);
+    }
+  } catch (error) {
+    console.error('获取港口信息失败', error);
+    message.error(t('contract.msgHarborInfoFail'));
+  } finally {
+    harborInfoLoading.value = false;
+  }
+};
+
+const handleImportPortChange = async (event: string) => {
   form.value.importPort = event;
   form.value.importPortEng = chnToEng.value[event] || form.value.importPortEng;
-}
-const handleImportPortEngChange = (event: any) => {
-  console.log("event",event)
+  await fetchHarborInfoByPortEnglish(form.value.importPortEng);
+};
+
+const handleImportPortEngChange = async (event: string) => {
   form.value.importPortEng = event;
   form.value.importPort = engToChn.value[event] || form.value.importPort;
-}
+  await fetchHarborInfoByPortEnglish(form.value.importPortEng);
+};
 
 const handleExportPortChange = (event: any) => {
   console.log("event",event)
@@ -609,7 +763,75 @@ const handleExportPortEngChange = (event: any) => {
 const form = ref<BusinessConfig>({
   exportPriceUnit: 'USD',
   premiumRate: 0.0088,
+  useVpn: 0,
 });
+const vpnLoginLoading = ref(false);
+
+const loadVpnSettings = () => {
+  try {
+    const raw = window.localStorage.getItem(VPN_SETTINGS_STORAGE_KEY);
+    if (!raw) return;
+    const parsed = JSON.parse(raw) as { useVpn?: number; vpnUrl?: string; cookies?: string };
+    if (typeof parsed.useVpn === 'number') {
+      form.value.useVpn = parsed.useVpn;
+    }
+    form.value.vpnUrl = parsed.vpnUrl || form.value.vpnUrl;
+    form.value.cookies = parsed.cookies || form.value.cookies;
+  } catch (error) {
+    console.warn('读取 VPN 本地配置失败', error);
+  }
+};
+
+const persistVpnSettings = () => {
+  try {
+    window.localStorage.setItem(
+      VPN_SETTINGS_STORAGE_KEY,
+      JSON.stringify({
+        useVpn: typeof form.value.useVpn === 'number' ? form.value.useVpn : 0,
+        vpnUrl: form.value.vpnUrl || '',
+        cookies: form.value.cookies || '',
+      }),
+    );
+  } catch (error) {
+    console.warn('保存 VPN 本地配置失败', error);
+  }
+};
+
+const handleOpenVpnLogin = async () => {
+  if ((form.value.useVpn ?? 0) !== 1) {
+    message.warning(t('contract.msgEnableVpnFirst'));
+    return;
+  }
+  const vpnUrl = form.value.vpnUrl?.trim();
+  if (!vpnUrl) {
+    message.warning(t('contract.msgVpnUrlRequired'));
+    return;
+  }
+  if (!window.electronAPI?.openVpnAuthWindow) {
+    message.error(t('contract.msgVpnFeatureUnavailable'));
+    return;
+  }
+
+  vpnLoginLoading.value = true;
+  try {
+    const result = await window.electronAPI.openVpnAuthWindow({
+      url: vpnUrl,
+      cookieNames: [],
+    });
+    if (!result?.success || !result.cookie) {
+      message.warning(result?.error || t('contract.msgVpnCookieFetchFail'));
+      return;
+    }
+    form.value.cookies = result.cookie;
+    persistVpnSettings();
+    message.success(t('contract.msgVpnCookieFetchSuccess'));
+  } catch (error) {
+    console.error('VPN 登录并获取 Cookie 失败', error);
+    message.error(t('contract.msgVpnCookieFetchFail'));
+  } finally {
+    vpnLoginLoading.value = false;
+  }
+};
 
 // 商品详情弹窗：弹窗内展示的数据 / 关闭后用于下方蓝色提示的数据
 const goodsDetailModalVisible = ref(false);
@@ -650,6 +872,7 @@ const handleGetGoodsDetail = async () => {
       supplierAccount: form.value.supplierAccount,
       supplierPassword: form.value.supplierPassword,
       code,
+      vpnCookies: form.value.useVpn ? form.value.cookies : '',
     });
     const data = unwrapGoodsData(res);
     goodsDetailForModal.value = data;
@@ -705,6 +928,7 @@ const loadConfig = async () => {
       form.value = {
         exportPriceUnit: 'USD',
         premiumRate: 0.0088,
+        useVpn: form.value.useVpn ?? 0,
         ...res,
       };
     }
@@ -725,6 +949,7 @@ const handleSave = async () => {
     } else {
       await businessConfigApi.create(payload);
     }
+    persistVpnSettings();
     message.success(t('contract.msgSaveSuccess'));
     await loadConfig();
   } catch (error) {
@@ -736,10 +961,16 @@ const handleSave = async () => {
 };
 
 onMounted(async () => {
+  loadVpnSettings();
   await loadConfig();
   await getCurrentInfo();
-  await fetchHarbors(currentInfoCurrentInfo.value.importCityEng);
-  await fetchInPort();
+  await fetchHarbors(currentInfoCurrentInfo.value.importCityEng,form.value.baseUrl,form.value.useVpn ? form.value.cookies : '',form.value.exportAccount,form.value.exportPassword);
+  await fetchInPort({
+    baseUrl: form.value.baseUrl,
+    vpnCookies: form.value.useVpn ? form.value.cookies : '',
+    exporterAccount: form.value.exportAccount,
+    exporterPassword: form.value.exportPassword,
+  });
   console.log("currentInfo",currentInfoCurrentInfo.value)
   console.log("harbors",harbors.value)
   console.log("engToChn",engToChn.value)
@@ -800,6 +1031,16 @@ onMounted(async () => {
 
 .ml-1 {
   margin-left: 4px;
+}
+
+.vpn-setting-row {
+  display: flex;
+  gap: 12px;
+}
+
+.vpn-setting-row :deep(.ant-input-affix-wrapper),
+.vpn-setting-row :deep(.ant-input) {
+  flex: 1;
 }
 
 .goods-detail-content {

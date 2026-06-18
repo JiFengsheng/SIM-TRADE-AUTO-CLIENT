@@ -3199,24 +3199,80 @@
                 "deprecated": false
             }
         },
-        "/harbor-info/listByCountry": {
-            "get": {
+        "/harbor-info/getByHarborPortEnglish": {
+            "post": {
                 "tags": [
                     "港口信息接口"
                 ],
-                "summary": "根据国家查询港口信息",
-                "description": "根据国家查询港口信息记录",
-                "operationId": "listByCountryUsingGET",
+                "summary": "根据港口英文名称获取港口信息",
+                "description": "根据港口英文名称获取港口信息记录",
+                "operationId": "getByHarborPortEnglishUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "*/*"
                 ],
                 "parameters": [
                     {
-                        "name": "country",
-                        "in": "query",
-                        "description": "country",
-                        "required": false,
-                        "type": "string"
+                        "in": "body",
+                        "name": "reqVo",
+                        "description": "reqVo",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/GetByHarborPortEnglishReqVo",
+                            "originalRef": "GetByHarborPortEnglishReqVo"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/通用响应结果«HarborInfo对象»",
+                            "originalRef": "通用响应结果«HarborInfo对象»"
+                        }
+                    },
+                    "201": {
+                        "description": "Created"
+                    },
+                    "401": {
+                        "description": "Unauthorized"
+                    },
+                    "403": {
+                        "description": "Forbidden"
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                },
+                "deprecated": false
+            }
+        },
+        "/harbor-info/listByCountry": {
+            "post": {
+                "tags": [
+                    "港口信息接口"
+                ],
+                "summary": "根据国家查询港口信息",
+                "description": "根据国家查询港口信息记录",
+                "operationId": "listByCountryUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "listByCountryReqVo",
+                        "description": "listByCountryReqVo",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ListByCountryReqVo",
+                            "originalRef": "ListByCountryReqVo"
+                        }
                     }
                 ],
                 "responses": {
@@ -3226,6 +3282,9 @@
                             "$ref": "#/definitions/通用响应结果«List«HarborInfo对象»»",
                             "originalRef": "通用响应结果«List«HarborInfo对象»»"
                         }
+                    },
+                    "201": {
+                        "description": "Created"
                     },
                     "401": {
                         "description": "Unauthorized"
@@ -3241,15 +3300,30 @@
             }
         },
         "/harbor-info/listInPort": {
-            "get": {
+            "post": {
                 "tags": [
                     "港口信息接口"
                 ],
                 "summary": "获取国内港口信息",
                 "description": "获取国内港口信息记录",
-                "operationId": "listInPortUsingGET",
+                "operationId": "listInPortUsingPOST",
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
                     "*/*"
+                ],
+                "parameters": [
+                    {
+                        "in": "body",
+                        "name": "listInPortReqVo",
+                        "description": "listInPortReqVo",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ListInPortReqVo",
+                            "originalRef": "ListInPortReqVo"
+                        }
+                    }
                 ],
                 "responses": {
                     "200": {
@@ -3258,6 +3332,9 @@
                             "$ref": "#/definitions/通用响应结果«List«HarborInfo对象»»",
                             "originalRef": "通用响应结果«List«HarborInfo对象»»"
                         }
+                    },
+                    "201": {
+                        "description": "Created"
                     },
                     "401": {
                         "description": "Unauthorized"
@@ -4389,6 +4466,9 @@
                     "type": "number",
                     "description": "从价消费税率（默认0%）"
                 },
+                "cookies": {
+                    "type": "string"
+                },
                 "createTime": {
                     "type": "string",
                     "format": "date-time",
@@ -4449,6 +4529,22 @@
                 "fillDate": {
                     "type": "string",
                     "description": "填表日期"
+                },
+                "freightForty": {
+                    "type": "number",
+                    "description": "40尺集装箱基本运费"
+                },
+                "freightTwenty": {
+                    "type": "number",
+                    "description": "20尺集装箱基本运费"
+                },
+                "fuelForty": {
+                    "type": "number",
+                    "description": "40尺集装箱燃油附加费"
+                },
+                "fuelTwenty": {
+                    "type": "number",
+                    "description": "20尺集装箱燃油附加费"
                 },
                 "goodsChineseName": {
                     "type": "string",
@@ -4527,6 +4623,10 @@
                     "type": "number",
                     "description": "进口商市场报价"
                 },
+                "mtq": {
+                    "type": "number",
+                    "description": "MTQ"
+                },
                 "negotiatingBankAccount": {
                     "type": "string",
                     "description": "出口地银行账号"
@@ -4546,6 +4646,14 @@
                 "payment": {
                     "type": "string",
                     "description": "结算方式（L/C/T/T/D/P/D/A）"
+                },
+                "portSurchargeForty": {
+                    "type": "number",
+                    "description": "40尺集装箱港口附加费"
+                },
+                "portSurchargeTwenty": {
+                    "type": "number",
+                    "description": "20尺集装箱港口附加费"
                 },
                 "premiumRate": {
                     "type": "number",
@@ -4579,6 +4687,10 @@
                     "type": "number",
                     "description": "退税率（默认13%）"
                 },
+                "tne": {
+                    "type": "number",
+                    "description": "TNE"
+                },
                 "trade": {
                     "type": "string",
                     "description": "贸易术语（CIF/CFR/FOB）"
@@ -4592,6 +4704,11 @@
                     "type": "number",
                     "description": "USD汇率"
                 },
+                "useVpn": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "是否使用VPN"
+                },
                 "vatRate": {
                     "type": "number",
                     "description": "增值税税率（默认13%）"
@@ -4599,6 +4716,10 @@
                 "version": {
                     "type": "string",
                     "description": "版本"
+                },
+                "vpnUrl": {
+                    "type": "string",
+                    "description": "VPN接口地址"
                 }
             },
             "title": "BusinessConfig对象",
@@ -4614,6 +4735,10 @@
                 "abbreviationEnglish": {
                     "type": "string",
                     "description": "简称（英文）"
+                },
+                "account": {
+                    "type": "string",
+                    "description": "账号"
                 },
                 "accountCode": {
                     "type": "string",
@@ -4662,6 +4787,10 @@
                 "legalPersonEnglish": {
                     "type": "string",
                     "description": "企业法人（英文）"
+                },
+                "password": {
+                    "type": "string",
+                    "description": "密码"
                 },
                 "phone": {
                     "type": "string",
@@ -4728,6 +4857,9 @@
                 "contractId": {
                     "type": "string",
                     "description": "合同主键ID"
+                },
+                "cookies": {
+                    "type": "string"
                 },
                 "createTime": {
                     "type": "string",
@@ -4811,6 +4943,22 @@
                     "type": "string",
                     "description": "填表日期"
                 },
+                "freightForty": {
+                    "type": "number",
+                    "description": "40尺集装箱基本运费"
+                },
+                "freightTwenty": {
+                    "type": "number",
+                    "description": "20尺集装箱基本运费"
+                },
+                "fuelForty": {
+                    "type": "number",
+                    "description": "40尺集装箱燃油附加费"
+                },
+                "fuelTwenty": {
+                    "type": "number",
+                    "description": "20尺集装箱燃油附加费"
+                },
                 "goodsChineseName": {
                     "type": "string",
                     "description": "商品中文名称"
@@ -4884,6 +5032,10 @@
                     "type": "number",
                     "description": "进口商市场报价"
                 },
+                "mtq": {
+                    "type": "number",
+                    "description": "MTQ"
+                },
                 "negotiatingBankAccount": {
                     "type": "string",
                     "description": "出口地银行账号"
@@ -4903,6 +5055,14 @@
                 "payment": {
                     "type": "string",
                     "description": "结算方式（L/C/T/T/D/P/D/A）"
+                },
+                "portSurchargeForty": {
+                    "type": "number",
+                    "description": "40尺集装箱港口附加费"
+                },
+                "portSurchargeTwenty": {
+                    "type": "number",
+                    "description": "20尺集装箱港口附加费"
                 },
                 "premiumRate": {
                     "type": "number",
@@ -4940,6 +5100,10 @@
                     "type": "number",
                     "description": "退税率（默认13%）"
                 },
+                "tne": {
+                    "type": "number",
+                    "description": "TNE"
+                },
                 "trade": {
                     "type": "string",
                     "description": "贸易术语（CIF/CFR/FOB）"
@@ -4953,6 +5117,11 @@
                     "type": "number",
                     "description": "USD汇率"
                 },
+                "useVpn": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "是否使用VPN"
+                },
                 "vatRate": {
                     "type": "number",
                     "description": "增值税税率（默认13%）"
@@ -4960,6 +5129,10 @@
                 "version": {
                     "type": "string",
                     "description": "版本"
+                },
+                "vpnUrl": {
+                    "type": "string",
+                    "description": "VPN接口地址"
                 }
             },
             "title": "ContractInfo对象",
@@ -5344,6 +5517,27 @@
             "title": "FulfillmentProcessType对象",
             "description": "FulfillmentProcessType对象"
         },
+        "GetByHarborPortEnglishReqVo": {
+            "type": "object",
+            "properties": {
+                "baseUrl": {
+                    "type": "string"
+                },
+                "exporterAccount": {
+                    "type": "string"
+                },
+                "exporterPassword": {
+                    "type": "string"
+                },
+                "harborPortEnglish": {
+                    "type": "string"
+                },
+                "vpnCookies": {
+                    "type": "string"
+                }
+            },
+            "title": "GetByHarborPortEnglishReqVo"
+        },
         "GetCrawlRateReqVo": {
             "type": "object",
             "properties": {
@@ -5354,6 +5548,9 @@
                     "type": "string"
                 },
                 "password": {
+                    "type": "string"
+                },
+                "vpnCookies": {
                     "type": "string"
                 }
             },
@@ -5384,6 +5581,9 @@
                     "type": "string"
                 },
                 "supplierPassword": {
+                    "type": "string"
+                },
+                "vpnCookies": {
                     "type": "string"
                 }
             },
@@ -5698,6 +5898,45 @@
                 }
             },
             "title": "IssueLoanReqVo"
+        },
+        "ListByCountryReqVo": {
+            "type": "object",
+            "properties": {
+                "baseUrl": {
+                    "type": "string"
+                },
+                "country": {
+                    "type": "string"
+                },
+                "exporterAccount": {
+                    "type": "string"
+                },
+                "exporterPassword": {
+                    "type": "string"
+                },
+                "vpnCookies": {
+                    "type": "string"
+                }
+            },
+            "title": "ListByCountryReqVo"
+        },
+        "ListInPortReqVo": {
+            "type": "object",
+            "properties": {
+                "baseUrl": {
+                    "type": "string"
+                },
+                "exporterAccount": {
+                    "type": "string"
+                },
+                "exporterPassword": {
+                    "type": "string"
+                },
+                "vpnCookies": {
+                    "type": "string"
+                }
+            },
+            "title": "ListInPortReqVo"
         },
         "Map«string,List«FulfillmentProcessStep对象»»": {
             "type": "object",

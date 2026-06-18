@@ -11,6 +11,19 @@ export interface BackgroundConfig {
   autoStart: boolean;
 }
 
+export interface OpenVpnAuthPayload {
+  url: string;
+  cookieNames?: string[];
+}
+
+export interface OpenVpnAuthResult {
+  success: boolean;
+  cookie?: string;
+  cookies?: Record<string, string>;
+  currentUrl?: string;
+  error?: string;
+}
+
 export interface IElectronAPI {
 
   getAppConfig: () => Promise<AppConfig>;
@@ -24,6 +37,7 @@ export interface IElectronAPI {
 
   runJar: (port?: number) => Promise<{ success: boolean; error?: string }>;
   stopJar: () => Promise<{ success: boolean; error?: string }>;
+  openVpnAuthWindow: (payload: OpenVpnAuthPayload) => Promise<OpenVpnAuthResult>;
 
 }
 
@@ -34,7 +48,7 @@ declare module 'node-cmd' {
     run(
       command: string,
       callback?: (error: ExecException | null, data: string, stderr: string) => void
-    ): any;
+    ): unknown;
     runSync(command: string): {
       data: string | null;
       err: string | null;

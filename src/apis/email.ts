@@ -7,7 +7,9 @@ const emailApi = {
    * 对应文档：GET /email/getEmailContent
    */
   getEmailContent() {
-    return request.get<EmailTemplateDto>("/sim-trade/email/getEmailContent");
+    return request.get<EmailTemplateDto>("/sim-trade/email/getEmailContent", {
+      timeout: 300000, // 300秒超时
+    });
   },
 
   /**
@@ -51,7 +53,7 @@ const emailApi = {
    */
   readEmails(data: ReadEmailReqVo) {
     return request.post<boolean>("/sim-trade/email/readEmails", data, {
-      timeout: 120000, // 120秒超时
+      timeout: 300000, // 300秒超时
     });
   },
 

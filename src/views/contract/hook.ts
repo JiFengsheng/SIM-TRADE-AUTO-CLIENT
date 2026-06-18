@@ -11,6 +11,7 @@ import type {
   ContractTaskHistory,
   CrawlRateRespVo,
   HarborInfo,
+  ListInPortReqVo,
 } from "../../apis/types";
 import businessConfigApi from "../../apis/businessConfig";
 import harborApi from "../../apis/harbor";
@@ -59,10 +60,10 @@ export const useListHarbors = () => {
   const harbors = ref<HarborInfo[]>([]);
   const engToChn = ref<Record<string, string>>({});
   const chnToEng = ref<Record<string, string>>({});
-  const fetchHarbors = async (country?: string) => {
+  const fetchHarbors = async (country?: string,baseUrl?: string,vpnCookies?: string,exporterAccount?: string,exporterPassword?: string) => {
     loading.value = true;
     try {
-      const res = unwrapApiData<HarborInfo[]>(await harborApi.listByCountry({ country }));
+      const res = unwrapApiData<HarborInfo[]>(await harborApi.listByCountry({ country,baseUrl,vpnCookies,exporterAccount,exporterPassword }));
       harbors.value = res as HarborInfo[];
       engToChn.value = res.reduce((acc, harbor) => {
         acc[harbor.countryEnglish] = harbor.countryChinese;
@@ -98,10 +99,10 @@ export const useListInPort = () => {
   const inPort = ref<HarborInfo[]>([]);
   const engToChn = ref<Record<string, string>>({});
   const chnToEng = ref<Record<string, string>>({});
-  const fetchInPort = async () => {
+  const fetchInPort = async (params:ListInPortReqVo) => {
     loading.value = true;
     try {
-      const res = unwrapApiData<HarborInfo[]>(await harborApi.listInPort());
+      const res = unwrapApiData<HarborInfo[]>(await harborApi.listInPort(params));
       inPort.value = res as HarborInfo[];
       engToChn.value = res.reduce((acc, harbor) => {
         acc[harbor.harborPortEnglish] = harbor.harborPortChinese;

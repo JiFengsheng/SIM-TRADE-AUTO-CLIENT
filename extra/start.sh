@@ -41,4 +41,4 @@ fi
 cd "$APP_HOME/service" || exit 1
 
 # Run the JAR file from the service directory
-"$EXECUTABLE" -jar "$APP_HOME/service/sim-trade-auto-sys-1.0-SNAPSHOT.jar"  --server.port=$1
+"$EXECUTABLE" -Djava.net.preferIPv4Stack=true -jar "$APP_HOME/service/sim-trade-auto-sys-1.0-SNAPSHOT.jar"  --server.port=$1

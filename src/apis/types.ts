@@ -129,6 +129,25 @@ export interface BusinessConfig {
   fillDate?: string;
   /** 版本 */
   version?: number;
+  useVpn?: number;
+  vpnUrl?: string;
+  cookies?: string;
+  /** 40尺集装箱基本运费 */
+  freightForty?: number;
+  /** 20尺集装箱基本运费 */
+  freightTwenty?: number;
+  /** 40尺集装箱燃油附加费 */
+  fuelForty?: number;
+  /** 20尺集装箱燃油附加费 */
+  fuelTwenty?: number;
+  /** MTQ代码 */
+  mtq?: number;
+  /** 40尺集装箱港口附加费 */
+  portSurchargeForty?: number;
+  /** 20尺集装箱港口附加费 */
+  portSurchargeTwenty?: number;
+  /** TNE代码 */
+  tne?: number;
 }
 
 /**
@@ -223,6 +242,8 @@ export interface CompanyInfoDto {
   abbreviationChinese?: string;
   /** 简称（英文） */
   abbreviationEnglish?: string;
+  /** 账号 */
+  account?: string;
   /** 账户编号 */
   accountCode?: string;
   /** 地址（中文） */
@@ -247,6 +268,8 @@ export interface CompanyInfoDto {
   legalPersonChinese?: string;
   /** 企业法人（英文） */
   legalPersonEnglish?: string;
+  /** 密码 */
+  password?: string;
   /** 电话 */
   phone?: string;
   /** 邮政编码 */
@@ -433,6 +456,25 @@ export interface ContractInfo {
   fillDate?: string;
   /** 版本 */
   version?: number;
+  useVpn?: number;
+  vpnUrl?: string;
+  cookies?: string;
+  /** 40尺集装箱基本运费 */
+  freightForty?: number;
+  /** 20尺集装箱基本运费 */
+  freightTwenty?: number;
+  /** 40尺集装箱燃油附加费 */
+  fuelForty?: number;
+  /** 20尺集装箱燃油附加费 */
+  fuelTwenty?: number;
+  /** MTQ代码 */
+  mtq?: number;
+  /** 40尺集装箱港口附加费 */
+  portSurchargeForty?: number;
+  /** 20尺集装箱港口附加费 */
+  portSurchargeTwenty?: number;
+  /** TNE代码 */
+  tne?: number;
 }
 
 /**
@@ -770,6 +812,8 @@ export interface GetMarketReqVo {
   supplierAccount?: string;
   /** 供应商密码 */
   supplierPassword?: string;
+  /** VPN Cookies */
+  vpnCookies?: string;
 }
 
 /**
@@ -823,6 +867,18 @@ export interface HarborInfo {
   tne?: number;
 }
 
+export interface GetByHarborPortEnglishReqVo {
+  /** 港口英文名称 */
+  harborPortEnglish?: string;
+  /** 基础地址 */
+  baseUrl?: string;
+  /** VPN Cookies */
+  vpnCookies?: string;
+  exporterAccount?: string;
+  exporterPassword?: string;
+}
+
+
 /**
  * 根据国家查询港口信息参数
  * 对应接口：GET /harbor-info/listByCountry
@@ -830,6 +886,12 @@ export interface HarborInfo {
 export interface HarborInfoListByCountryQuery {
   /** 国家（中文或英文） */
   country?: string;
+  /** 基础地址 */
+  baseUrl?: string;
+  /** VPN Cookies */
+  vpnCookies?: string;
+  exporterAccount?: string;
+  exporterPassword?: string;
 }
 
 export interface FulfillmentProcessStepListReqVo {
@@ -930,9 +992,10 @@ export type EmailSendType =
 
 
 export interface GetCrawlRate {
-  baseUrl?: string
-  account?: string
-  password?: string
+  baseUrl?: string;
+  account?: string;
+  password?: string;
+  vpnCookies?: string;
 }
 
 /**
@@ -951,4 +1014,13 @@ export interface IssueLoanReqVo {
   moneyType?: string;
   /** 角色 */
   role?: string;
+}
+
+export interface ListInPortReqVo {
+  /** 基础地址 */
+  baseUrl?: string;
+  /** VPN Cookies */
+  vpnCookies?: string;
+  exporterAccount?: string;
+  exporterPassword?: string;
 }

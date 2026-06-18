@@ -19,13 +19,16 @@
                   {{ tab.subtitle }}
                 </div> -->
 
-                <a-form :model="form" layout="vertical">
+                <a-form :ref="tab.code === activeCompanyCode ? formRef : undefined" :model="form" layout="vertical">
                   <a-row :gutter="16">
                     <a-col v-for="field in getFieldsByCode(tab.code)" :key="String(field.key)"
                       v-bind="getColProps(field)">
-                      <a-form-item :label="field.label" :name="String(field.key)">
+                      <a-form-item :label="field.label" :name="String(field.key)" :rules="getFieldRules(field)">
                         <a-textarea v-if="field.component === 'textarea'" v-model:value="(form as any)[field.key]"
                           :placeholder="field.placeholder" :auto-size="{ minRows: 3, maxRows: 8 }" allow-clear />
+                        <a-input-password v-else-if="field.component === 'password'"
+                          v-model:value="(form as any)[field.key]" :placeholder="field.placeholder" size="large"
+                          allow-clear />
                         <a-input v-else v-model:value="(form as any)[field.key]" :placeholder="field.placeholder"
                           size="large" allow-clear />
                       </a-form-item>
@@ -82,6 +85,7 @@
 
 <script setup lang="ts">
 import { message } from "ant-design-vue";
+import type { FormInstance } from "ant-design-vue";
 import { ref, computed } from "vue";
 import { useI18n } from "vue-i18n";
 import companyApi from "../../apis/company";
@@ -91,7 +95,7 @@ import { useCompanyProfile, type CompanyCode } from "./hook";
 const { t } = useI18n();
 
 type CompanyFieldKey = keyof CompanyInfoDto;
-type FieldComponent = "input" | "textarea";
+type FieldComponent = "input" | "textarea" | "password";
 
 interface FieldDef {
   key: CompanyFieldKey;
@@ -99,6 +103,7 @@ interface FieldDef {
   placeholder?: string;
   component?: FieldComponent;
   col?: { xs: number; md: number };
+  required?: boolean;
 }
 
 const COMPANY_TABS = computed<Array<{ code: CompanyCode; label: string; subtitle: string }>>(() => [
@@ -109,8 +114,15 @@ const COMPANY_TABS = computed<Array<{ code: CompanyCode; label: string; subtitle
   { code: "ISSUING_BANK_COMPANY", label: t("company.tabIssuingBank"), subtitle: "" },
 ]);
 
-const COMPANY_FIELDS = computed<Record<CompanyCode, FieldDef[]>>(() => ({
+const COMPANY_FIELDS = computed<Record<CompanyCode, FieldDef[]>>(() => {
+  const accountPasswordFields: FieldDef[] = [
+    { key: "account", label: t("company.labelAccount"), placeholder: t("company.placeholderAccount"), required: true },
+    { key: "password", label: t("company.labelPassword"), placeholder: t("company.placeholderPassword"), component: "password" },
+  ];
+
+  return {
   EXPORTER_COMPANY: [
+    ...accountPasswordFields,
     { key: "fullNameChinese", label: t("company.labelFullNameChinese"), placeholder: t("company.placeholderFullNameChinese") },
     { key: "fullNameEnglish", label: t("company.labelFullNameEnglish"), placeholder: t("company.placeholderFullNameEnglish") },
     { key: "abbreviationChinese", label: t("company.labelAbbreviationChinese"), placeholder: t("company.placeholderAbbreviationChinese") },
@@ -126,6 +138,7 @@ const COMPANY_FIELDS = computed<Record<CompanyCode, FieldDef[]>>(() => ({
     { key: "introduction", label: t("company.labelIntroduction"), placeholder: t("company.placeholderIntroduction"), component: "textarea", col: { xs: 24, md: 24 } },
   ],
   IMPORTER_COMPANY: [
+    ...accountPasswordFields,
     { key: "fullNameEnglish", label: t("company.labelFullName"), placeholder: t("company.placeholderFullNameEn"), col: { xs: 24, md: 24 } },
     { key: "abbreviationEnglish", label: t("company.labelAbbreviation"), placeholder: t("company.placeholderAbbreviationEn") },
     { key: "legalPersonEnglish", label: t("company.labelLegalPerson"), placeholder: t("company.placeholderLegalPersonEn") },
@@ -136,6 +149,7 @@ const COMPANY_FIELDS = computed<Record<CompanyCode, FieldDef[]>>(() => ({
     { key: "introduction", label: t("company.labelIntroduction"), placeholder: t("company.placeholderIntroduction"), component: "textarea", col: { xs: 24, md: 24 } },
   ],
   SUPPLIER_COMPANY: [
+    ...accountPasswordFields,
     { key: "fullNameChinese", label: t("company.labelFullName"), placeholder: t("company.placeholderFullNameChinese"), col: { xs: 24, md: 24 } },
     { key: "abbreviationChinese", label: t("company.labelAbbreviation"), placeholder: t("company.placeholderAbbreviationChinese") },
     { key: "legalPersonChinese", label: t("company.labelLegalPerson"), placeholder: t("company.placeholderLegalPersonChinese") },
@@ -147,6 +161,7 @@ const COMPANY_FIELDS = computed<Record<CompanyCode, FieldDef[]>>(() => ({
     { key: "introduction", label: t("company.labelIntroduction"), placeholder: t("company.placeholderIntroduction"), component: "textarea", col: { xs: 24, md: 24 } },
   ],
   NEGOTIATING_BANK_COMPANY: [
+    ...accountPasswordFields,
     { key: "fullNameChinese", label: t("company.labelBankFullNameChinese"), placeholder: t("company.placeholderBankFullNameChinese") },
     { key: "fullNameEnglish", label: t("company.labelBankFullNameEnglish"), placeholder: t("company.placeholderBankFullNameEnglish") },
     { key: "abbreviationChinese", label: t("company.labelBankAbbreviationChinese"), placeholder: t("company.placeholderBankAbbreviationChinese") },
@@ -160,6 +175,7 @@ const COMPANY_FIELDS = computed<Record<CompanyCode, FieldDef[]>>(() => ({
     { key: "introduction", label: t("company.labelBankIntroduction"), placeholder: t("company.placeholderIntroduction"), component: "textarea", col: { xs: 24, md: 24 } },
   ],
   ISSUING_BANK_COMPANY: [
+    ...accountPasswordFields,
     { key: "fullNameEnglish", label: t("company.labelBankFullName"), placeholder: t("company.placeholderBankFullNameEn"), col: { xs: 24, md: 24 } },
     { key: "abbreviationEnglish", label: t("company.labelBankAbbreviation"), placeholder: t("company.placeholderBankAbbreviationEn") },
     { key: "phone", label: t("company.labelPhone"), placeholder: t("company.placeholderPhone") },
@@ -168,15 +184,23 @@ const COMPANY_FIELDS = computed<Record<CompanyCode, FieldDef[]>>(() => ({
     { key: "addressEnglish", label: t("company.labelBankAddress"), placeholder: t("company.placeholderBankAddressEn"), col: { xs: 24, md: 24 } },
     { key: "introduction", label: t("company.labelBankIntroduction"), placeholder: t("company.placeholderIntroduction"), component: "textarea", col: { xs: 24, md: 24 } },
   ],
-}));
+  };
+});
 
 const { activeCompanyCode, loading, saving, form, fetchCompany, saveCompany } = useCompanyProfile(
   "EXPORTER_COMPANY"
 );
 
+const formRef = ref<FormInstance>();
+
 const getFieldsByCode = (code: CompanyCode) => COMPANY_FIELDS.value[code] || [];
 
 const getColProps = (field: FieldDef) => field.col || { xs: 24, md: 12 };
+
+const getFieldRules = (field: FieldDef) => {
+  if (!field.required) return undefined;
+  return [{ required: true, message: t("company.ruleAccount"), whitespace: true }];
+};
 
 const exporting = ref(false);
 const importing = ref(false);
@@ -251,9 +275,11 @@ const handleReset = async () => {
 
 const handleSave = async () => {
   try {
+    await formRef.value?.validate();
     await saveCompany(activeCompanyCode.value);
     message.success(t("company.msgSaveSuccess"));
   } catch (error) {
+    if (error && typeof error === "object" && "errorFields" in error) return;
     console.error("保存失败", error);
     message.error(t("company.msgSaveFail"));
   }

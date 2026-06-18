@@ -1,7 +1,7 @@
 // See the Electron documentation for details on how to use preload scripts:
 // https://www.electronjs.org/docs/latest/tutorial/process-model#preload-scripts
 import { ipcRenderer, contextBridge } from "electron";
-import type { AppConfig, BackgroundConfig } from "../interface";
+import type { AppConfig, BackgroundConfig, OpenVpnAuthPayload } from "../interface";
 
 contextBridge.exposeInMainWorld("electronAPI", {
 
@@ -17,6 +17,7 @@ contextBridge.exposeInMainWorld("electronAPI", {
     ipcRenderer.invoke('save-background-config', config),
 
   runJar: (port?: number) => ipcRenderer.invoke('run-jar', port),
-  stopJar: () => ipcRenderer.invoke('stop-jar')
+  stopJar: () => ipcRenderer.invoke('stop-jar'),
+  openVpnAuthWindow: (payload: OpenVpnAuthPayload) => ipcRenderer.invoke('open-vpn-auth-window', payload)
 
 });

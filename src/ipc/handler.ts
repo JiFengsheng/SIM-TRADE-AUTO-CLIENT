@@ -1,14 +1,24 @@
-import { app, BrowserWindow, ipcMain } from "electron";
-import path from "path";
-import fs from "fs";
+import { BrowserWindow, ipcMain, session } from "electron";
 import { languageType } from "../types";
-import { generateUUID } from "../utils/uuid";
 import { ConfigManager } from "../views/settings/config/ConfigManager";
 import { BackgroundManager } from "../views/settings/config/BackgroundManager";
 import type { AppConfig, BackgroundConfig } from "../../interface";
 import { updateMenu, createContextMenu } from "../menu/menu";
 import { runNetdiskJar, stopNetdiskJar } from "../utils/background"
 import logger from "../utils/log";
+
+interface OpenVpnAuthPayload {
+  url: string;
+  cookieNames?: string[];
+}
+
+interface OpenVpnAuthResult {
+  success: boolean;
+  cookie?: string;
+  cookies?: Record<string, string>;
+  currentUrl?: string;
+  error?: string;
+}
 
 /**
  * 注册所有 IPC handlers
@@ -132,6 +142,121 @@ export function registerIpcHandlers(
     
     const updateConfig = await backgroundManager.save(cleanConfig);
     return updateConfig;
+  });
+
+  ipcMain.handle("open-vpn-auth-window", async (event, payload: OpenVpnAuthPayload): Promise<OpenVpnAuthResult> => {
+    const rawUrl = (payload?.url || "").trim();
+    if (!rawUrl) {
+      return { success: false, error: "VPN 地址不能为空" };
+    }
+
+    let target: URL;
+    try {
+      target = new URL(rawUrl);
+    } catch {
+      return { success: false, error: "VPN 地址格式不正确" };
+    }
+
+    const cookieNames = new Set(
+      (payload?.cookieNames || [])
+        .map((name) => name.trim())
+        .filter(Boolean),
+    );
+
+    return await new Promise((resolve) => {
+      const partition = `vpn-auth-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+      const authSession = session.fromPartition(partition);
+      const authWindow = new BrowserWindow({
+        width: 1200,
+        height: 800,
+        parent: mainWindow && !mainWindow.isDestroyed() ? mainWindow : undefined,
+        modal: Boolean(mainWindow && !mainWindow.isDestroyed()),
+        autoHideMenuBar: true,
+        webPreferences: {
+          partition,
+          sandbox: true,
+          contextIsolation: true,
+          nodeIntegration: false,
+        },
+      });
+
+      let finished = false;
+      let isClosingFromFinish = false;
+
+      const finish = (result: OpenVpnAuthResult) => {
+        if (finished) return;
+        finished = true;
+        if (!authWindow.isDestroyed()) {
+          isClosingFromFinish = true;
+          authWindow.close();
+        }
+        resolve(result);
+      };
+
+      const tryCollectCookie = async () => {
+        if (finished || authWindow.isDestroyed()) return;
+        try {
+          const cookieList = await authSession.cookies.get({
+            url: `${target.protocol}//${target.host}`,
+          });
+          const filtered = cookieList.filter((item) => cookieNames.size === 0 || cookieNames.has(item.name));
+          if (!filtered.length) return;
+          const cookie = filtered.map((item) => `${item.name}=${item.value}`).join("; ");
+          const cookieMap: Record<string, string> = {};
+          filtered.forEach((item) => {
+            cookieMap[item.name] = item.value;
+          });
+          finish({
+            success: true,
+            cookie,
+            cookies: cookieMap,
+            currentUrl: authWindow.webContents.getURL(),
+          });
+        } catch (error) {
+          logger.error("读取 VPN Cookie 失败:", error);
+        }
+      };
+
+      authWindow.on("close", (closeEvent) => {
+        if (finished || isClosingFromFinish) return;
+        closeEvent.preventDefault();
+        void (async () => {
+          await tryCollectCookie();
+          if (!finished) {
+            finish({
+              success: false,
+              currentUrl: authWindow.webContents.getURL(),
+              error: "窗口已关闭，未获取到 Cookie",
+            });
+          }
+        })();
+      });
+
+      authWindow.on("closed", () => {
+        if (!finished) {
+          resolve({
+            success: false,
+            error: "窗口已关闭，未获取到 Cookie",
+          });
+        }
+      });
+
+      void (async () => {
+        try {
+          // 使用独立会话并清理同域数据，避免命中“窗口已被占用”的历史状态
+          await authSession.clearStorageData({
+            origin: `${target.protocol}//${target.host}`,
+          });
+          await authSession.clearCache();
+          await authWindow.loadURL(rawUrl);
+        } catch (error) {
+          finish({
+            success: false,
+            error: `打开登录页失败: ${String(error)}`,
+          });
+        }
+      })();
+    });
   });
 
 }

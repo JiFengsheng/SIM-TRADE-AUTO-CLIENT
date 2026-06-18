@@ -14,6 +14,7 @@ type CompanyInfoKey = keyof CompanyInfoDto;
 const COMPANY_INFO_KEYS: CompanyInfoKey[] = [
   "abbreviationChinese",
   "abbreviationEnglish",
+  "account",
   "accountCode",
   "addressChinese",
   "addressEnglish",
@@ -26,6 +27,7 @@ const COMPANY_INFO_KEYS: CompanyInfoKey[] = [
   "introduction",
   "legalPersonChinese",
   "legalPersonEnglish",
+  "password",
   "phone",
   "postalCode",
   "registeredCapital",
@@ -43,6 +45,19 @@ const pickCompanyInfoDto = (src: unknown): CompanyInfoDto => {
     }
   });
   return dst;
+};
+
+const hasValue = (value: unknown) => value !== undefined && value !== null && value !== "";
+
+const preserveAccountPassword = (prev: CompanyInfoDto, next: CompanyInfoDto): CompanyInfoDto => {
+  const merged = { ...next };
+  if (hasValue(prev.account) && !hasValue(merged.account)) {
+    merged.account = prev.account;
+  }
+  if (hasValue(prev.password) && !hasValue(merged.password)) {
+    merged.password = prev.password;
+  }
+  return merged;
 };
 
 /**
@@ -70,9 +85,14 @@ export const useCompanyProfile = (initialCompanyCode: CompanyCode = "EXPORTER_CO
   const saveCompany = async (companyCode: CompanyCode = activeCompanyCode.value) => {
     saving.value = true;
     try {
+      const prevAccountPassword = {
+        account: form.value.account,
+        password: form.value.password,
+      };
       const payload = pickCompanyInfoDto(form.value);
       const ok = await sysProfileParameterApi.updateCompany(companyCode, payload);
-      await fetchCompany(companyCode);
+      const res = await sysProfileParameterApi.getCompany(companyCode);
+      form.value = preserveAccountPassword(prevAccountPassword, pickCompanyInfoDto(res));
       return ok;
     } finally {
       saving.value = false;
