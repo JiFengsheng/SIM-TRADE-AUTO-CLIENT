@@ -275,7 +275,7 @@
 
             <a-col :xs="24" :md="12">
               <a-form-item :label="$t('contract.exportPrice')" name="exportPrice">
-                <a-input-number v-model:value="form.exportPrice" :min="0" :precision="2" class="w-full"
+                <a-input-number v-model:value="form.exportPrice" :min="0" :precision="4" class="w-full"
                   :placeholder="$t('contract.placeholderExportPrice')" size="large" />
               </a-form-item>
               <div class="rmb-tip">{{ $t('contract.rmbConversion', { rmb: exportPriceRmb }) }}</div>
@@ -311,7 +311,7 @@
             </a-col>
             <a-col :xs="24" :md="12">
               <a-form-item :label="$t('contract.marketPrice')" name="marketPrice">
-                <a-input-number v-model:value="form.marketPrice" :min="0" :precision="2" class="w-full"
+                <a-input-number v-model:value="form.marketPrice" :min="0" :precision="4" class="w-full"
                   :placeholder="$t('contract.placeholderMarketPrice')" size="large" />
               </a-form-item>
               <div v-if="marketGoodsDetail?.importPrice != null" class="rmb-tip">
@@ -357,7 +357,7 @@
 
             <a-col :xs="24" :md="12">
               <a-form-item :label="$t('contract.supplierPrice')" name="supplierPrice">
-                <a-input-number v-model:value="form.supplierPrice" :min="0" :precision="2" class="w-full"
+                <a-input-number v-model:value="form.supplierPrice" :min="0" :precision="4" class="w-full"
                   :placeholder="$t('contract.placeholderSupplierPrice')" size="large" />
               </a-form-item>
               <div v-if="marketGoodsDetail?.cost != null" class="rmb-tip">
@@ -430,32 +430,32 @@
               </a-col>
               <a-col :xs="24" :md="12">
                 <a-form-item :label="$t('contract.freightTwenty')" name="freightTwenty">
-                  <a-input-number v-model:value="form.freightTwenty" :min="0" :precision="2" class="w-full" :placeholder="$t('contract.placeholderFreightTwenty')" size="large" />
+                  <a-input-number v-model:value="form.freightTwenty" :min="0" :precision="4" class="w-full" :placeholder="$t('contract.placeholderFreightTwenty')" size="large" />
                 </a-form-item>
               </a-col>
               <a-col :xs="24" :md="12">
                 <a-form-item :label="$t('contract.freightForty')" name="freightForty">
-                  <a-input-number v-model:value="form.freightForty" :min="0" :precision="2" class="w-full" :placeholder="$t('contract.placeholderFreightForty')" size="large" />
+                  <a-input-number v-model:value="form.freightForty" :min="0" :precision="4" class="w-full" :placeholder="$t('contract.placeholderFreightForty')" size="large" />
                 </a-form-item>
               </a-col>
               <a-col :xs="24" :md="12">
                 <a-form-item :label="$t('contract.portSurchargeTwenty')" name="portSurchargeTwenty">
-                  <a-input-number v-model:value="form.portSurchargeTwenty" :min="0" :precision="2" class="w-full" :placeholder="$t('contract.placeholderPortSurchargeTwenty')" size="large" />
+                  <a-input-number v-model:value="form.portSurchargeTwenty" :min="0" :precision="4" class="w-full" :placeholder="$t('contract.placeholderPortSurchargeTwenty')" size="large" />
                 </a-form-item>
               </a-col>
               <a-col :xs="24" :md="12">
                 <a-form-item :label="$t('contract.portSurchargeForty')" name="portSurchargeForty">
-                  <a-input-number v-model:value="form.portSurchargeForty" :min="0" :precision="2" class="w-full" :placeholder="$t('contract.placeholderPortSurchargeForty')" size="large" />
+                  <a-input-number v-model:value="form.portSurchargeForty" :min="0" :precision="4" class="w-full" :placeholder="$t('contract.placeholderPortSurchargeForty')" size="large" />
                 </a-form-item>
               </a-col>
               <a-col :xs="24" :md="12">
                 <a-form-item :label="$t('contract.fuelTwenty')" name="fuelTwenty">
-                  <a-input-number v-model:value="form.fuelTwenty" :min="0" :precision="2" class="w-full" :placeholder="$t('contract.placeholderFuelTwenty')" size="large" />
+                  <a-input-number v-model:value="form.fuelTwenty" :min="0" :precision="4" class="w-full" :placeholder="$t('contract.placeholderFuelTwenty')" size="large" />
                 </a-form-item>
               </a-col>
               <a-col :xs="24" :md="12">
                 <a-form-item :label="$t('contract.fuelForty')" name="fuelForty">
-                  <a-input-number v-model:value="form.fuelForty" :min="0" :precision="2" class="w-full" :placeholder="$t('contract.placeholderFuelForty')" size="large" />
+                  <a-input-number v-model:value="form.fuelForty" :min="0" :precision="4" class="w-full" :placeholder="$t('contract.placeholderFuelForty')" size="large" />
                 </a-form-item>
               </a-col>
             </a-row>
